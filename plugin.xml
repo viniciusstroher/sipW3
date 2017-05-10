@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+           id="cordova-plugin-rtsp-w3"
+      version="1.0">
+    <name>sip W3</name>
+    <description>sip W3 Plugin</description>
+    <license>Apache 2.0</license>
+    <keywords>sip</keywords>
+
+    <engines>
+        <engine name="cordova-android" version=">=3.6.0" /><!-- Requires CordovaPlugin.preferences -->
+    </engines>
+
+    <js-module src="www/module.js" name="SIP">
+        <!-- acessa como navigator.RtspW3 -->
+        <clobbers target="navigator.SIP" />
+    </js-module>
+
+    <!-- android -->
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <!-- NOME QUE O cordova exec vai chamar e o mapa da classe principal-->
+            <feature name="SIP">
+                <param name="android-package" value="org.apache.cordova.SIP.SIP"/>
+                <param name="onload" value="true"/>
+            </feature>
+        </config-file>
+
+        <!-- configuracoes de activity -->
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <!--
+            <activity android:label="w3_plugin" android:name="org.apache.cordova.rtspw3.RtspW3Activity">
+            </activity>
+
+            <activity android:name="io.vov.vitamio.activity.InitActivity" 
+       android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden"
+       android:launchMode="singleTop"
+        android:theme="@android:style/Theme.NoTitleBar"
+        android:windowSoftInputMode="stateAlwaysHidden"/>     -->
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            
+                <uses-permission android:name="android.permission.INTERNET" />
+                <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+                <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+                <uses-permission android:name="android.permission.WAKE_LOCK" />
+                <uses-permission android:name="android.permission.RECORD_AUDIO" />
+                <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+        </config-file>
+        <!-- configuracoes de activity -->
+
+        <!-- classes -->
+        <!--<source-file src="src/android/FakeR.java" target-dir="src/org/apache/cordova/rtspw3" />
+        <source-file src="src/android/RtspW3.java" target-dir="src/org/apache/cordova/rtspw3" />
+        <source-file src="src/android/RtspW3Activity.java" target-dir="src/org/apache/cordova/rtspw3" />
+        -->
+        <!-- classes -->
+
+        <!-- templates -->
+        <!--<source-file src="src/android/res/layout/rtsp_w3_activity.xml" target-dir="res/layout"/>
+        -->
+        <!-- templates -->
+        
+        <!-- gradle para baixa as dependencias -->
+        <source-file src="liblinphone.jar" target-dir="lib" />
+        <framework src="build.gradle" custom="true" type="gradleReference" />
+
+    </platform>
+
+    
+
+    <!-- ios -->
+    <!--
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="SplashScreen">
+                <param name="ios-package" value="CDVSplashScreen"/>
+                <param name="onload" value="true"/>
+            </feature>
+        </config-file>
+
+        <header-file src="src/ios/CDVSplashScreen.h" />
+        <source-file src="src/ios/CDVSplashScreen.m" />
+        <header-file src="src/ios/CDVViewController+SplashScreen.h" />
+        <source-file src="src/ios/CDVViewController+SplashScreen.m" />
+
+        <framework src="CoreGraphics.framework" />
+    </platform>-->
+</plugin>
