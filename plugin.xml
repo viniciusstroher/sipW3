@@ -65,7 +65,7 @@
         
         <!-- gradle para baixa as dependencias -->
         <source-file src="lib/liblinphone.jar" target-dir="lib" />
-        <framework src="build.gradle" custom="true" type="gradleReference" />
+        <framework src="src/android/extras.gradle" custom="true" type="gradleReference" />
 
     </platform>
 
