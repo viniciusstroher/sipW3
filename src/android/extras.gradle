@@ -1,3 +1,3 @@
 dependencies {
-    compile 'lib/liblinphone.jar'
+    compile fileTree(dir: 'lib', include: '*.jar')
 } 
