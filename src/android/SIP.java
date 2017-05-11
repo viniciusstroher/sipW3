@@ -40,9 +40,9 @@ import java.util.*;
 import android.net.sip.SipManager;
 import android.net.sip.SipProfile;
 import android.net.sip.SipRegistrationListener;
-import android.net.sip.SipProfile;
+import android.net.sip.SipProfileDb ;
 import android.net.sip.SipException;
-
+ 
  
 public class SIP extends CordovaPlugin {
     private static final String LOG_TAG = "SIPW3";
