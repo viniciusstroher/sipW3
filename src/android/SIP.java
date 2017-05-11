@@ -49,6 +49,8 @@ public class SIP extends CordovaPlugin {
     public SipManager mSipManager = null;
     public SipProfile mSipProfile = null;
 
+    Boolean voipSupported = SipManager.isVoipSupported(this);
+    Boolean apiSupported = SipManager.isApiSupported(this);
 
     private View getView() {
         try {
@@ -60,32 +62,32 @@ public class SIP extends CordovaPlugin {
 
     @Override
     protected void pluginInitialize() {
-
-        closeLocalProfile();
-
+        
         try{
             if (mSipManager == null) {
                 mSipManager = SipManager.newInstance(cordova.getActivity());
 
-                SipProfile.Builder builder = new SipProfile.Builder("1060", "192.168.0.43");
-                builder.setPassword("password");
-                mSipProfile = builder.build();
-                Log.d("SIP","SIP PLUGIN: SIP PROFILE BUILDED");
-
+                
             }
 
-            
+            SipProfile.Builder builder = new SipProfile.Builder("1060", "192.168.0.43");
+            builder.setPassword("password");
+            mSipProfile = builder.build();
+            Log.d("SIP","SIP PLUGIN: SIP PROFILE BUILDED");
+
        
         }catch(Exception e){
             Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
         }
 
         try{
+            
             Intent intent = new Intent();
             intent.setAction("org.apache.cordova.SIP.INCOMING_CALL");
             PendingIntent pendingIntent = PendingIntent.getBroadcast(cordova.getActivity(), 0, intent, Intent.FILL_IN_DATA);
             
             Log.d("SIP","SIP PLUGIN: isOpened "+mSipManager.isOpened(mSipProfile.getUriString()));
+            
             mSipManager.open(mSipProfile, pendingIntent, null);
 
             /*Log.d("SIP","SIP PLUGIN: PROFILE SIP - "+mSipProfile.getUriString());
