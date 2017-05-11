@@ -96,7 +96,7 @@ public class SIP extends CordovaPlugin {
             }
 
             });
-            Log.d("SIP","SIP PLUGIN: CONECTADO");
+            Log.d("SIP","SIP PLUGIN: Listener registrado");
         }catch(Exception e){
             Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
         }
