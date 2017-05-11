@@ -85,7 +85,7 @@ public class SIP extends CordovaPlugin {
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
        
-        if (action.equals("abrirRtsp")) {
+        /*if (action.equals("abrirRtsp")) {
             //pega parametros do js
             this.params = args.getJSONObject(0);
             Intent intent = new Intent(cordova.getActivity(), RtspW3Activity.class);
@@ -96,7 +96,7 @@ public class SIP extends CordovaPlugin {
             if (this.cordova != null) {
                 this.cordova.startActivityForResult((CordovaPlugin) this, intent, 0);
             }
-        }
+        }*/
 
         callbackContext.success();
         return true;
