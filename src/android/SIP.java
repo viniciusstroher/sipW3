@@ -34,15 +34,17 @@ import android.content.Intent;
 
 //SIP
 import android.net.sip.SipManager;
+import android.net.sip.SipProfile;
 
 public class SIP extends CordovaPlugin {
-    private static final String LOG_TAG = "RtspW3";
+    private static final String LOG_TAG = "SIPW3";
 
     private CallbackContext callbackContext;
     private JSONObject params;
     private int orientation;
 
     public SipManager mSipManager = null;
+    public SipProfile mSipProfile = null;
 
 
     private View getView() {
@@ -59,6 +61,11 @@ public class SIP extends CordovaPlugin {
         if (mSipManager == null) {
             mSipManager = SipManager.newInstance(this);
         }
+
+        SipProfile.Builder builder = new SipProfile.Builder("1060", "192.168.0.43");
+        builder.setPassword("password");
+        mSipProfile = builder.build();
+
     }
 
 

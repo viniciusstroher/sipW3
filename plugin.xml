@@ -22,25 +22,32 @@
         <config-file target="res/xml/config.xml" parent="/*">
             <!-- NOME QUE O cordova exec vai chamar e o mapa da classe principal-->
             <feature name="SIP">
-                <param name="android-package" value="org.apache.cordova.SIP.SIP"/>
+                <param name="android-package" value="org.apache.cordova.SIP"/>
                 <param name="onload" value="true"/>
             </feature>
         </config-file>
 
-        <!-- configuracoes de activity -->
+        <!-- configuracoes DA INCOMMING da chamada -->
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
 
             <receiver android:name="org.apache.cordova.SIP.SIPReceiver" android:label="Call Receiver">
                 <intent-filter>
-                    <action android:name="org.apache.cordova.SIP.SIPReceiver.INCOMING_CALL"/>
+                    <action android:name="org.apache.cordova.SIP.INCOMING_CALL"/>
                     <!--
                     <action android:name="android.net.sip.SIP_SERVICE_UP" />
                     <action android:name="android.intent.action.PHONE_STATE" />
                     -->
                 </intent-filter>
           </receiver>
-          
+
         </config-file>
+        <config-file target="AndroidManifest.xml" parent="/manifest/application/activity">
+            <intent-filter>
+                <action android:name="org.apache.cordova.SIP.INCOMING_CALL" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </config-file>
+        <!-- configuracoes DA INCOMMING da chamada -->
 
         <config-file target="AndroidManifest.xml" parent="/manifest">
                 <uses-permission android:name="android.permission.USE_SIP" />
