@@ -1,4 +1,4 @@
-package com.javray.cordova.plugin;
+package org.apache.cordova.SIP;
 
 import android.content.Context;
 import android.content.Intent;

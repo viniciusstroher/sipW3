@@ -68,9 +68,10 @@
 
         <!-- classes -->
         <!--<source-file src="src/android/FakeR.java" target-dir="src/org/apache/cordova/rtspw3" />
-        <source-file src="src/android/RtspW3.java" target-dir="src/org/apache/cordova/rtspw3" />
-        <source-file src="src/android/RtspW3Activity.java" target-dir="src/org/apache/cordova/rtspw3" />
         -->
+        <source-file src="src/android/SIP.java" target-dir="src/org/apache/cordova/SIP" />
+        <source-file src="src/android/SIPReceiver.java" target-dir="src/org/apache/cordova/SIP" />
+ 
         <!-- classes -->
 
         <!-- templates -->
