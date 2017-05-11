@@ -60,7 +60,14 @@ public class SIP extends CordovaPlugin {
 
     @Override
     protected void pluginInitialize() {
-        
+        try{
+             SipManager.close("SIP:1060@192.168.0.43");
+             SipManager.close("SIP:1062@192.168.0.43");
+             
+        }catch(Exception e){
+             Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
+        }
+
         try{
             if (mSipManager == null) {
                 mSipManager = SipManager.newInstance(cordova.getActivity());
