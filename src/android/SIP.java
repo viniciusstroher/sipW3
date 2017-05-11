@@ -57,15 +57,18 @@ public class SIP extends CordovaPlugin {
 
     @Override
     protected void pluginInitialize() {
+        try{
+            if (mSipManager == null) {
+                mSipManager = SipManager.newInstance(cordova.getActivity());
+            }
 
-        if (mSipManager == null) {
-            mSipManager = SipManager.newInstance(cordova.getActivity());
+            SipProfile.Builder builder = new SipProfile.Builder("1060", "192.168.0.43");
+            builder.setPassword("password");
+            mSipProfile = builder.build();
+            Log.i("SIP PLUGIN: SIPPROFILE BUILDED");
+        }catch(Exception e){
+            Log.i("SIP PLUGIN: "+e.getMessage());
         }
-
-        SipProfile.Builder builder = new SipProfile.Builder("1060", "192.168.0.43");
-        builder.setPassword("password");
-        mSipProfile = builder.build();
-
     }
 
 

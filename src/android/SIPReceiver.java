@@ -28,7 +28,7 @@ public class SIPReceiver extends BroadcastReceiver {
   @Override
   public void onReceive(Context context, Intent intent) {
 
-      Log.d("SIP", "Llamada recibida");
+      Log.i("SIP PLUGIN: RECEBENDO LIGACAO");
       dumpIntent(intent);
       
       Bundle extras = intent.getExtras();
@@ -41,8 +41,7 @@ public class SIPReceiver extends BroadcastReceiver {
 
       if (wifi == State.CONNECTED || wifi == State.CONNECTING) {
 
-        Log.d("SIP", "WIFI");
-        Log.d("SIP", "RECEBENDO CALL !!!!!");
+        Log.i("SIP PLUGIN: CONECTADO A WIFI E RECEBENDO CHAMADA");
         /*
         PowerManager pm = (PowerManager)context.getSystemService(Context.POWER_SERVICE);
         WakeLock wakeLock = pm.newWakeLock((PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.FULL_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP), "TAG");
