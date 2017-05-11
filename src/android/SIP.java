@@ -65,9 +65,9 @@ public class SIP extends CordovaPlugin {
             SipProfile.Builder builder = new SipProfile.Builder("1060", "192.168.0.43");
             builder.setPassword("password");
             mSipProfile = builder.build();
-            Log.d("SIP PLUGIN: SIPPROFILE BUILDED");
+            Log.d("SIP","SIP PLUGIN: SIPPROFILE BUILDED");
         }catch(Exception e){
-            Log.d("SIP PLUGIN: "+e.getMessage());
+            Log.d("SIP","SIP PLUGIN: "+e.getMessage());
         }
     }
 
