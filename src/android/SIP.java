@@ -41,7 +41,7 @@ import android.net.sip.SipManager;
 import android.net.sip.SipProfile;
 import android.net.sip.SipRegistrationListener;
 import android.net.sip.SipProfileDb ;
-import android.net.sip.SipException;
+import com.android.services.telephony.sip.SipException;
  
  
 public class SIP extends CordovaPlugin {
