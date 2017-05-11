@@ -68,7 +68,16 @@ public class SIP extends CordovaPlugin {
             mSipProfile = builder.build();
             Log.d("SIP","SIP PLUGIN: SIPPROFILE BUILDED");
         }catch(Exception e){
-            Log.d("SIP","SIP PLUGIN: "+e.getMessage());
+            Log.d("SIP","SIP PROFILE BUILD PLUGIN: "+e.getMessage());
+        }
+
+        try{
+            Intent intent = new Intent();
+            intent.setAction("org.apache.cordova.SIP.INCOMING_CALL");
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, Intent.FILL_IN_DATA);
+            mSipManager.open(mSipProfile, pendingIntent, null);
+        }catch(Exception e){
+            Log.d("SIP","SIP REGISTRATION PLUGIN: "+e.getMessage());
         }
     }
 
