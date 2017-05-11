@@ -78,8 +78,10 @@ public class SIP extends CordovaPlugin {
             intent.setAction("org.apache.cordova.SIP.INCOMING_CALL");
             PendingIntent pendingIntent = PendingIntent.getBroadcast(cordova.getActivity(), 0, intent, Intent.FILL_IN_DATA);
             mSipManager.open(mSipProfile, pendingIntent, null);
+            Log.d("SIP","SIP PLUGIN: PROFILE SIP - "+mSipProfile.getUriString());
             mSipManager.setRegistrationListener(mSipProfile.getUriString(), new SipRegistrationListener() {
 
+            
             public void onRegistering(String localProfileUri) {
                 Log.d("SIP","SIP PLUGIN: Registering with SIP Server... "+localProfileUri);
             }
