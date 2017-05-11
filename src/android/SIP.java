@@ -60,6 +60,7 @@ public class SIP extends CordovaPlugin {
 
     @Override
     protected void pluginInitialize() {
+        
         try {
            if (mSipProfile != null) {
               mSipManager.close(mSipProfile.getUriString());
@@ -67,7 +68,7 @@ public class SIP extends CordovaPlugin {
         } catch (Exception ee) {
            Log.d("SIP", "SIP PLUGIN ERROR: Failed to close local profile.", ee);
         }
-        
+
         try{
             if (mSipManager == null) {
                 mSipManager = SipManager.newInstance(cordova.getActivity());
@@ -77,12 +78,10 @@ public class SIP extends CordovaPlugin {
             builder.setPassword("password");
             mSipProfile = builder.build();
             Log.d("SIP","SIP PLUGIN: SIP PROFILE BUILDED");
+       
         }catch(Exception e){
             Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
         }
-
-
-        
 
         try{
             Intent intent = new Intent();
@@ -90,24 +89,26 @@ public class SIP extends CordovaPlugin {
             PendingIntent pendingIntent = PendingIntent.getBroadcast(cordova.getActivity(), 0, intent, Intent.FILL_IN_DATA);
             
             mSipManager.open(mSipProfile, pendingIntent, null);
+
             Log.d("SIP","SIP PLUGIN: PROFILE SIP - "+mSipProfile.getUriString());
+
             mSipManager.setRegistrationListener(mSipProfile.getUriString(), new SipRegistrationListener() {
 
-            
-            public void onRegistering(String localProfileUri) {
-                Log.d("SIP","SIP PLUGIN: Registering with SIP Server... "+localProfileUri);
-            }
+                public void onRegistering(String localProfileUri) {
+                    Log.d("SIP","SIP PLUGIN: Registering with SIP Server... "+localProfileUri);
+                }
 
-            public void onRegistrationDone(String localProfileUri, long expiryTime) {
-                Log.d("SIP","SIP PLUGIN: Ready "+localProfileUri );
-            }
+                public void onRegistrationDone(String localProfileUri, long expiryTime) {
+                    Log.d("SIP","SIP PLUGIN: Ready "+localProfileUri );
+                }
 
-            public void onRegistrationFailed(String localProfileUri, int errorCode,
-                String errorMessage) {
-                Log.d("SIP","SIP PLUGIN: Registration failed.  Please check settings. - ("+errorCode+")"+errorMessage);
-            }
+                public void onRegistrationFailed(String localProfileUri, int errorCode,
+                    String errorMessage) {
+                    Log.d("SIP","SIP PLUGIN: Registration failed.  Please check settings. - ("+errorCode+")"+errorMessage);
+                }
 
             });
+
             Log.d("SIP","SIP PLUGIN: Listener registrado");
         }catch(Exception e){
             Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
