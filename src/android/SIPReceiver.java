@@ -17,7 +17,6 @@ import android.os.PowerManager.WakeLock;
 import android.net.sip.SipManager;
 import android.net.sip.SipSession;
 import android.net.sip.SipAudioCall;
-import android.net.sip.SipProfile;
 
 import android.util.Log;
 
@@ -53,24 +52,13 @@ public class SIPReceiver extends BroadcastReceiver {
         keyguardLock.disableKeyguard();
         */
 
-        /*intent = new Intent();
+        intent = new Intent();
         intent.setAction("org.apache.cordova.SIP.INCOMING_CALL");
         intent.setPackage(context.getPackageName());
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtras(extras);
 
-        context.startActivity(intent);*/
-        SipAudioCall.Listener listener = new SipAudioCall.Listener() {
-                @Override
-                public void onRinging(SipAudioCall call, SipProfile caller) {
-                    try {
-                        call.answerCall(30);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-        };
-
+        context.startActivity(intent);
       }
       else {
         Log.d("SIP PLUGIN:", "SEM INTERNET !!!!!");
