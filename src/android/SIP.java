@@ -73,10 +73,20 @@ public class SIP extends CordovaPlugin {
             Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
         }
 
+
+        try {
+           if (mSipProfile != null) {
+              mSipManager.close(mSipProfile.getUriString());
+           }
+        } catch (Exception ee) {
+           Log.d("SIP", "SIP PLUGIN ERROR: Failed to close local profile.", ee);
+        }
+
         try{
             Intent intent = new Intent();
             intent.setAction("org.apache.cordova.SIP.INCOMING_CALL");
             PendingIntent pendingIntent = PendingIntent.getBroadcast(cordova.getActivity(), 0, intent, Intent.FILL_IN_DATA);
+            
             mSipManager.open(mSipProfile, pendingIntent, null);
             Log.d("SIP","SIP PLUGIN: PROFILE SIP - "+mSipProfile.getUriString());
             mSipManager.setRegistrationListener(mSipProfile.getUriString(), new SipRegistrationListener() {
