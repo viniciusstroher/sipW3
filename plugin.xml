@@ -22,7 +22,7 @@
         <config-file target="res/xml/config.xml" parent="/*">
             <!-- NOME QUE O cordova exec vai chamar e o mapa da classe principal-->
             <feature name="SIP">
-                <param name="android-package" value="org.apache.cordova.SIP"/>
+                <param name="android-package" value="org.apache.cordova.SIP.SIP"/>
                 <param name="onload" value="true"/>
             </feature>
         </config-file>
