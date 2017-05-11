@@ -50,6 +50,7 @@ public class SIPReceiver extends BroadcastReceiver {
         KeyguardManager keyguardManager = (KeyguardManager)context.getSystemService(Context.KEYGUARD_SERVICE); 
         KeyguardLock keyguardLock =  keyguardManager.newKeyguardLock("TAG");
         keyguardLock.disableKeyguard();
+        */
 
         intent = new Intent();
         intent.setAction("com.javray.cordova.plugin.SIP.INCOMING_CALL");
@@ -57,7 +58,7 @@ public class SIPReceiver extends BroadcastReceiver {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtras(extras);
 
-        context.startActivity(intent);*/
+        context.startActivity(intent);
       }
       else {
         Log.d("SIP PLUGIN:", "SEM INTERNET !!!!!");
