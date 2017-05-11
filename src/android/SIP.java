@@ -61,14 +61,6 @@ public class SIP extends CordovaPlugin {
     @Override
     protected void pluginInitialize() {
         
-        try {
-           if (mSipProfile != null) {
-              mSipManager.close(mSipProfile.getUriString());
-           }
-        } catch (Exception ee) {
-           Log.d("SIP", "SIP PLUGIN ERROR: Failed to close local profile.", ee);
-        }
-
         try{
             if (mSipManager == null) {
                 mSipManager = SipManager.newInstance(cordova.getActivity());
