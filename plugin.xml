@@ -29,19 +29,27 @@
 
         <!-- configuracoes de activity -->
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
-            <!--
-            <activity android:label="w3_plugin" android:name="org.apache.cordova.rtspw3.RtspW3Activity">
-            </activity>
 
-            <activity android:name="io.vov.vitamio.activity.InitActivity" 
-       android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden"
-       android:launchMode="singleTop"
-        android:theme="@android:style/Theme.NoTitleBar"
-        android:windowSoftInputMode="stateAlwaysHidden"/>     -->
+            <receiver android:name="org.apache.cordova.SIP.SIPReceiver" android:label="Call Receiver">
+                <intent-filter>
+                    <action android:name="org.apache.cordova.SIP.SIPReceiver.INCOMING_CALL"/>
+                    <!--
+                    <action android:name="android.net.sip.SIP_SERVICE_UP" />
+                    <action android:name="android.intent.action.PHONE_STATE" />
+                    -->
+                </intent-filter>
+          </receiver>
+          
         </config-file>
 
         <config-file target="AndroidManifest.xml" parent="/manifest">
-            
+                <uses-permission android:name="android.permission.USE_SIP" />
+                <uses-permission android:name="android.permission.INTERNET" />
+  
+                <uses-feature android:name="android.hardware.sip.voip" android:required="true" />
+                <uses-feature android:name="android.hardware.wifi" android:required="true" />
+                <uses-feature android:name="android.hardware.microphone" android:required="true" />
+                
                 <uses-permission android:name="android.permission.INTERNET" />
                 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
                 <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -64,9 +72,9 @@
         <!-- templates -->
         
         <!-- gradle para baixa as dependencias -->
-        <source-file src="liblinphone.jar" target-dir="lib" />
+        <!--<source-file src="liblinphone.jar" target-dir="lib" />
         <framework src="src/android/extras.gradle" custom="true" type="gradleReference" />
-
+        -->
     </platform>
 
     

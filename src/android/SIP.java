@@ -32,6 +32,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import android.content.Intent;
 
+//SIP
+import android.net.sip.SipManager;
+
 public class SIP extends CordovaPlugin {
     private static final String LOG_TAG = "RtspW3";
 
@@ -39,7 +42,9 @@ public class SIP extends CordovaPlugin {
     private JSONObject params;
     private int orientation;
 
-   
+    public SipManager mSipManager = null;
+
+
     private View getView() {
         try {
             return (View)webView.getClass().getMethod("getView").invoke(webView);
@@ -51,6 +56,9 @@ public class SIP extends CordovaPlugin {
     @Override
     protected void pluginInitialize() {
 
+        if (mSipManager == null) {
+            mSipManager = SipManager.newInstance(this);
+        }
     }
 
 
