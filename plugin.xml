@@ -41,7 +41,7 @@
           </receiver>
 
         </config-file>
-        <config-file target="AndroidManifest.xml" parent="/manifest/application/activity">
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
             <intent-filter>
                 <action android:name="org.apache.cordova.SIP.INCOMING_CALL" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -49,7 +49,7 @@
         </config-file>
         <!-- configuracoes DA INCOMMING da chamada -->
 
-        <config-file target="AndroidManifest.xml" parent="/*">
+        <config-file target="AndroidManifest.xml" parent="/manifest">
                 <uses-permission android:name="android.permission.USE_SIP" />
                 <uses-permission android:name="android.permission.INTERNET" />
   
