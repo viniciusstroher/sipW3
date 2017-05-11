@@ -34,11 +34,16 @@ import android.content.Intent;
 import android.app.PendingIntent;
 
 import  android.util.Log;
+import java.util.*;
+
 //SIP
 import android.net.sip.SipManager;
 import android.net.sip.SipProfile;
 import android.net.sip.SipRegistrationListener;
+import android.net.sip.SipProfile;
+import android.net.sip.SipException;
 
+ 
 public class SIP extends CordovaPlugin {
     private static final String LOG_TAG = "SIPW3";
 
@@ -147,7 +152,7 @@ public class SIP extends CordovaPlugin {
                   //sipManager.open(profile,SipUtil.createIncomingCallPendingIntent(),null);
                
                 }catch (SipException e) {
-                  Log.e(TAG,"failed" + profile.getProfileName(),e);
+                  Log.e("SIP","SIP PLUGIN: failed: " + profile.getProfileName(),e);
                 }
 
               }
