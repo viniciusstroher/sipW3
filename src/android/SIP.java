@@ -59,7 +59,7 @@ public class SIP extends CordovaPlugin {
     protected void pluginInitialize() {
 
         if (mSipManager == null) {
-            mSipManager = SipManager.newInstance((CordovaPlugin) this);
+            mSipManager = SipManager.newInstance(cordova.getActivity());
         }
 
         SipProfile.Builder builder = new SipProfile.Builder("1060", "192.168.0.43");
