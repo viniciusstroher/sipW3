@@ -129,6 +129,33 @@ public class SIP extends CordovaPlugin {
         }
     }
 
+
+    private void registerAllProfiles(){
+      final Context context=cordova.getActivity();
+      
+      new Thread(new Runnable(){
+          public void run(){
+              SipManager sipManager = SipManager.newInstance(context);
+              SipProfileDb profileDb = new SipProfileDb(context);
+              List<SipProfile> sipProfileList = profileDb.retrieveSipProfileList();
+             
+              for (SipProfile profile : sipProfileList) {
+                try {
+                  if (!profile.getAutoRegistration() && !profile.getUriString().equals(mSipSharedPreferences.getPrimaryAccount())) {
+                    continue;
+                  }
+                  //sipManager.open(profile,SipUtil.createIncomingCallPendingIntent(),null);
+               
+                }catch (SipException e) {
+                  Log.e(TAG,"failed" + profile.getProfileName(),e);
+                }
+
+              }
+            }
+        }
+    ).start();
+    }
+
     @Override
     public void onPause(boolean multitasking) {
 
