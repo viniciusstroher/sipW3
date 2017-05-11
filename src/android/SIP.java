@@ -67,12 +67,14 @@ public class SIP extends CordovaPlugin {
             if (mSipManager == null) {
                 mSipManager = SipManager.newInstance(cordova.getActivity());
 
+                SipProfile.Builder builder = new SipProfile.Builder("1060", "192.168.0.43");
+                builder.setPassword("password");
+                mSipProfile = builder.build();
+                Log.d("SIP","SIP PLUGIN: SIP PROFILE BUILDED");
+
             }
 
-            SipProfile.Builder builder = new SipProfile.Builder("1060", "192.168.0.43");
-            builder.setPassword("password");
-            mSipProfile = builder.build();
-            Log.d("SIP","SIP PLUGIN: SIP PROFILE BUILDED");
+            
        
         }catch(Exception e){
             Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
@@ -117,6 +119,8 @@ public class SIP extends CordovaPlugin {
         
         try {
            if (mSipProfile != null) {
+            
+              Log.d("SIP", "SIP DESLOGANDO: "+ mSipProfile.getUriString());
               mSipManager.close(mSipProfile.getUriString());
            }
         } catch (Exception e) {
