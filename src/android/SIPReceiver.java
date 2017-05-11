@@ -17,6 +17,7 @@ import android.os.PowerManager.WakeLock;
 import android.net.sip.SipManager;
 import android.net.sip.SipSession;
 import android.net.sip.SipAudioCall;
+import android.net.sip.SipProfile;
 
 import android.util.Log;
 
@@ -69,7 +70,7 @@ public class SIPReceiver extends BroadcastReceiver {
                     }
                 }
         };
-        
+
       }
       else {
         Log.d("SIP PLUGIN:", "SEM INTERNET !!!!!");
