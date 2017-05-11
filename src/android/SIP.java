@@ -85,6 +85,7 @@ public class SIP extends CordovaPlugin {
             intent.setAction("org.apache.cordova.SIP.INCOMING_CALL");
             PendingIntent pendingIntent = PendingIntent.getBroadcast(cordova.getActivity(), 0, intent, Intent.FILL_IN_DATA);
             
+            Log.d("SIP","SIP PLUGIN: isOpened "+mSipManager.isOpened(mSipProfile.getUriString()));
             mSipManager.open(mSipProfile, pendingIntent, null);
 
             /*Log.d("SIP","SIP PLUGIN: PROFILE SIP - "+mSipProfile.getUriString());
