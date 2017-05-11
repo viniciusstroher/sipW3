@@ -62,7 +62,7 @@ public class SIP extends CordovaPlugin {
     protected void pluginInitialize() {
 
         closeLocalProfile();
-        
+
         try{
             if (mSipManager == null) {
                 mSipManager = SipManager.newInstance(cordova.getActivity());
@@ -85,7 +85,7 @@ public class SIP extends CordovaPlugin {
             
             mSipManager.open(mSipProfile, pendingIntent, null);
 
-            Log.d("SIP","SIP PLUGIN: PROFILE SIP - "+mSipProfile.getUriString());
+            /*Log.d("SIP","SIP PLUGIN: PROFILE SIP - "+mSipProfile.getUriString());
 
             mSipManager.setRegistrationListener(mSipProfile.getUriString(), new SipRegistrationListener() {
 
@@ -102,7 +102,7 @@ public class SIP extends CordovaPlugin {
                     Log.d("SIP","SIP PLUGIN: Registration failed.  Please check settings. - ("+errorCode+")"+errorMessage);
                 }
 
-            });
+            });*/
 
             Log.d("SIP","SIP PLUGIN: Listener registrado");
         }catch(Exception e){
