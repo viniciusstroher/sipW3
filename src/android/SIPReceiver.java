@@ -53,7 +53,7 @@ public class SIPReceiver extends BroadcastReceiver {
         */
 
         intent = new Intent();
-        intent.setAction("com.javray.cordova.plugin.SIP.INCOMING_CALL");
+        intent.setAction("org.apache.cordova.SIP.INCOMING_CALL");
         intent.setPackage(context.getPackageName());
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtras(extras);
