@@ -67,9 +67,9 @@ public class SIP extends CordovaPlugin {
             SipProfile.Builder builder = new SipProfile.Builder("1060", "192.168.0.43");
             builder.setPassword("password");
             mSipProfile = builder.build();
-            Log.d("SIP","SIP PLUGIN: SIPPROFILE BUILDED");
+            Log.d("SIP","SIP PLUGIN: SIP PROFILE BUILDED");
         }catch(Exception e){
-            Log.d("SIP","SIP PROFILE BUILD PLUGIN: "+e.getMessage());
+            Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
         }
 
         try{
@@ -77,10 +77,25 @@ public class SIP extends CordovaPlugin {
             intent.setAction("org.apache.cordova.SIP.INCOMING_CALL");
             PendingIntent pendingIntent = PendingIntent.getBroadcast(cordova.getActivity(), 0, intent, Intent.FILL_IN_DATA);
             mSipManager.open(mSipProfile, pendingIntent, null);
+            mSipManager.setRegistrationListener(mSipProfile.getUriString(), new SipRegistrationListener() {
 
-            Log.d("SIP","SIP CONECTADO PLUGIN: CONECTADO");
+            public void onRegistering(String localProfileUri) {
+                Log.d("SIP","SIP PLUGIN: Registering with SIP Server...");
+            }
+
+            public void onRegistrationDone(String localProfileUri, long expiryTime) {
+                Log.d("SIP","SIP PLUGIN: Ready");
+            }
+
+            public void onRegistrationFailed(String localProfileUri, int errorCode,
+                String errorMessage) {
+                Log.d("SIP","SIP PLUGIN: Registration failed.  Please check settings.");
+            }
+
+            });
+            Log.d("SIP","SIP PLUGIN: CONECTADO");
         }catch(Exception e){
-            Log.d("SIP","SIP REGISTRATION PLUGIN: "+e.getMessage());
+            Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
         }
     }
 
