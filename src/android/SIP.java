@@ -81,16 +81,16 @@ public class SIP extends CordovaPlugin {
             mSipManager.setRegistrationListener(mSipProfile.getUriString(), new SipRegistrationListener() {
 
             public void onRegistering(String localProfileUri) {
-                Log.d("SIP","SIP PLUGIN: Registering with SIP Server...");
+                Log.d("SIP","SIP PLUGIN: Registering with SIP Server... "+localProfileUri);
             }
 
             public void onRegistrationDone(String localProfileUri, long expiryTime) {
-                Log.d("SIP","SIP PLUGIN: Ready");
+                Log.d("SIP","SIP PLUGIN: Ready "+localProfileUri );
             }
 
             public void onRegistrationFailed(String localProfileUri, int errorCode,
                 String errorMessage) {
-                Log.d("SIP","SIP PLUGIN: Registration failed.  Please check settings.");
+                Log.d("SIP","SIP PLUGIN: Registration failed.  Please check settings. - ("+errorCode+")"+errorMessage);
             }
 
             });
