@@ -61,13 +61,12 @@ public class SIP extends CordovaPlugin {
     @Override
     protected void pluginInitialize() {
 
-
+        closeLocalProfile();
+        
         try{
             if (mSipManager == null) {
                 mSipManager = SipManager.newInstance(cordova.getActivity());
-                
-                mSipManager.close("SIP:1060@192.168.0.43");
-                mSipManager.close("SIP:1062@192.168.0.43");
+
             }
 
             SipProfile.Builder builder = new SipProfile.Builder("1060", "192.168.0.43");
@@ -111,6 +110,19 @@ public class SIP extends CordovaPlugin {
         }
     }
 
+    public void closeLocalProfile() {
+        if (mSipManager == null) {
+           return;
+        }
+        
+        try {
+           if (mSipProfile != null) {
+              mSipManager.close(mSipProfile.getUriString());
+           }
+        } catch (Exception e) {
+           Log.d("SIP", "SIP PLUGIN: Failed to close local profile: "+ e.getMessage());
+        }
+    }
 
     @Override
     public void onPause(boolean multitasking) {
