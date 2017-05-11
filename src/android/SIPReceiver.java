@@ -52,13 +52,24 @@ public class SIPReceiver extends BroadcastReceiver {
         keyguardLock.disableKeyguard();
         */
 
-        intent = new Intent();
+        /*intent = new Intent();
         intent.setAction("org.apache.cordova.SIP.INCOMING_CALL");
         intent.setPackage(context.getPackageName());
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtras(extras);
 
-        context.startActivity(intent);
+        context.startActivity(intent);*/
+        SipAudioCall.Listener listener = new SipAudioCall.Listener() {
+                @Override
+                public void onRinging(SipAudioCall call, SipProfile caller) {
+                    try {
+                        call.answerCall(30);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+        };
+        
       }
       else {
         Log.d("SIP PLUGIN:", "SEM INTERNET !!!!!");
