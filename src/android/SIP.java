@@ -40,7 +40,7 @@ import java.util.*;
 import android.net.sip.SipManager;
 import android.net.sip.SipProfile;
 import android.net.sip.SipRegistrationListener;
-import com.android.services.telephony.sip.SipProfileDb ;
+
 import android.net.sip.SipException;
  
  
@@ -90,7 +90,7 @@ public class SIP extends CordovaPlugin {
             PendingIntent pendingIntent = PendingIntent.getBroadcast(cordova.getActivity(), 0, intent, Intent.FILL_IN_DATA);
             
             Log.d("SIP","SIP PLUGIN: isOpened "+mSipManager.isOpened(mSipProfile.getUriString()));
-            
+            mSipProfile.getAutoRegistration();
             mSipManager.open(mSipProfile, pendingIntent, null);
 
             Log.d("SIP","SIP PLUGIN: PROFILE SIP - "+mSipProfile.getUriString());
@@ -132,33 +132,6 @@ public class SIP extends CordovaPlugin {
         } catch (Exception e) {
            Log.d("SIP", "SIP PLUGIN: Failed to close local profile: "+ e.getMessage());
         }
-    }
-
-
-    private void registerAllProfiles(){
-      final Context context=cordova.getActivity();
-      
-      new Thread(new Runnable(){
-          public void run(){
-              SipManager sipManager = SipManager.newInstance(context);
-              SipProfileDb profileDb = new SipProfileDb(context);
-              List<SipProfile> sipProfileList = profileDb.retrieveSipProfileList();
-             
-              for (SipProfile profile : sipProfileList) {
-                try {
-                  if (!profile.getAutoRegistration() && !profile.getUriString().equals(mSipSharedPreferences.getPrimaryAccount())) {
-                    continue;
-                  }
-                  //sipManager.open(profile,SipUtil.createIncomingCallPendingIntent(),null);
-               
-                }catch (SipException e) {
-                  Log.e("SIP","SIP PLUGIN: failed: " + profile.getProfileName(),e);
-                }
-
-              }
-            }
-        }
-    ).start();
     }
 
     @Override
