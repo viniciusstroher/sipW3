@@ -37,7 +37,7 @@ import  android.util.Log;
 //SIP
 import android.net.sip.SipManager;
 import android.net.sip.SipProfile;
-import android.net.sipSipRegistrationListener;
+import android.net.sip.SipRegistrationListener;
 
 public class SIP extends CordovaPlugin {
     private static final String LOG_TAG = "SIPW3";
