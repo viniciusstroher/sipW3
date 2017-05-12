@@ -121,7 +121,7 @@ public class SIP extends CordovaPlugin {
             IntentFilter filter = new IntentFilter();
             filter.addAction("org.apache.cordova.SIP.INCOMING_CALL");
             SIPReceiver callReceiver = new SIPReceiver();
-            this.registerReceiver(callReceiver, filter);
+            getView().registerReceiver(callReceiver, filter);
 
         }catch(Exception e){
             Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
