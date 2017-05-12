@@ -67,7 +67,8 @@ public class SIPReceiver extends BroadcastReceiver {
                 }
               }
           };
-
+          
+          /*
           WalkieTalkieActivity wtActivity = (WalkieTalkieActivity) context;
           incomingCall = wtActivity.manager.takeAudioCall(intent, listener);
           incomingCall.answerCall(30);
@@ -80,7 +81,8 @@ public class SIPReceiver extends BroadcastReceiver {
 
           wtActivity.call = incomingCall;
           wtActivity.updateStatus(incomingCall);
-        
+          */
+          
         }catch(Exception e){
           Log.d("SIP","SIP PLUGIN: "+e.getMessage());
         }
