@@ -52,7 +52,7 @@ public class SIP extends CordovaPlugin {
     private JSONObject params;
     private int orientation;
 
-    public SipManager mSipManager = null;
+    public static SipManager mSipManager = null;
     public SipProfile mSipProfile = null;
     public SIPReceiver callReceiver;
 
