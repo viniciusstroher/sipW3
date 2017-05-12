@@ -28,7 +28,11 @@ import java.util.Set;
 
 public class SIPReceiver extends BroadcastReceiver {
   public SipManager mSipManager = null;
-
+  
+  public SIPReceiver (SipManager mSipManager){
+    mSipManager = mSipManager;
+  }
+  
   @Override
   public void onReceive(Context context, Intent intent) {
       SipAudioCall incomingCall = null;
