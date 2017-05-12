@@ -66,7 +66,10 @@ public class SIPReceiver extends BroadcastReceiver {
                 }
               }
           };
-
+          
+        }catch(Exception e){
+          Log.d("SIP","SIP PLUGIN: "+e.getMessage());
+        }
         /*
         intent = new Intent();
         intent.setAction("org.apache.cordova.SIP.INCOMING_CALL");
