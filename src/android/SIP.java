@@ -31,6 +31,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.app.PendingIntent;
 
 import  android.util.Log;
@@ -116,6 +117,12 @@ public class SIP extends CordovaPlugin {
             });
 
             Log.d("SIP","SIP PLUGIN: Listener registrado");
+        
+            IntentFilter filter = new IntentFilter();
+            filter.addAction("org.apache.cordova.SIP.INCOMING_CALL");
+            SIPReceiver callReceiver = new SIPReceiver();
+            this.registerReceiver(callReceiver, filter);
+
         }catch(Exception e){
             Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
         }
