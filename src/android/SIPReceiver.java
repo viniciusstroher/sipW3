@@ -28,7 +28,7 @@ public class SIPReceiver extends BroadcastReceiver {
  
   @Override
   public void onReceive(Context context, Intent intent) {
-
+      SipAudioCall incomingCall = null;
       Log.d("SIP","SIP PLUGIN: RECEBENDO LIGACAO");
       //dumpIntent(intent);
       
@@ -43,17 +43,6 @@ public class SIPReceiver extends BroadcastReceiver {
       if (wifi == State.CONNECTED || wifi == State.CONNECTING) {
 
         Log.d("SIP","SIP PLUGIN: CONECTADO A WIFI E RECEBENDO CHAMADA");
-        
-        /*
-        PowerManager pm = (PowerManager)context.getSystemService(Context.POWER_SERVICE);
-        WakeLock wakeLock = pm.newWakeLock((PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.FULL_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP), "TAG");
-        wakeLock.acquire();
-
-        KeyguardManager keyguardManager = (KeyguardManager)context.getSystemService(Context.KEYGUARD_SERVICE); 
-        KeyguardLock keyguardLock =  keyguardManager.newKeyguardLock("TAG");
-        keyguardLock.disableKeyguard();
-        */
-
         try {
           
           SipAudioCall.Listener listener = new SipAudioCall.Listener() {
@@ -68,34 +57,25 @@ public class SIPReceiver extends BroadcastReceiver {
               }
           };
           
-          /*
-          WalkieTalkieActivity wtActivity = (WalkieTalkieActivity) context;
-          incomingCall = wtActivity.manager.takeAudioCall(intent, listener);
+          SIP sipact = (SIP) context;
+          incomingCall = sipact.mSipManager.takeAudioCall(intent, listener);
           incomingCall.answerCall(30);
           incomingCall.startAudio();
           incomingCall.setSpeakerMode(true);
           
-          if(incomingCall.isMuted()) {
+          /*if(incomingCall.isMuted()) {
             incomingCall.toggleMute();
           }
 
           wtActivity.call = incomingCall;
-          wtActivity.updateStatus(incomingCall);
-          */
+          wtActivity.updateStatus(incomingCall);*/
           
+
         }catch(Exception e){
           Log.d("SIP","SIP PLUGIN: "+e.getMessage());
         }
-        /*
-        intent = new Intent();
-        intent.setAction("org.apache.cordova.SIP.INCOMING_CALL");
-        intent.setPackage(context.getPackageName());
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.putExtras(extras);
 
-        context.startActivity(intent);*/
-      }
-      else {
+      }else {
         Log.d("SIP PLUGIN:", "SEM INTERNET !!!!!");
       }
   }

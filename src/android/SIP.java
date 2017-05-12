@@ -54,6 +54,7 @@ public class SIP extends CordovaPlugin {
 
     public SipManager mSipManager = null;
     public SipProfile mSipProfile = null;
+    public SIPReceiver callReceiver;
 
 
     private View getView() {
@@ -120,7 +121,7 @@ public class SIP extends CordovaPlugin {
         
             IntentFilter filter = new IntentFilter();
             filter.addAction("org.apache.cordova.SIP.INCOMING_CALL");
-            SIPReceiver callReceiver = new SIPReceiver();
+            callReceiver = new SIPReceiver();
             cordova.getActivity().registerReceiver(callReceiver, filter);
 
         }catch(Exception e){
