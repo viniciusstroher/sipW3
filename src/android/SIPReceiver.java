@@ -68,8 +68,6 @@ public class SIPReceiver extends BroadcastReceiver {
               }
           };
 
-
-          Context context = this.cordova.getActivity().getApplicationContext();
           /*
           incomingCall = mSipManager.takeAudioCall(intent, listener);
           incomingCall.answerCall(30);
