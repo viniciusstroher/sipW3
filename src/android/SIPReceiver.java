@@ -30,7 +30,7 @@ public class SIPReceiver extends BroadcastReceiver {
   public void onReceive(Context context, Intent intent) {
 
       Log.d("SIP","SIP PLUGIN: RECEBENDO LIGACAO");
-      dumpIntent(intent);
+      //dumpIntent(intent);
       
       Bundle extras = intent.getExtras();
 
@@ -80,7 +80,7 @@ public class SIPReceiver extends BroadcastReceiver {
         Log.d("SIP PLUGIN:", "SEM INTERNET !!!!!");
       }
   }
-
+  /*
   public static void dumpIntent(Intent i){
 
     Log.d("SIP", i.getAction());
@@ -103,5 +103,5 @@ public class SIPReceiver extends BroadcastReceiver {
             Log.d("SIP","[" + key + "=" + bundle.get(key)+"]");
         }
     }
-  }
+  }*/
 }
