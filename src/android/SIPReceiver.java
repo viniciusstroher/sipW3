@@ -1,5 +1,6 @@
 package org.apache.cordova.SIP;
 
+import org.apache.cordova.SIP.SIP;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
