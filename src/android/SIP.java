@@ -119,14 +119,18 @@ public class SIP extends CordovaPlugin {
 
             Log.d("SIP","SIP PLUGIN: Listener registrado");
         
-            IntentFilter filter = new IntentFilter();
-            filter.addAction("org.apache.cordova.SIP.INCOMING_CALL");
-            callReceiver = new SIPReceiver();
-            cordova.getActivity().registerReceiver(callReceiver, filter);
+            
 
         }catch(Exception e){
             Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
         }
+    }
+
+    public void registerManagerInReceiver(){
+        IntentFilter filter = new IntentFilter(mSipManager);
+        filter.addAction("org.apache.cordova.SIP.INCOMING_CALL");
+        callReceiver = new SIPReceiver();
+        cordova.getActivity().registerReceiver(callReceiver, filter);
     }
 
     public void closeLocalProfile() {

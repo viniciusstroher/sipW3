@@ -27,7 +27,8 @@ import java.util.Iterator;
 import java.util.Set;
 
 public class SIPReceiver extends BroadcastReceiver {
- 
+  public SipManager mSipManager = null;
+
   @Override
   public void onReceive(Context context, Intent intent) {
       SipAudioCall incomingCall = null;
@@ -59,8 +60,7 @@ public class SIPReceiver extends BroadcastReceiver {
               }
           };
           
-          SIP sipact = ((SIP)context.getApplicationContext());
-          incomingCall = sipact.mSipManager.takeAudioCall(intent, listener);
+          incomingCall = mSipManager.takeAudioCall(intent, listener);
           incomingCall.answerCall(30);
           incomingCall.startAudio();
           incomingCall.setSpeakerMode(true);
