@@ -30,8 +30,9 @@ public class SIPReceiver extends BroadcastReceiver {
   public SipManager mSipManager = null;
   
   public SIPReceiver (){
-    
+
   }
+
   public SIPReceiver (SipManager mSipManager){
     mSipManager = mSipManager;
   }
@@ -67,6 +68,7 @@ public class SIPReceiver extends BroadcastReceiver {
               }
           };
           
+          /*
           incomingCall = mSipManager.takeAudioCall(intent, listener);
           incomingCall.answerCall(30);
           incomingCall.startAudio();

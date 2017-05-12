@@ -102,12 +102,12 @@ public class SIP extends CordovaPlugin {
 
                 public void onRegistering(String localProfileUri) {
                     Log.d("SIP","SIP PLUGIN: Registering with SIP Server... "+localProfileUri);
-                    registerManagerInReceiver();
+                   
                 }
 
                 public void onRegistrationDone(String localProfileUri, long expiryTime) {
                     Log.d("SIP","SIP PLUGIN: Ready "+localProfileUri );
-                    registerManagerInReceiver();
+                 
                 }
 
                 public void onRegistrationFailed(String localProfileUri, int errorCode,
@@ -124,13 +124,6 @@ public class SIP extends CordovaPlugin {
         }catch(Exception e){
             Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
         }
-    }
-
-    public void registerManagerInReceiver(){
-        IntentFilter filter = new IntentFilter();
-        filter.addAction("org.apache.cordova.SIP.INCOMING_CALL");
-        callReceiver = new SIPReceiver(mSipManager);
-        cordova.getActivity().registerReceiver(callReceiver, filter);
     }
 
     public void closeLocalProfile() {
