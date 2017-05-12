@@ -51,14 +51,34 @@ public class SIPReceiver extends BroadcastReceiver {
         KeyguardLock keyguardLock =  keyguardManager.newKeyguardLock("TAG");
         keyguardLock.disableKeyguard();
         */
+        try {
+          
+          SipAudioCall.Listener listener = new SipAudioCall.Listener() {
+             
+              @Override
+              public void onRinging(SipAudioCall call, SipProfile caller) {
+                try {
+                  call.answerCall(30);
+                }catch (Exception e) {
+                  Log.d("SIP","SIP PLUGIN: "+e.getMessage());
+                }
+              }
+          };
 
+        }catch (Exception e) {
+          if (incomingCall != null) {
+           incomingCall.close();
+          }
+        }
+
+        /*
         intent = new Intent();
         intent.setAction("org.apache.cordova.SIP.INCOMING_CALL");
         intent.setPackage(context.getPackageName());
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtras(extras);
 
-        context.startActivity(intent);
+        context.startActivity(intent);*/
       }
       else {
         Log.d("SIP PLUGIN:", "SEM INTERNET !!!!!");
@@ -70,14 +90,13 @@ public class SIPReceiver extends BroadcastReceiver {
     Log.d("SIP", i.getAction());
     Log.d("SIP", Integer.toString(i.getFlags()));
     Uri uri = i.getData();
+    
     if (uri != null) {
       Log.d("SIP", uri.toString());
     }
     else {
       Log.d("SIP", "data null");
     }
-
-
 
     Bundle bundle = i.getExtras();
     if (bundle != null) {
