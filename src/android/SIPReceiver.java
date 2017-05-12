@@ -68,7 +68,7 @@ public class SIPReceiver extends BroadcastReceiver {
               }
           };
 
-          Context context =  cordova.getActivity().getApplicationContext();
+          Context context2  =  cordova.getActivity().getApplicationContext();
 
           /*
           incomingCall = mSipManager.takeAudioCall(intent, listener);
