@@ -24,20 +24,12 @@ import android.app.Activity;
 
 import java.util.Iterator;
 import java.util.Set;
-import org.apache.cordova.CallbackContext;
 
 public class SIPReceiver extends BroadcastReceiver {
-
-  private CallbackContext callbackContext;
-
-  public SIPReceiver (CallbackContext callbackContext) {
-      this.callbackContext = callbackContext;
-  }
-
+ 
   @Override
   public void onReceive(Context context, Intent intent) {
       SipAudioCall incomingCall = null;
-     
       Log.d("SIP","SIP PLUGIN: RECEBENDO LIGACAO");
       //dumpIntent(intent);
       
@@ -66,8 +58,7 @@ public class SIPReceiver extends BroadcastReceiver {
               }
           };
           
-        //  SIP sipact = (SIP) context;
-          incomingCall = callbackContext.mSipManager.takeAudioCall(intent, listener);
+          incomingCall = sipact.mSipManager.takeAudioCall(intent, listener);
           incomingCall.answerCall(30);
           incomingCall.startAudio();
           incomingCall.setSpeakerMode(true);
