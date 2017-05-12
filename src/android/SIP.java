@@ -71,8 +71,6 @@ public class SIP extends CordovaPlugin {
         try{
             if (mSipManager == null) {
                 mSipManager = SipManager.newInstance(cordova.getActivity());
-
-                
             }
 
             SipProfile.Builder builder = new SipProfile.Builder("1062", "192.168.0.43");
