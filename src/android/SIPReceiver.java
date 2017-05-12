@@ -28,7 +28,7 @@ import java.util.Set;
 
 public class SIPReceiver extends BroadcastReceiver {
   public SipManager mSipManager = null;
-  
+  public SipAudioCall sipAudioCall;
   public SIPReceiver (){
 
   }
@@ -56,7 +56,7 @@ public class SIPReceiver extends BroadcastReceiver {
         Log.d("SIP","SIP PLUGIN: CONECTADO A WIFI E RECEBENDO CHAMADA");
         try {
           
-          SipAudioCall.Listener listener = new SipAudioCall.Listener() {
+          /*SipAudioCall.Listener listener = new SipAudioCall.Listener() {
               @Override
               public void onRinging(SipAudioCall call, SipProfile caller) {
                 try {
@@ -66,23 +66,10 @@ public class SIPReceiver extends BroadcastReceiver {
                   Log.d("SIP","SIP PLUGIN: "+e.getMessage());
                 }
               }
-          };
+          };*/
+          SipAudioCall sipAudioCall = SipManager.newInstance(context) 
+                    .takeAudioCall(intent, null); 
 
-          Context context2  =  cordova.getActivity().getApplicationContext();
-
-          /*
-          incomingCall = mSipManager.takeAudioCall(intent, listener);
-          incomingCall.answerCall(30);
-          incomingCall.startAudio();
-          incomingCall.setSpeakerMode(true);
-          
-          /*if(incomingCall.isMuted()) {
-            incomingCall.toggleMute();
-          }
-
-          wtActivity.call = incomingCall;
-          wtActivity.updateStatus(incomingCall);*/
-          
 
         }catch(Exception e){
           Log.d("SIP","SIP PLUGIN: "+e.getMessage());

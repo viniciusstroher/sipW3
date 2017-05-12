@@ -78,7 +78,6 @@ public class SIP extends CordovaPlugin {
             mSipProfile = builder.build();
             Log.d("SIP","SIP PLUGIN: SIP PROFILE BUILDED");
 
-       
         }catch(Exception e){
             Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
         }
@@ -119,8 +118,6 @@ public class SIP extends CordovaPlugin {
 
             Log.d("SIP","SIP PLUGIN: Listener registrado");
         
-            
-
         }catch(Exception e){
             Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
         }
