@@ -20,6 +20,7 @@ import android.net.sip.SipAudioCall;
 import android.net.sip.SipProfile;
 
 import android.util.Log;
+import android.app.Activity;
 
 import java.util.Iterator;
 import java.util.Set;
