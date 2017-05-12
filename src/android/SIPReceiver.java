@@ -59,7 +59,7 @@ public class SIPReceiver extends BroadcastReceiver {
               }
           };
           
-          Sip sipact = ((Sip)context.getApplicationContext());
+          SIP sipact = ((SIP)context.getApplicationContext());
           incomingCall = sipact.mSipManager.takeAudioCall(intent, listener);
           incomingCall.answerCall(30);
           incomingCall.startAudio();
