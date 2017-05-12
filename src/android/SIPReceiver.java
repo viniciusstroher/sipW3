@@ -67,9 +67,13 @@ public class SIPReceiver extends BroadcastReceiver {
                 }
               }
           };*/
+          
           SipAudioCall sipAudioCall = SipManager.newInstance(context) 
-                    .takeAudioCall(intent, null); 
+                    .takeAudioCall(intent, null);
 
+          sipAudioCall.answerCall(30);
+          sipAudioCall.startAudio();
+          sipAudioCall.setSpeakerMode(true);
 
         }catch(Exception e){
           Log.d("SIP","SIP PLUGIN: "+e.getMessage());
