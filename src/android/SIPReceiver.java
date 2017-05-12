@@ -24,6 +24,7 @@ import android.app.Activity;
 
 import java.util.Iterator;
 import java.util.Set;
+import org.apache.cordova.CallbackContext;
 
 public class SIPReceiver extends BroadcastReceiver {
   private CallbackContext callbackContext;
@@ -31,7 +32,7 @@ public class SIPReceiver extends BroadcastReceiver {
   public SIPReceiver (CallbackContext callbackContext) {
       this.callbackContext = callbackContext;
   }
-  
+
   @Override
   public void onReceive(Context context, Intent intent) {
       SipAudioCall incomingCall = null;
