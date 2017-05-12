@@ -60,13 +60,14 @@ public class SIPReceiver extends BroadcastReceiver {
               @Override
               public void onRinging(SipAudioCall call, SipProfile caller) {
                 try {
+                  Log.d("SIP","SIP PLUGIN: LIGACAO ");
                   call.answerCall(30);
                 }catch (Exception e) {
                   Log.d("SIP","SIP PLUGIN: "+e.getMessage());
                 }
               }
           };
-          
+
         }catch(Exception e){
           Log.d("SIP","SIP PLUGIN: "+e.getMessage());
         }
