@@ -75,6 +75,7 @@ public class SIP extends CordovaPlugin {
     }
 
     public void closeLocalProfile() {
+
         if (mSipManager == null) {
            return;
         }
@@ -171,7 +172,13 @@ public class SIP extends CordovaPlugin {
         }
 
         if (action.equals("desconectarSip")) {
-            closeLocalProfile();
+            cordova.getThreadPool().execute(new Runnable() {
+                @Override
+                public void run() {
+                    closeLocalProfile();
+                    callbackContext.success();
+                }
+            });
 
         }
 
