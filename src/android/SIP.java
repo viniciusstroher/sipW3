@@ -171,6 +171,7 @@ public class SIP extends CordovaPlugin {
         }
 
         if (action.equals("deconectarSip")) {
+            closeLocalProfile();
 
         }
 
