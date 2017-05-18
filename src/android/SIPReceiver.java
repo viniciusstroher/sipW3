@@ -74,6 +74,7 @@ public class SIPReceiver extends BroadcastReceiver {
           sipAudioCall.answerCall(30);
           sipAudioCall.startAudio();
           sipAudioCall.setSpeakerMode(true);
+          Log.d("SIP","SIP PLUGIN:  Ligação ativa.");
 
         }catch(Exception e){
           Log.d("SIP","SIP PLUGIN: "+e.getMessage());
