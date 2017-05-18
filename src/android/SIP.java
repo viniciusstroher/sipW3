@@ -224,12 +224,18 @@ public class SIP extends CordovaPlugin {
     }
 
     public static void aceitaChamada(Context context, Intent intent){
-        SipAudioCall sipAudioCall = SipManager.newInstance(context) 
-                      .takeAudioCall(intent, null);
+        if(!inBackground){
+            Log.d("SIP","SIP PLUGIN: Chamada recebida e ativa.");
 
-        sipAudioCall.answerCall(30);
-        sipAudioCall.startAudio();
-        sipAudioCall.setSpeakerMode(true);
+            SipAudioCall sipAudioCall = SipManager.newInstance(context) 
+                          .takeAudioCall(intent, null);
+
+            sipAudioCall.answerCall(30);
+            sipAudioCall.startAudio();
+            sipAudioCall.setSpeakerMode(true);
+        }else{
+            Log.d("SIP","SIP PLUGIN: App em background.");
+        }
     }
 
 }
