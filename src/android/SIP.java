@@ -109,7 +109,7 @@ public class SIP extends CordovaPlugin {
         if (action.equals("conectarSip")) {
             //pega parametros do js
             //this.params = args.getJSONObject(0);
-            JSONObject params = = args.getJSONObject(0);
+            JSONObject params = args.getJSONObject(0);
 
             this.sip        = params.getString("sip");
             this.password   = params.getString("password");
