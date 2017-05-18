@@ -43,7 +43,7 @@ public class SIPReceiver extends BroadcastReceiver {
         Log.d("SIP","SIP PLUGIN: CONECTADO A WIFI E RECEBENDO CHAMADA");
         try {
           
-          SIP.aceitaChamada(intent,context);
+          SIP.aceitaChamada(context,intent);
           
           
         }catch(Exception e){
