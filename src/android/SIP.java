@@ -98,15 +98,11 @@ public class SIP extends CordovaPlugin {
 
     @Override
     public void onPause(boolean multitasking) {
-        inBackground = false;
-        setVisible(true);
-
+        
     }
 
     @Override
     public void onResume(boolean multitasking) {
-        inBackground = true;
-        setVisible(false);
 
     }
 
