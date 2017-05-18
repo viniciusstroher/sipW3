@@ -98,11 +98,14 @@ public class SIP extends CordovaPlugin {
 
     @Override
     public void onPause(boolean multitasking) {
-        
+        inBackground = false;
+        Log.d("SIP","SIP PLUGIN: onPause inBackground "+inBackground);
     }
 
     @Override
     public void onResume(boolean multitasking) {
+        inBackground = true;
+        Log.d("SIP","SIP PLUGIN: onResume inBackground "+inBackground);
 
     }
 
@@ -224,7 +227,7 @@ public class SIP extends CordovaPlugin {
     }
 
     public static void aceitaChamada(Context context, Intent intent){
-        if(isVisible()){
+        if(true){
             Log.d("SIP","SIP PLUGIN: Chamada recebida e ativa.");
 
             SipAudioCall sipAudioCall = SipManager.newInstance(context) 
