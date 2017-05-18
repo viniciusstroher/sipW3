@@ -199,7 +199,7 @@ public class SIP extends CordovaPlugin {
 
         }
 
-        if(action.equals("")){
+        if(action.equals("chamar")){
             JSONObject params = args.getJSONObject(0);
             String address  = params.getString("address");
             
