@@ -204,7 +204,7 @@ public class SIP extends CordovaPlugin {
             String address  = params.getString("address");
             
             try{
-                fazChamada(mSipManager ,mSipProfile , String address);
+                fazChamada(mSipManager ,mSipProfile , address);
             }catch(Exception e){
                 Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
             }
