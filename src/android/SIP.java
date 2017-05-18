@@ -56,6 +56,9 @@ public class SIP extends CordovaPlugin {
     public SipProfile mSipProfile = null;
     public SIPReceiver callReceiver;
 
+    public String sip       = "";
+    public String password  = "";
+    public String user      = "";
 
     private View getView() {
         try {
@@ -105,14 +108,20 @@ public class SIP extends CordovaPlugin {
        
         if (action.equals("conectarSip")) {
             //pega parametros do js
-            this.params = args.getJSONObject(0);
+            //this.params = args.getJSONObject(0);
+            JSONObject params = = args.getJSONObject(0);
+
+            this.sip        = params.getString("sip");
+            this.password   = params.getString("password");
+            this.user       = params.getString("user");
+
             try{
                 if (mSipManager == null) {
                     mSipManager = SipManager.newInstance(cordova.getActivity());
                 }
 
-                SipProfile.Builder builder = new SipProfile.Builder("1063", "192.168.0.43");
-                builder.setPassword("password");
+                SipProfile.Builder builder = new SipProfile.Builder(this.user, this.sip);
+                builder.setPassword(this.password);
                 mSipProfile = builder.build();
                 Log.d("SIP","SIP PLUGIN: SIP PROFILE BUILDED");
 
@@ -127,8 +136,8 @@ public class SIP extends CordovaPlugin {
                 PendingIntent pendingIntent = PendingIntent.getBroadcast(cordova.getActivity(), 0, intent, Intent.FILL_IN_DATA);
                 
                 
-                Log.d("SIP","SIP PLUGIN: isRegistered "+mSipManager.isRegistered(mSipProfile.getUriString()));
-                Log.d("SIP","SIP PLUGIN: isOpened "+mSipManager.isOpened(mSipProfile.getUriString()));
+                Log.d("SIP","SIP PLUGIN: isRegistered "+ mSipManager.isRegistered(mSipProfile.getUriString()));
+                Log.d("SIP","SIP PLUGIN: isOpened "    + mSipManager.isOpened(mSipProfile.getUriString()));
                 
                 mSipProfile.getAutoRegistration();
                 mSipManager.open(mSipProfile, pendingIntent, null);

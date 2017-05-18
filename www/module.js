@@ -1,12 +1,12 @@
 var exec = require('cordova/exec');
 
 var SipW3 = {
-    conectarSip:function(sip,pass,ip) {
+    conectarSip:function(user,password,sip) {
         
         var params = {
-          sip: sip,
-          pass: pass,
-          ip: ip
+          sip : sip,
+          user: user,
+          password  : password
         };
 
 
