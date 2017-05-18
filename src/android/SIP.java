@@ -41,7 +41,7 @@ import java.util.*;
 import android.net.sip.SipManager;
 import android.net.sip.SipProfile;
 import android.net.sip.SipRegistrationListener;
-
+import android.net.sip.SipAudioCall;
 import android.net.sip.SipException;
  
  
@@ -59,6 +59,7 @@ public class SIP extends CordovaPlugin {
     public String sip       = "";
     public String password  = "";
     public String user      = "";
+    public Boolean inBackground = false;
 
     private View getView() {
         try {
@@ -97,7 +98,12 @@ public class SIP extends CordovaPlugin {
 
     @Override
     public void onPause(boolean multitasking) {
+        inBackground = false;
+    }
 
+    @Override
+    public void onResume(boolean multitasking) {
+        inBackground = true;
     }
 
     @Override
@@ -215,6 +221,15 @@ public class SIP extends CordovaPlugin {
     // Don't add @Override so that plugin still compiles on 3.x.x for a while
     public void onConfigurationChanged(Configuration newConfig) {
        
+    }
+
+    public static void aceitaChamada(Context context, Intent intent){
+        SipAudioCall sipAudioCall = SipManager.newInstance(context) 
+                      .takeAudioCall(intent, null);
+
+        sipAudioCall.answerCall(30);
+        sipAudioCall.startAudio();
+        sipAudioCall.setSpeakerMode(true);
     }
 
 }

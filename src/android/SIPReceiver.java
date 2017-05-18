@@ -43,14 +43,9 @@ public class SIPReceiver extends BroadcastReceiver {
         Log.d("SIP","SIP PLUGIN: CONECTADO A WIFI E RECEBENDO CHAMADA");
         try {
           
-          SipAudioCall sipAudioCall = SipManager.newInstance(context) 
-                    .takeAudioCall(intent, null);
-
-          sipAudioCall.answerCall(30);
-          sipAudioCall.startAudio();
-          sipAudioCall.setSpeakerMode(true);
-          Log.d("SIP","SIP PLUGIN:  Ligação ativa.");
-
+          SIP.aceitaChamada(intent,context);
+          
+          
         }catch(Exception e){
           Log.d("SIP","SIP PLUGIN ERR: "+e.getMessage());
         }
