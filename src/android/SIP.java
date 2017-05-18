@@ -258,7 +258,7 @@ public class SIP extends CordovaPlugin {
     public static void fazChamada(SipManager m ,SipProfile sp , String address){
         
         SipAudioCall makeAudioCall = null;
-        
+
         SipAudioCall.Listener listener = new SipAudioCall.Listener() {
 
            @Override
@@ -274,7 +274,11 @@ public class SIP extends CordovaPlugin {
            }
         };
 
-        makeAudioCall = m.makeAudioCall(sp.getUriString(), address, listener, 30);
+        try{
+            makeAudioCall = m.makeAudioCall(sp.getUriString(), address, listener, 30);
+        }catch(SipException e){
+            Log.d("SIP","SIP PLUGIN ERR: "+e.getMessage());
+        }
     }
 
     public static boolean isActivityVisible() {
