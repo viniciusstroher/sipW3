@@ -20,7 +20,7 @@ var SipW3 = {
     chamar:function(address){
         var params = {address:address};
         exec(null, null, "SIP", "chamar", [params]);
-    }
+    },
 
     desconectarSip:function(){
         exec(null, null, "SIP", "desconectarSip", []);
