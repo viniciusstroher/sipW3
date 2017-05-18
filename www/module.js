@@ -16,7 +16,7 @@ var SipW3 = {
         exec(null, null, "SIP", "conectarSip", [params]);
         
     },desconectarSip:function(){
-        exec(null, null, "SIP", "desconectarSip", [params]);
+        exec(null, null, "SIP", "desconectarSip", []);
     }
 
 
