@@ -70,7 +70,8 @@ public class SIP extends CordovaPlugin {
 
     @Override
     protected void pluginInitialize() {
-        
+        Log.d("SIP","isVoipSupported(): " +SipManager.isVoipSupported());
+        Log.d("SIP","isApiSupported() : " +SipManager.isApiSupported());
         
     }
 
