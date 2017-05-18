@@ -85,6 +85,10 @@ public class SIP extends CordovaPlugin {
             
               Log.d("SIP", "SIP DESLOGANDO: "+ mSipProfile.getUriString());
               mSipManager.close(mSipProfile.getUriString());
+              
+              if (mSipManager.isRegistered(mSipProfile.getProfileName())){
+                mSipManager.unregister(mSipProfile, null);
+              }
            }
         } catch (Exception e) {
            Log.d("SIP", "SIP PLUGIN: Failed to close local profile: "+ e.getMessage());
