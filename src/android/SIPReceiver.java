@@ -27,46 +27,21 @@ import java.util.Iterator;
 import java.util.Set;
 
 public class SIPReceiver extends BroadcastReceiver {
-  public SipManager mSipManager = null;
-  public SipAudioCall sipAudioCall;
-  public SIPReceiver (){
-
-  }
-
-  public SIPReceiver (SipManager mSipManager){
-    mSipManager = mSipManager;
-  }
-
+  
   @Override
   public void onReceive(Context context, Intent intent) {
-      SipAudioCall incomingCall = null;
-      Log.d("SIP","SIP PLUGIN: RECEBENDO LIGACAO");
-      //dumpIntent(intent);
       
+      Log.d("SIP","SIP PLUGIN: RECEBENDO LIGACAO");
+     
       Bundle extras = intent.getExtras();
 
       ConnectivityManager conMan = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-      //State mobile = conMan.getNetworkInfo(0).getState();
-
       State wifi = conMan.getNetworkInfo(1).getState();
 
       if (wifi == State.CONNECTED || wifi == State.CONNECTING) {
 
         Log.d("SIP","SIP PLUGIN: CONECTADO A WIFI E RECEBENDO CHAMADA");
         try {
-          
-          /*SipAudioCall.Listener listener = new SipAudioCall.Listener() {
-              @Override
-              public void onRinging(SipAudioCall call, SipProfile caller) {
-                try {
-                  Log.d("SIP","SIP PLUGIN: LIGACAO ");
-                  call.answerCall(30);
-                }catch (Exception e) {
-                  Log.d("SIP","SIP PLUGIN: "+e.getMessage());
-                }
-              }
-          };*/
           
           SipAudioCall sipAudioCall = SipManager.newInstance(context) 
                     .takeAudioCall(intent, null);
@@ -77,35 +52,12 @@ public class SIPReceiver extends BroadcastReceiver {
           Log.d("SIP","SIP PLUGIN:  Ligação ativa.");
 
         }catch(Exception e){
-          Log.d("SIP","SIP PLUGIN: "+e.getMessage());
+          Log.d("SIP","SIP PLUGIN ERR: "+e.getMessage());
         }
 
       }else {
         Log.d("SIP PLUGIN:", "SEM INTERNET !!!!!");
       }
   }
-  /*
-  public static void dumpIntent(Intent i){
-
-    Log.d("SIP", i.getAction());
-    Log.d("SIP", Integer.toString(i.getFlags()));
-    Uri uri = i.getData();
-    
-    if (uri != null) {
-      Log.d("SIP", uri.toString());
-    }
-    else {
-      Log.d("SIP", "data null");
-    }
-
-    Bundle bundle = i.getExtras();
-    if (bundle != null) {
-        Set<String> keys = bundle.keySet();
-        Iterator<String> it = keys.iterator();
-        while (it.hasNext()) {
-            String key = it.next();
-            Log.d("SIP","[" + key + "=" + bundle.get(key)+"]");
-        }
-    }
-  }*/
+ 
 }

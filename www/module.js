@@ -15,7 +15,11 @@ var SipW3 = {
         /*abrirRtsp -> metodo*/
         exec(null, null, "SIP", "conectarSip", [params]);
         
+    },deconectarSip:function(){
+        exec(null, null, "SIP", "deconectarSip", [params]);
     }
+
+
 };
 
 module.exports = SipW3;
