@@ -52,8 +52,6 @@ public class SIP extends CordovaPlugin {
     private JSONObject params;
     private int orientation;
 
-    private SipAudioCall makeAudioCall;
-
     public static SipManager mSipManager = null;
     public SipProfile mSipProfile = null;
     public SIPReceiver callReceiver;
@@ -258,6 +256,8 @@ public class SIP extends CordovaPlugin {
     }
 
     public static void fazChamada(SipManager m ,SipProfile sp , String address){
+        
+        SipAudioCall makeAudioCall = null;
         
         SipAudioCall.Listener listener = new SipAudioCall.Listener() {
 
