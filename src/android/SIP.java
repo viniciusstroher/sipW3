@@ -176,7 +176,6 @@ public class SIP extends CordovaPlugin {
                 @Override
                 public void run() {
                     closeLocalProfile();
-                    callbackContext.success();
                 }
             });
 
