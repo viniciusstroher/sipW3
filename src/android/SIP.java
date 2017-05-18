@@ -128,7 +128,7 @@ public class SIP extends CordovaPlugin {
                 SipProfile.Builder builder = new SipProfile.Builder(this.user, this.sip);
                 builder.setPassword(this.password);
                 mSipProfile = builder.build();
-                
+
                 Log.d("SIP","SIP PLUGIN: SIP PROFILE BUILDED");
 
             }catch(Exception e){
@@ -153,14 +153,7 @@ public class SIP extends CordovaPlugin {
                 mSipProfile.getAutoRegistration();
                 
                 if(isVoipSupported && isApiSupported){
-                    if(isRegistered){
-                        Log.d("SIP","SIP PLUGIN: isRegistered "+isRegistered);
-                    }
-
-                    if(isOpened){
-                        Log.d("SIP","SIP PLUGIN: isOpened "+isOpened);
-                    }
-
+                    
                     mSipManager.open(mSipProfile, pendingIntent, null);
 
                     Log.d("SIP","SIP PLUGIN: PROFILE SIP - "+mSipProfile.getUriString());
