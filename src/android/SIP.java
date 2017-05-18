@@ -152,8 +152,17 @@ public class SIP extends CordovaPlugin {
                 Log.d("SIP","SIP PLUGIN: isOpened "        + isOpened);
                 Log.d("SIP","SIP PLUGIN: isVoipSupported " + isVoipSupported);
                 Log.d("SIP","SIP PLUGIN: isApiSupported "  + isApiSupported);
+                mSipProfile.getAutoRegistration()
                 
-                if(mSipProfile.getAutoRegistration() && isRegistered && isOpened){
+                if(isVoipSupported && isApiSupported){
+                    if(isRegistered){
+                        Log.d("SIP","SIP PLUGIN: isRegistered "+isRegistered);
+                    }
+
+                    if(isOpened){
+                        Log.d("SIP","SIP PLUGIN: isOpened "+isOpened);
+                    }
+
                     mSipManager.open(mSipProfile, pendingIntent, null);
 
                     Log.d("SIP","SIP PLUGIN: PROFILE SIP - "+mSipProfile.getUriString());
@@ -179,7 +188,8 @@ public class SIP extends CordovaPlugin {
 
                     Log.d("SIP","SIP PLUGIN: Listener registrado");
                 }else{
-                    Log.d("SIP","SIP PLUGIN: Listener não registrado");
+                    
+                    Log.d("SIP","SIP PLUGIN: NÃO SUPORTADO.");
                 }
             }catch(Exception e){
                 Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
