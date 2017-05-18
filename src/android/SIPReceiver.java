@@ -41,15 +41,8 @@ public class SIPReceiver extends BroadcastReceiver {
       if (wifi == State.CONNECTED || wifi == State.CONNECTING) {
 
         Log.d("SIP","SIP PLUGIN: CONECTADO A WIFI E RECEBENDO CHAMADA");
-        try {
-          
-          SIP.aceitaChamada(context,intent);
-          
-          
-        }catch(Exception e){
-          Log.d("SIP","SIP PLUGIN ERR: "+e.getMessage());
-        }
-
+        SIP.aceitaChamada(context,intent);
+        
       }else {
         Log.d("SIP PLUGIN:", "SEM INTERNET !!!!!");
       }
