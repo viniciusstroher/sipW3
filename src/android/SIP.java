@@ -152,7 +152,7 @@ public class SIP extends CordovaPlugin {
                 Log.d("SIP","SIP PLUGIN: isOpened "        + isOpened);
                 Log.d("SIP","SIP PLUGIN: isVoipSupported " + isVoipSupported);
                 Log.d("SIP","SIP PLUGIN: isApiSupported "  + isApiSupported);
-                mSipProfile.getAutoRegistration()
+                mSipProfile.getAutoRegistration();
                 
                 if(isVoipSupported && isApiSupported){
                     if(isRegistered){
