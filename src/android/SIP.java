@@ -59,7 +59,7 @@ public class SIP extends CordovaPlugin {
     public String sip       = "";
     public String password  = "";
     public String user      = "";
-    public Boolean inBackground = false;
+    public static Boolean inBackground = false;
 
     private View getView() {
         try {
@@ -99,11 +99,15 @@ public class SIP extends CordovaPlugin {
     @Override
     public void onPause(boolean multitasking) {
         inBackground = false;
+        setVisible(true);
+
     }
 
     @Override
     public void onResume(boolean multitasking) {
         inBackground = true;
+        setVisible(false);
+
     }
 
     @Override
@@ -224,7 +228,7 @@ public class SIP extends CordovaPlugin {
     }
 
     public static void aceitaChamada(Context context, Intent intent){
-        if(!inBackground){
+        if(isVisible()){
             Log.d("SIP","SIP PLUGIN: Chamada recebida e ativa.");
 
             SipAudioCall sipAudioCall = SipManager.newInstance(context) 
@@ -233,6 +237,7 @@ public class SIP extends CordovaPlugin {
             sipAudioCall.answerCall(30);
             sipAudioCall.startAudio();
             sipAudioCall.setSpeakerMode(true);
+
         }else{
             Log.d("SIP","SIP PLUGIN: App em background.");
         }
