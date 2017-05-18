@@ -52,6 +52,8 @@ public class SIP extends CordovaPlugin {
     private JSONObject params;
     private int orientation;
 
+    private SipAudioCall makeAudioCall;
+
     public static SipManager mSipManager = null;
     public SipProfile mSipProfile = null;
     public SIPReceiver callReceiver;
@@ -197,6 +199,17 @@ public class SIP extends CordovaPlugin {
 
         }
 
+        if(action.equals("")){
+            JSONObject params = args.getJSONObject(0);
+            String address  = params.getString("address");
+            
+            try{
+                fazChamada(mSipManager ,mSipProfile , String address);
+            }catch(Exception e){
+                Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
+            }
+        }
+
         if (action.equals("desconectarSip")) {
             cordova.getThreadPool().execute(new Runnable() {
                 @Override
@@ -242,6 +255,26 @@ public class SIP extends CordovaPlugin {
         }catch(Exception e){
           Log.d("SIP","SIP PLUGIN ERR: "+e.getMessage());
         }
+    }
+
+    public static void fazChamada(SipManager m ,SipProfile sp , String address){
+        
+        SipAudioCall.Listener listener = new SipAudioCall.Listener() {
+
+           @Override
+           public void onCallEstablished(SipAudioCall call) {
+              call.startAudio();
+              call.setSpeakerMode(true);
+              call.toggleMute();
+           }
+
+           @Override
+           public void onCallEnded(SipAudioCall call) {
+              // Do something.
+           }
+        };
+
+        makeAudioCall = m.makeAudioCall(sp.getUriString(), address, listener, 30);
     }
 
     public static boolean isActivityVisible() {
