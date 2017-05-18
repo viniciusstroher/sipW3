@@ -281,6 +281,23 @@ public class SIP extends CordovaPlugin {
         }
     }
 
+    //ADICIONAR CANCELAR CHAMADA
+    //ATTIBUTO PARA VER SE ESTA EM LIGACAO
+     public static boolean isInChamada() {
+        return inChamada;
+    }  
+
+    public static void inChamadaTrue() {
+        inChamada = true;
+    }
+
+    public static void inChamadaFalse() {
+        inChamada = false;
+    }
+
+    private static boolean inChamada;
+
+
     public static boolean isActivityVisible() {
         return activityVisible;
     }  
