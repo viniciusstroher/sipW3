@@ -243,15 +243,40 @@ public class SIP extends CordovaPlugin {
     public static void aceitaChamada(Context context, Intent intent){
         try {
             if(isActivityVisible()){
-                Log.d("SIP","SIP PLUGIN: Chamada recebida e ativa.");
+                if(!SIP.isInChamada()){
+                    SIP.inChamadaTrue();
+                    Log.d("SIP","SIP PLUGIN: Chamada recebida e ativa.");
 
-                SipAudioCall sipAudioCall = SipManager.newInstance(context) 
-                              .takeAudioCall(intent, null);
+                    SipAudioCall.Listener listener = new SipAudioCall.Listener() {
 
-                sipAudioCall.answerCall(30);
-                sipAudioCall.startAudio();
-                sipAudioCall.setSpeakerMode(true);
+                       @Override
+                       public void onCallEstablished(SipAudioCall call) {
+                          call.startAudio();
+                          call.setSpeakerMode(true);
+                          call.toggleMute();
+                          
+                          SIP.inChamadaTrue();
+                          SIP.callbackContext.success("chamada_em_andamento");
+                       }
 
+                       @Override
+                       public void onCallEnded(SipAudioCall call) {
+                          SIP.inChamadaFalse();
+                          SIP.callbackContext.success("chamada_terminada");
+                       }
+                    };
+
+                    SipAudioCall sipAudioCall = SipManager.newInstance(context) 
+                                  .takeAudioCall(intent, null);
+                    sipAudioCall.setListener(listener);
+                    
+                    sipAudioCall.answerCall(30);
+                    sipAudioCall.startAudio();
+                    sipAudioCall.setSpeakerMode(true);
+                    SIP.callbackContext.success("chamada_em_andamento");
+                }else{
+                    SIP.callbackContext.success("ja_tem_alguma_chamada_em_andamento");
+                }
             }else{
                 Log.d("SIP","SIP PLUGIN: App em background.");
             }
@@ -261,28 +286,39 @@ public class SIP extends CordovaPlugin {
     }
 
     public static void fazChamada(SipManager m ,SipProfile sp , String address){
-        
-        SipAudioCall makeAudioCall = null;
+        if(!SIP.isInChamada()){
+            
+            SipAudioCall makeAudioCall = null;
 
-        SipAudioCall.Listener listener = new SipAudioCall.Listener() {
+            SipAudioCall.Listener listener = new SipAudioCall.Listener() {
 
-           @Override
-           public void onCallEstablished(SipAudioCall call) {
-              call.startAudio();
-              call.setSpeakerMode(true);
-              call.toggleMute();
-           }
+               @Override
+               public void onCallEstablished(SipAudioCall call) {
+                  call.startAudio();
+                  call.setSpeakerMode(true);
+                  call.toggleMute();
+                  
+                  SIP.inChamadaTrue();
+                  SIP.callbackContext.success("chamada_em_andamento");
+               }
 
-           @Override
-           public void onCallEnded(SipAudioCall call) {
-              // Do something.
-           }
-        };
+               @Override
+               public void onCallEnded(SipAudioCall call) {
+                  SIP.inChamadaFalse();
+                  SIP.callbackContext.success("chamada_terminada");
+               }
+            };
 
-        try{
-            makeAudioCall = m.makeAudioCall(sp.getUriString(), address, listener, 30);
-        }catch(SipException e){
-            Log.d("SIP","SIP PLUGIN ERR: "+e.getMessage());
+            try{
+                makeAudioCall = m.makeAudioCall(sp.getUriString(), address, listener, 30);
+                
+            }catch(SipException e){
+                SIP.inChamadaFalse();
+                Log.d("SIP","SIP PLUGIN ERR: "+e.getMessage());
+            }
+
+        }else{
+            SIP.callbackContext.success("ja_tem_alguma_chamada_em_andamento");
         }
     }
 
