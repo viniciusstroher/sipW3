@@ -36,7 +36,7 @@ var SipW3 = {
         },function(err){
             falha(err);
         }, "SIP", "desconectarSip", []);
-    }
+    },
 
     emChamada:function(sucesso,falha){
         exec(function(suc){
