@@ -228,8 +228,10 @@ public class SIP extends CordovaPlugin {
         }
 
         if(action.equals("emChamada")){
-            
-            SIP.callbackContext.success(SIP.isInChamada());
+            JSONObject obj = new JSONObject();
+            obj.put("emChamada", SIP.isInChamada());
+
+            SIP.callbackContext.success(obj);
         }
 
         return true;
