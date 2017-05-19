@@ -184,7 +184,7 @@ public class SIP extends CordovaPlugin {
                             String errorMessage) {
                             Log.d("SIP","SIP PLUGIN: Registration failed.  Please check settings. - ("+errorCode+")"+errorMessage);
                             callbackContext.success("false");
-                            return true;
+
                         }
 
                     });
