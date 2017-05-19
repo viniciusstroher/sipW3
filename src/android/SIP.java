@@ -328,6 +328,8 @@ public class SIP extends CordovaPlugin {
                   SIP.callbackContext.success("chamada_terminada");
                   Log.d("SIP","SIP PLUGIN:  fazChamada chamada_terminada.");
                }
+
+               
             };
 
             try{
