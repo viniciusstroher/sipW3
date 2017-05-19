@@ -306,7 +306,7 @@ public class SIP extends CordovaPlugin {
                        @Override
                        public void onCallEstablished(SipAudioCall call) {
                           call.startAudio();
-                          call.setSpeakerMode(true);
+                          //call.setSpeakerMode(true);
                           call.toggleMute();
                           
                           SIP.inChamadaTrue();
