@@ -44,6 +44,17 @@ var SipW3 = {
         },function(err){
             falha(err);
         }, "SIP", "emChamada", []);
+    },
+
+    toogleSpeaker:function(opt,sucesso,falha){
+        if(opt === undefined){
+            opt = 1;
+        }
+        exec(function(suc){
+            sucesso(suc);
+        },function(err){
+            falha(err);
+        }, "SIP", opt == 1 ? "toogleSpeakerRecebeLigacao" : "toogleSpeakerEnviaLigacao", []);
     }
 
 
