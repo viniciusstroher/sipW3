@@ -13,7 +13,11 @@ var SipW3 = {
 
         /*RtspW3 -> nome no plugin.xml*/
         /*abrirRtsp -> metodo*/
-        exec(null, null, "SIP", "conectarSip", [params]);
+        exec(function(suc){
+            console.log(suc);
+        },function(err){
+            console.log(suc);
+        }, "SIP", "conectarSip", [params]);
         
     },
     
