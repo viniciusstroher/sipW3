@@ -56,8 +56,8 @@ public class SIP extends CordovaPlugin {
     public SipProfile mSipProfile = null;
     public SIPReceiver callReceiver;
 
-    public SipAudioCall sipAudioCall;
-    public SipAudioCall makeAudioCall;
+    public static SipAudioCall sipAudioCall;
+    public static SipAudioCall makeAudioCall;
 
     public String sip       = "";
     public String password  = "";
@@ -271,13 +271,13 @@ public class SIP extends CordovaPlugin {
                        }
                     };
 
-                    sipAudioCall = SipManager.newInstance(context) 
+                    SIP.sipAudioCall = SipManager.newInstance(context) 
                                   .takeAudioCall(intent, null);
-                    sipAudioCall.setListener(listener);
+                    SIP.sipAudioCall.setListener(listener);
 
-                    sipAudioCall.answerCall(30);
-                    sipAudioCall.startAudio();
-                    sipAudioCall.setSpeakerMode(true);
+                    SIP.sipAudioCall.answerCall(30);
+                    SIP.sipAudioCall.startAudio();
+                    SIP.sipAudioCall.setSpeakerMode(true);
 
                     SIP.callbackContext.success("chamada_em_andamento");
                 }else{
@@ -314,7 +314,7 @@ public class SIP extends CordovaPlugin {
             };
 
             try{
-                makeAudioCall = m.makeAudioCall(sp.getUriString(), address, listener, 30);  
+                SIP.makeAudioCall = m.makeAudioCall(sp.getUriString(), address, listener, 30);  
             }catch(SipException e){
                 SIP.inChamadaFalse();
                 Log.d("SIP","SIP PLUGIN ERR: "+e.getMessage());
