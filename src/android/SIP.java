@@ -179,14 +179,14 @@ public class SIP extends CordovaPlugin {
 
                         public void onRegistrationDone(String localProfileUri, long expiryTime) {
                             Log.d("SIP","SIP PLUGIN: Ready "+localProfileUri );
-                            this.callbackContext.success("true");
+                            callbackContext.success("true");
                             
                         }
 
                         public void onRegistrationFailed(String localProfileUri, int errorCode,
                             String errorMessage) {
                             Log.d("SIP","SIP PLUGIN: Registration failed.  Please check settings. - ("+errorCode+")"+errorMessage);
-                            this.callbackContext.success("false");
+                            callbackContext.success("false");
 
                         }
 
