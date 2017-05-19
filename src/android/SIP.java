@@ -177,7 +177,7 @@ public class SIP extends CordovaPlugin {
                         public void onRegistrationDone(String localProfileUri, long expiryTime) {
                             Log.d("SIP","SIP PLUGIN: Ready "+localProfileUri );
                             callbackContext.success("true");
-                            return true;
+                            
                         }
 
                         public void onRegistrationFailed(String localProfileUri, int errorCode,
@@ -221,7 +221,7 @@ public class SIP extends CordovaPlugin {
 
         }
 
-        
+        return true;
     }
 
 
