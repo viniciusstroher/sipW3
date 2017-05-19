@@ -171,17 +171,20 @@ public class SIP extends CordovaPlugin {
 
                         public void onRegistering(String localProfileUri) {
                             Log.d("SIP","SIP PLUGIN: Registering with SIP Server... "+localProfileUri);
-                           
+                            
                         }
 
                         public void onRegistrationDone(String localProfileUri, long expiryTime) {
                             Log.d("SIP","SIP PLUGIN: Ready "+localProfileUri );
-                         
+                            callbackContext.success("true");
+                            return true;
                         }
 
                         public void onRegistrationFailed(String localProfileUri, int errorCode,
                             String errorMessage) {
                             Log.d("SIP","SIP PLUGIN: Registration failed.  Please check settings. - ("+errorCode+")"+errorMessage);
+                            callbackContext.success("false");
+                            return true;
                         }
 
                     });
@@ -218,8 +221,7 @@ public class SIP extends CordovaPlugin {
 
         }
 
-        callbackContext.success();
-        return true;
+        
     }
 
 
