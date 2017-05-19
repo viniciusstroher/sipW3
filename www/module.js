@@ -38,6 +38,14 @@ var SipW3 = {
         }, "SIP", "desconectarSip", []);
     }
 
+    emChamada:function(sucesso,falha){
+        exec(function(suc){
+            sucesso(suc);
+        },function(err){
+            falha(err);
+        }, "SIP", "emChamada", []);
+    }
+
 
 };
 
