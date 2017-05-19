@@ -48,7 +48,7 @@ import android.net.sip.SipException;
 public class SIP extends CordovaPlugin {
     private static final String LOG_TAG = "SIPW3";
 
-    private CallbackContext callbackContext;
+    private final CallbackContext callbackContext;
     private JSONObject params;
     private int orientation;
 
