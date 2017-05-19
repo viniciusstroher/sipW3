@@ -222,6 +222,7 @@ public class SIP extends CordovaPlugin {
             cordova.getThreadPool().execute(new Runnable() {
                 @Override
                 public void run() {
+                    SIP.inChamadaFalse();
                     closeLocalProfile();
                 }
             });
