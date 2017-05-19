@@ -304,12 +304,14 @@ public class SIP extends CordovaPlugin {
                   
                   SIP.inChamadaTrue();
                   SIP.callbackContext.success("chamada_em_andamento");
+                  Log.d("SIP","SIP PLUGIN:  fazChamada chamada_em_andamento.");
                }
 
                @Override
                public void onCallEnded(SipAudioCall call) {
                   SIP.inChamadaFalse();
                   SIP.callbackContext.success("chamada_terminada");
+                  Log.d("SIP","SIP PLUGIN:  fazChamada chamada_terminada.");
                }
             };
 
@@ -322,6 +324,7 @@ public class SIP extends CordovaPlugin {
 
         }else{
             SIP.callbackContext.success("ja_tem_alguma_chamada_em_andamento");
+            Log.d("SIP","SIP PLUGIN:  fazChamada else ja_tem_alguma_chamada_em_andamento.");
         }
     }
 
