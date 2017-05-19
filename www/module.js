@@ -15,7 +15,7 @@ var SipW3 = {
 
         },function(err){
             console.log(err);
-            falha(suc);
+            falha(err);
 
         }, "SIP", "conectarSip", [params]);
         
