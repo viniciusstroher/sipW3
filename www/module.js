@@ -19,16 +19,23 @@ var SipW3 = {
 
         }, "SIP", "conectarSip", [params]);
         
-
     },
     
-    chamar:function(address){
+    chamar:function(address,sucesso,falha){
         var params = {address:address};
-        exec(null, null, "SIP", "chamar", [params]);
+        exec(function(suc){
+            sucesso(suc);
+        },function(err){
+            falha(err);
+        }, "SIP", "chamar", [params]);
     },
 
-    desconectarSip:function(){
-        exec(null, null, "SIP", "desconectarSip", []);
+    desconectarSip:function(sucesso,falha){
+        exec(function(suc){
+            sucesso(suc);
+        },function(err){
+            falha(err);
+        }, "SIP", "desconectarSip", []);
     }
 
 
