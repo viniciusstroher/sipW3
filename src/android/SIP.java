@@ -241,13 +241,13 @@ public class SIP extends CordovaPlugin {
             obj.put("speaker", false);
             
             try{
-                if(!SIP.makeAudioCall.getSpeakerMode()){
+                if(!SIP.speaker){
                     SIP.makeAudioCall.setSpeakerMode(true);
                 }else{
                     SIP.makeAudioCall.setSpeakerMode(false);
                 }
 
-                obj.put("speaker", SIP.makeAudioCall.getSpeakerMode());
+                obj.put("speaker", SIP.speaker);
                 SIP.callbackContext.success(obj);
 
             }catch(Exception e){
@@ -262,13 +262,13 @@ public class SIP extends CordovaPlugin {
             obj.put("speaker", false);
             
             try{
-                if(!SIP.sipAudioCall.getSpeakerMode()){
+                if(!SIP.speaker){
                     SIP.sipAudioCall.setSpeakerMode(true);
                 }else{
                     SIP.sipAudioCall.setSpeakerMode(false);
                 }
 
-                obj.put("speaker", SIP.sipAudioCall.getSpeakerMode());
+                obj.put("speaker", SIP.speaker);
                 SIP.callbackContext.success(obj);
 
             }catch(Exception e){
@@ -420,5 +420,5 @@ public class SIP extends CordovaPlugin {
     }
 
     private static boolean activityVisible;
-
+    private static boolean speaker = false;
 }
