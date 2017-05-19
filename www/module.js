@@ -1,8 +1,7 @@
 var exec = require('cordova/exec');
-var q    = require('q');
 
 var SipW3 = {
-    conectarSip:function(user,password,sip) {
+    conectarSip:function(user,password,sip,sucesso,falha) {
         
         var params = {
           sip : sip,
@@ -10,14 +9,14 @@ var SipW3 = {
           password  : password
         };
 
-
-
-        /*RtspW3 -> nome no plugin.xml*/
-        /*abrirRtsp -> metodo*/
         exec(function(suc){
             console.log(suc);
+            sucesso(suc);
+
         },function(err){
-            console.log(suc);
+            console.log(err);
+            falha(suc);
+
         }, "SIP", "conectarSip", [params]);
         
 
