@@ -267,21 +267,21 @@ public class SIP extends CordovaPlugin {
                           
                           SIP.inChamadaTrue();
                           SIP.callbackContext.success("chamada_em_andamento");
-                          Log.d("SIP","SIP PLUGIN: aceitaChamada Chamada iniciada.");
+                          Log.d("SIP","SIP PLUGIN: aceitaChamada Chamada iniciada." + SIP.isInChamada());
                        }
 
                        @Override
                        public void onCallEnded(SipAudioCall call) {
                           SIP.inChamadaFalse();
                           SIP.callbackContext.success("chamada_terminada");
-                          Log.d("SIP","SIP PLUGIN: aceitaChamada Chamada encerrada.");
+                          Log.d("SIP","SIP PLUGIN: aceitaChamada Chamada encerrada." +SIP.isInChamada());
                        }
                      
                       @Override
                        public void onError(SipAudioCall call, int errorCode, String errorMessage){
                           SIP.inChamadaFalse();
                           SIP.callbackContext.success("chamada_terminada");
-                          Log.d("SIP","SIP PLUGIN: onError Chamada encerrada."+errorCode+" - "+errorMessage);
+                          Log.d("SIP","SIP PLUGIN: onError Chamada encerrada. "+SIP.isInChamada()+"  "+errorCode+" - "+errorMessage);
                        }
 
                     };
@@ -296,11 +296,11 @@ public class SIP extends CordovaPlugin {
 
                     SIP.callbackContext.success("chamada_em_andamento");
                 }else{
-                    Log.d("SIP","SIP PLUGIN: else aceitaChamada ja_tem_alguma_chamada_em_andamento.");
+                    Log.d("SIP","SIP PLUGIN: else aceitaChamada ja_tem_alguma_chamada_em_andamento."+SIP.isInChamada());
                     SIP.callbackContext.success("ja_tem_alguma_chamada_em_andamento");
                 }
             }else{
-                Log.d("SIP","SIP PLUGIN: App em background.");
+                Log.d("SIP","SIP PLUGIN: App em background."+SIP.isInChamada());
             }
         }catch(Exception e){
           Log.d("SIP","SIP PLUGIN ERR: "+e.getMessage());
