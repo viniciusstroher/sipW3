@@ -242,7 +242,7 @@ public class SIP extends CordovaPlugin {
 
     public static void aceitaChamada(Context context, Intent intent){
         try {
-            if(isActivityVisible()){
+            if(SIP.isActivityVisible()){
                 if(!SIP.isInChamada()){
                     SIP.inChamadaTrue();
                     Log.d("SIP","SIP PLUGIN: Chamada recebida e ativa.");
@@ -257,19 +257,21 @@ public class SIP extends CordovaPlugin {
                           
                           SIP.inChamadaTrue();
                           SIP.callbackContext.success("chamada_em_andamento");
+                          Log.d("SIP","SIP PLUGIN: aceitaChamada Chamada iniciada.");
                        }
 
                        @Override
                        public void onCallEnded(SipAudioCall call) {
                           SIP.inChamadaFalse();
                           SIP.callbackContext.success("chamada_terminada");
+                          Log.d("SIP","SIP PLUGIN: aceitaChamada Chamada encerrada.");
                        }
                     };
 
                     SipAudioCall sipAudioCall = SipManager.newInstance(context) 
                                   .takeAudioCall(intent, null);
                     sipAudioCall.setListener(listener);
-                    
+
                     sipAudioCall.answerCall(30);
                     sipAudioCall.startAudio();
                     sipAudioCall.setSpeakerMode(true);
@@ -289,7 +291,6 @@ public class SIP extends CordovaPlugin {
         if(!SIP.isInChamada()){
             
             SipAudioCall makeAudioCall = null;
-
             SipAudioCall.Listener listener = new SipAudioCall.Listener() {
 
                @Override
@@ -310,8 +311,7 @@ public class SIP extends CordovaPlugin {
             };
 
             try{
-                makeAudioCall = m.makeAudioCall(sp.getUriString(), address, listener, 30);
-                
+                makeAudioCall = m.makeAudioCall(sp.getUriString(), address, listener, 30);  
             }catch(SipException e){
                 SIP.inChamadaFalse();
                 Log.d("SIP","SIP PLUGIN ERR: "+e.getMessage());
