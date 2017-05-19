@@ -115,6 +115,7 @@ public class SIP extends CordovaPlugin {
     @Override
     public void onDestroy() {
         Log.d("SIP", "SIP PLUGIN: Destruindo Sip profile ");
+        encerraChamada();
         closeLocalProfile();
     }
 
