@@ -296,6 +296,7 @@ public class SIP extends CordovaPlugin {
 
                     SIP.callbackContext.success("chamada_em_andamento");
                 }else{
+                    Log.d("SIP","SIP PLUGIN: else aceitaChamada ja_tem_alguma_chamada_em_andamento.");
                     SIP.callbackContext.success("ja_tem_alguma_chamada_em_andamento");
                 }
             }else{
@@ -329,7 +330,7 @@ public class SIP extends CordovaPlugin {
                   Log.d("SIP","SIP PLUGIN:  fazChamada chamada_terminada.");
                }
 
-               
+
             };
 
             try{
