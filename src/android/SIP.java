@@ -236,6 +236,29 @@ public class SIP extends CordovaPlugin {
             SIP.callbackContext.success(obj);
         }
 
+        if(action.equals("encerraChamada")){
+            
+            try{
+                
+                SIP.makeAudioCall.endCall();
+                SIP.makeAudioCall.close();
+                Log.d("SIP","SIP PLUGIN: "+e.getMessage());
+            }catch(SipException e){
+                Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
+            }
+
+            try{
+                
+                SIP.sipAudioCall.endCall();
+                SIP.sipAudioCall.close();
+                Log.d("SIP","SIP PLUGIN: "+e.getMessage());
+            }catch(SipException e){
+                Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
+            }
+
+            SIP.callbackContext.success("true");
+        }
+
         if(action.equals("toogleSpeakerEnviaLigacao")){
             JSONObject obj = new JSONObject();
             obj.put("speaker", false);

@@ -55,6 +55,15 @@ var SipW3 = {
         },function(err){
             falha(err);
         }, "SIP", opt == 1 ? "toogleSpeakerRecebeLigacao" : "toogleSpeakerEnviaLigacao", []);
+    },
+
+    encerraChamada:function(sucesso,falha){
+
+        exec(function(suc){
+            sucesso(suc);
+        },function(err){
+            falha(err);
+        }, "SIP", "encerraChamada", []);
     }
 
 
