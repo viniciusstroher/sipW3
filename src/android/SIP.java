@@ -121,7 +121,7 @@ public class SIP extends CordovaPlugin {
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         this.callbackContext = callbackContext;
-        
+
         if (action.equals("conectarSip")) {
             //pega parametros do js
             //this.params = args.getJSONObject(0);
@@ -179,14 +179,14 @@ public class SIP extends CordovaPlugin {
 
                         public void onRegistrationDone(String localProfileUri, long expiryTime) {
                             Log.d("SIP","SIP PLUGIN: Ready "+localProfileUri );
-                            callbackContext.success("true");
+                            this.callbackContext.success("true");
                             
                         }
 
                         public void onRegistrationFailed(String localProfileUri, int errorCode,
                             String errorMessage) {
                             Log.d("SIP","SIP PLUGIN: Registration failed.  Please check settings. - ("+errorCode+")"+errorMessage);
-                            callbackContext.success("false");
+                            this.callbackContext.success("false");
 
                         }
 
