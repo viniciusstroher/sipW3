@@ -1,5 +1,5 @@
 var exec = require('cordova/exec');
-var q    = require('node_modules/q/q.js');
+var q    = require('q');
 
 var SipW3 = {
     conectarSip:function(user,password,sip) {
