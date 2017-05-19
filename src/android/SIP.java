@@ -236,15 +236,36 @@ public class SIP extends CordovaPlugin {
             SIP.callbackContext.success(obj);
         }
 
-        if(action.equals("toogleSpeaker")){
+        if(action.equals("toogleSpeakerEnviaLigacao")){
             JSONObject obj = new JSONObject();
             obj.put("speaker", false);
             
             try{
-                if(!call.getSpeakerMode()){
-                    call.setSpeakerMode(true);
+                if(!SIP.makeAudioCall.getSpeakerMode()){
+                    SIP.makeAudioCall.setSpeakerMode(true);
                 }else{
-                    call.setSpeakerMode(false);
+                    SIP.makeAudioCall.setSpeakerMode(false);
+                }
+
+                obj.put("speaker", call.getSpeakerMode());
+                SIP.callbackContext.success(obj);
+
+            }catch(Exception e){
+                 obj.put("exception", e.getMessage());
+                 obj.put("speaker", false);
+                 SIP.callbackContext.success(obj);
+            }
+        }
+
+        if(action.equals("toogleSpeakerRecebeLigacao")){
+            JSONObject obj = new JSONObject();
+            obj.put("speaker", false);
+            
+            try{
+                if(!SIP.sipAudioCall.getSpeakerMode()){
+                    SIP.sipAudioCall.setSpeakerMode(true);
+                }else{
+                    SIP.sipAudioCall.setSpeakerMode(false);
                 }
 
                 obj.put("speaker", call.getSpeakerMode());
