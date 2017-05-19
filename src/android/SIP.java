@@ -236,6 +236,27 @@ public class SIP extends CordovaPlugin {
             SIP.callbackContext.success(obj);
         }
 
+        if(action.equals("toogleSpeaker")){
+            JSONObject obj = new JSONObject();
+            obj.put("speaker", false);
+            
+            try{
+                if(!call.getSpeakerMode()){
+                    call.setSpeakerMode(true);
+                }else{
+                    call.setSpeakerMode(false);
+                }
+
+                obj.put("speaker", call.getSpeakerMode());
+                SIP.callbackContext.success(obj);
+
+            }catch(Exception e){
+                 obj.put("exception", e.getMessage());
+                 obj.put("speaker", false);
+                 SIP.callbackContext.success(obj);
+            }
+        }
+
         return true;
     }
 
@@ -294,7 +315,7 @@ public class SIP extends CordovaPlugin {
 
                     SIP.sipAudioCall.answerCall(30);
                     SIP.sipAudioCall.startAudio();
-                    SIP.sipAudioCall.setSpeakerMode(true);
+                    //SIP.sipAudioCall.setSpeakerMode(true);
 
                     SIP.callbackContext.success("chamada_em_andamento");
                 }else{
@@ -317,7 +338,7 @@ public class SIP extends CordovaPlugin {
                @Override
                public void onCallEstablished(SipAudioCall call) {
                   call.startAudio();
-                  call.setSpeakerMode(true);
+                  //call.setSpeakerMode(true);
                   call.toggleMute();
                   
                   SIP.inChamadaTrue();
