@@ -1,5 +1,5 @@
 var exec = require('cordova/exec');
-var q    = require('q');
+var q    = require('node_modules/q');
 
 var SipW3 = {
     conectarSip:function(user,password,sip) {
@@ -10,19 +10,17 @@ var SipW3 = {
           password  : password
         };
 
-        var defer = Q.defer();
+
 
         /*RtspW3 -> nome no plugin.xml*/
         /*abrirRtsp -> metodo*/
         exec(function(suc){
             console.log(suc);
-            defer.resolve(suc);
         },function(err){
-            console.log(err);
-            defer.resolve(err);
+            console.log(suc);
         }, "SIP", "conectarSip", [params]);
         
-        return defer.promise;
+
     },
     
     chamar:function(address){
