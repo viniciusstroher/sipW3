@@ -238,24 +238,7 @@ public class SIP extends CordovaPlugin {
 
         if(action.equals("encerraChamada")){
             
-            try{
-                
-                SIP.makeAudioCall.endCall();
-                SIP.makeAudioCall.close();
-                Log.d("SIP","SIP PLUGIN: ligacao encerrada.");
-            }catch(SipException e){
-                Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
-            }
-
-            try{
-                
-                SIP.sipAudioCall.endCall();
-                SIP.sipAudioCall.close();
-                Log.d("SIP","SIP PLUGIN: ligacao encerrada.");
-            }catch(SipException e){
-                Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
-            }
-
+            encerraChamada();
             SIP.callbackContext.success("true");
         }
 
@@ -316,7 +299,27 @@ public class SIP extends CordovaPlugin {
     public void onConfigurationChanged(Configuration newConfig) {
        
     }
+    
+    public static void encerraChamada(){
+        try{
+                
+            SIP.makeAudioCall.endCall();
+            SIP.makeAudioCall.close();
+            Log.d("SIP","SIP PLUGIN: ligacao encerrada.");
+        }catch(SipException e){
+            Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
+        }
 
+        try{
+            
+            SIP.sipAudioCall.endCall();
+            SIP.sipAudioCall.close();
+            Log.d("SIP","SIP PLUGIN: ligacao encerrada.");
+        }catch(SipException e){
+            Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
+        }
+
+    }
     public static void aceitaChamada(Context context, Intent intent){
         try {
             if(SIP.isActivityVisible()){
