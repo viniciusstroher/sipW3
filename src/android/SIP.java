@@ -61,6 +61,8 @@ public class SIP extends CordovaPlugin {
     public String user      = "";
     public static Boolean inBackground = false;
 
+
+
     private View getView() {
         try {
             return (View)webView.getClass().getMethod("getView").invoke(webView);
@@ -118,7 +120,8 @@ public class SIP extends CordovaPlugin {
     //AQUI FICAO AS ACOES
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-       
+        this.callbackContext = callbackContext;
+        
         if (action.equals("conectarSip")) {
             //pega parametros do js
             //this.params = args.getJSONObject(0);
