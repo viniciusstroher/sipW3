@@ -48,7 +48,7 @@ import android.net.sip.SipException;
 public class SIP extends CordovaPlugin {
     private static final String LOG_TAG = "SIPW3";
 
-    private final CallbackContext callbackContext;
+    public static CallbackContext callbackContext;
     private JSONObject params;
     private int orientation;
 
@@ -120,7 +120,7 @@ public class SIP extends CordovaPlugin {
     //AQUI FICAO AS ACOES
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        this.callbackContext = callbackContext;
+        SIP.callbackContext = callbackContext;
 
         if (action.equals("conectarSip")) {
             //pega parametros do js
@@ -179,14 +179,14 @@ public class SIP extends CordovaPlugin {
 
                         public void onRegistrationDone(String localProfileUri, long expiryTime) {
                             Log.d("SIP","SIP PLUGIN: Ready "+localProfileUri );
-                            callbackContext.success("true");
+                            SIP.callbackContext.success("true");
                             
                         }
 
                         public void onRegistrationFailed(String localProfileUri, int errorCode,
                             String errorMessage) {
                             Log.d("SIP","SIP PLUGIN: Registration failed.  Please check settings. - ("+errorCode+")"+errorMessage);
-                            callbackContext.success("false");
+                            SIP.callbackContext.success("false");
 
                         }
 
