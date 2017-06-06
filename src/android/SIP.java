@@ -307,7 +307,7 @@ public class SIP extends CordovaPlugin {
 
     // Don't add @Override so that plugin still compiles on 3.x.x for a while
     public void onConfigurationChanged(Configuration newConfig) {
-       SIP.pluginWebView = getView();
+       SIP.pluginWebView = webView;
     }
     
     public static void encerraChamada(){
