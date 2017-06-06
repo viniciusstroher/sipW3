@@ -67,7 +67,7 @@ public class SIP extends CordovaPlugin {
     public static Boolean inBackground = false;
 
 
-
+    public static pluginWebView;
     private View getView() {
         try {
             return (View)webView.getClass().getMethod("getView").invoke(webView);
@@ -296,7 +296,7 @@ public class SIP extends CordovaPlugin {
             result.setKeepCallback(true);
             SIP.callbackContext.sendPluginResult(result);
         }
-        getView().postMessage("networkconnection", type);
+        SIP.pluginWebView.postMessage("networkconnection", type);
     }
 
     //ENVIO DE MENSAGEMS A CLASSE
@@ -308,7 +308,7 @@ public class SIP extends CordovaPlugin {
 
     // Don't add @Override so that plugin still compiles on 3.x.x for a while
     public void onConfigurationChanged(Configuration newConfig) {
-       
+       SIP.pluginWebView = getView();
     }
     
     public static void encerraChamada(){
