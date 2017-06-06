@@ -1,6 +1,8 @@
 var exec = require('cordova/exec');
 
 var SipW3 = {
+    //navigator.SIP.conectarSip(1060,"password","192.168.0.43",function(r){console.log('s',r)},function(r){console.log('e',r)});
+
     conectarSip:function(user,password,sip,sucesso,falha) {
         
         var params = {
