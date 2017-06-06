@@ -39,10 +39,10 @@ public class SIPReceiver extends BroadcastReceiver {
       State wifi = conMan.getNetworkInfo(1).getState();
 
       if (wifi == State.CONNECTED || wifi == State.CONNECTING) {
-        cordova.fireWindowEvent("recebeChamadaEvent","{\"level\":\"20\",\"isPlugged\":true}");
         Log.d("SIP","SIP PLUGIN: CONECTADO A WIFI E RECEBENDO CHAMADA");
         SIP.aceitaChamada(context,intent);
-       
+        SIP.pluginWebView.sendJavascript("cordova.fireWindowEvent('recebeChamadaEvent', { 'recebendo_call':true});");
+
 
 
       }else {
