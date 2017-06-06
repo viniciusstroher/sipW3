@@ -14,7 +14,7 @@ var SipW3 = {
             sucesso(suc);
 
             addEventListener(document, 'recebeChamadaEvent', function(e) {
-              document.body.innerHTML = e.detail;
+              console.log('recebendo evento: ',e);
             });
 
         },function(err){
