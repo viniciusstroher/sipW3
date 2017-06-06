@@ -13,6 +13,10 @@ var SipW3 = {
             console.log(suc);
             sucesso(suc);
 
+            addEventListener(document, 'recebeChamadaEvent', function(e) {
+              document.body.innerHTML = e.detail;
+            });
+
         },function(err){
             console.log(err);
             falha(err);
@@ -64,7 +68,22 @@ var SipW3 = {
         },function(err){
             falha(err);
         }, "SIP", "encerraChamada", []);
+    },
+
+
+
+
+
+    function addEventListener(el, eventName, handler) {
+      if (el.addEventListener) {
+        el.addEventListener(eventName, handler);
+      } else {
+        el.attachEvent('on' + eventName, function() {
+          handler.call(el);
+        });
+      }
     }
+
 
 
 };

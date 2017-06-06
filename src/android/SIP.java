@@ -290,14 +290,19 @@ public class SIP extends CordovaPlugin {
         return true;
     }
 
-    public static void sendUpdate(String type) {
+    /*public static void sendUpdate(String type) {
         if (SIP.callbackContext != null) {
             PluginResult result = new PluginResult(PluginResult.Status.OK, type);
             result.setKeepCallback(true);
             SIP.callbackContext.sendPluginResult(result);
         }
-        SIP.pluginWebView.postMessage("networkconnection", type);
-    }
+        
+        cordova.fireWindowEvent('recebeChamadaEvent', 
+                {"level":"20","isPlugged":true});
+
+        //SIP.pluginWebView.postMessage("recebeChamadaEvent", type);
+    }*/
+    
 
     //ENVIO DE MENSAGEMS A CLASSE
     @Override
