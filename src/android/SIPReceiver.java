@@ -41,9 +41,7 @@ public class SIPReceiver extends BroadcastReceiver {
       if (wifi == State.CONNECTED || wifi == State.CONNECTING) {
         Log.d("SIP","SIP PLUGIN: CONECTADO A WIFI E RECEBENDO CHAMADA");
         SIP.aceitaChamada(context,intent);
-        SIP.pluginWebView.sendJavascript("cordova.fireWindowEvent('recebeChamadaEvent', { 'recebendo_call':true});");
-
-
+        SIP.enviaEvento();
 
       }else {
         Log.d("SIP PLUGIN:", "SEM INTERNET !!!!!");

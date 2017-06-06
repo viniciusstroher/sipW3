@@ -302,7 +302,7 @@ public class SIP extends CordovaPlugin {
 
         //SIP.pluginWebView.postMessage("recebeChamadaEvent", type);
     }*/
-    
+
 
     //ENVIO DE MENSAGEMS A CLASSE
     @Override
@@ -429,6 +429,15 @@ public class SIP extends CordovaPlugin {
             SIP.callbackContext.success("ja_tem_alguma_chamada_em_andamento");
             Log.d("SIP","SIP PLUGIN:  fazChamada else ja_tem_alguma_chamada_em_andamento.");
         }
+    }
+
+    public static void enviaEvento(){
+        cordova.getThreadPool().execute(new Runnable() {
+                public void run() {
+                    SIP.pluginWebView.sendJavascript("cordova.fireWindowEvent('recebeChamadaEvent', { 'recebendo_call':true});");
+
+                }
+        });
     }
 
     //ADICIONAR CANCELAR CHAMADA
