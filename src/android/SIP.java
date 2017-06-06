@@ -288,6 +288,14 @@ public class SIP extends CordovaPlugin {
         return true;
     }
 
+    public static void sendUpdate(String type) {
+        if (SIP.callbackContext != null) {
+            PluginResult result = new PluginResult(PluginResult.Status.OK, type);
+            result.setKeepCallback(true);
+            SIP.callbackContext.sendPluginResult(result);
+        }
+        webView.postMessage("networkconnection", type);
+    }
 
     //ENVIO DE MENSAGEMS A CLASSE
     @Override

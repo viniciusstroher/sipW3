@@ -42,7 +42,7 @@ public class SIPReceiver extends BroadcastReceiver {
 
         Log.d("SIP","SIP PLUGIN: CONECTADO A WIFI E RECEBENDO CHAMADA");
         SIP.aceitaChamada(context,intent);
-        
+        SIP.sendUpdate("chamada");
       }else {
         Log.d("SIP PLUGIN:", "SEM INTERNET !!!!!");
       }
