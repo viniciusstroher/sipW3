@@ -51,12 +51,12 @@ public class SIP extends CordovaPlugin {
     private static final String LOG_TAG = "SIPW3";
 
     public static CallbackContext callbackContext;
-    private JSONObject params;
-    private int orientation;
+    private       JSONObject      params;
+    private       int             orientation;
 
     public static SipManager mSipManager = null;
-    public SipProfile mSipProfile = null;
-    public SIPReceiver callReceiver;
+    public        SipProfile mSipProfile = null;
+    public        SIPReceiver callReceiver;
 
     public static SipAudioCall sipAudioCall;
     public static SipAudioCall makeAudioCall;
@@ -67,7 +67,7 @@ public class SIP extends CordovaPlugin {
     public static Boolean inBackground = false;
 
 
-    public static pluginWebView;
+    public static View pluginWebView;
     private View getView() {
         try {
             return (View)webView.getClass().getMethod("getView").invoke(webView);
