@@ -13,7 +13,7 @@ var SipW3 = {
             console.log(suc);
             sucesso(suc);
 
-            addEventListener(document, 'recebeChamadaEvent', function(e) {
+            SipW3.addEventListener(document, 'recebeChamadaEvent', function(e) {
               console.log('recebendo evento: ',e);
             });
 
@@ -74,7 +74,7 @@ var SipW3 = {
 
 
 
-    function addEventListener(el, eventName, handler) {
+    addEventListener: function (el, eventName, handler) {
       if (el.addEventListener) {
         el.addEventListener(eventName, handler);
       } else {
