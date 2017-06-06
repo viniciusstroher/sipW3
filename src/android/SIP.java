@@ -67,7 +67,7 @@ public class SIP extends CordovaPlugin {
     public static Boolean inBackground = false;
 
 
-    public static View pluginWebView;
+    public static CordovaWebView pluginWebView;
     private View getView() {
         try {
             return (View)webView.getClass().getMethod("getView").invoke(webView);
@@ -302,7 +302,6 @@ public class SIP extends CordovaPlugin {
     //ENVIO DE MENSAGEMS A CLASSE
     @Override
     public Object onMessage(String id, Object data) {
-       
         return null;
     }
 
