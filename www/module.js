@@ -88,5 +88,8 @@ var SipW3 = {
 
 
 };
+function teste(){
+    alert("teste");
 
+}
 module.exports = SipW3;
