@@ -76,7 +76,7 @@ var SipW3 = {
         document.addEventListener('recebeEvento', function (e) { 
             console.log(e);
         }, false);
-    }
+    },
 
 
     enviaDadoEventos:function(dado){
