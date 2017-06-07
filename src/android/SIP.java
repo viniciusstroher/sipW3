@@ -73,6 +73,13 @@ public class SIP extends CordovaPlugin {
 
 
     public static CordovaWebView pluginWebView;
+
+    public void initialize(CordovaInterface cordova, CordovaWebView webView) {
+        super.initialize(cordova, webView);
+
+        SIP.pluginWebView = webView;
+    }
+
     private View getView() {
         try {
             return (View)webView.getClass().getMethod("getView").invoke(webView);
@@ -132,6 +139,8 @@ public class SIP extends CordovaPlugin {
         SIP.callbackContext = callbackContext;
 
         if (action.equals("conectarSip")) {
+            SIP.pluginWebView.sendJavascript("navigator.SIP.teste();");
+         
             //pega parametros do js
             //this.params = args.getJSONObject(0);
             JSONObject params = args.getJSONObject(0);
@@ -191,8 +200,7 @@ public class SIP extends CordovaPlugin {
                             SIP.inChamadaFalse();
                             SIP.callbackContext.success("true");
                             
-                            SIP.pluginWebView.loadUrl("javascript:alert('AA');");
-         
+                            
                         }
 
                         public void onRegistrationFailed(String localProfileUri, int errorCode,
