@@ -90,7 +90,7 @@ public class SIP extends CordovaPlugin {
 
     @Override
     protected void pluginInitialize() {
-        SIP.pluginWebView = webView;   
+        //SIP.pluginWebView = webView;   
     }
 
     public void closeLocalProfile() {
