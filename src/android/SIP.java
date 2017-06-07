@@ -79,17 +79,22 @@ public class SIP extends CordovaPlugin {
         }
     }
 
+    public void initialize(CordovaInterface cordova, CordovaWebView webView) {
+        super.initialize(cordova, webView);
+        webView.setWebViewClient(new WebViewClient() {
+
+           public void onPageFinished(WebView view, String url) {
+                view.loadUrl("javascript:navigator.SIP.teste();");
+            }
+        });
+    }
+
     @Override
     protected void pluginInitialize() {
         SIP.pluginWebView = webView;
         //registra evento no module\js para envido de eventos de funcao
         Log.d("SIP","SIP PLUGIN: inicializando  navigator.SIP.recebeEvento(); ");
-        ((WebView)SIP.pluginWebView).setWebViewClient(new WebViewClient() {
-
-           public void onPageFinished(WebView view, String url) {
-                SIP.pluginWebView.loadUrl("javascript:navigator.SIP.teste();");
-            }
-        });
+        
         
     }
 
