@@ -39,9 +39,11 @@ public class SIPReceiver extends BroadcastReceiver {
       State wifi = conMan.getNetworkInfo(1).getState();
 
       if (wifi == State.CONNECTED || wifi == State.CONNECTING) {
+        Log.d("SIP","SIP PLUGIN: ENVIA EVENTO CORDOVA sendJavascript");
+        SIP.enviaEvento();
         Log.d("SIP","SIP PLUGIN: CONECTADO A WIFI E RECEBENDO CHAMADA");
         SIP.aceitaChamada(context,intent);
-        SIP.enviaEvento();
+        
 
       }else {
         Log.d("SIP PLUGIN:", "SEM INTERNET !!!!!");
