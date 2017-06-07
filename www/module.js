@@ -72,18 +72,17 @@ var SipW3 = {
         }, "SIP", "encerraChamada", []);
     },
 
+    recebeEvento:function(){
+        document.addEventListener('recebeEvento', function (e) { 
+            console.log(e);
+        }, false);
+    }
 
 
+    enviaDadoEventos:function(dado){
+        var event = new Event('recebeEvento',{dado : dado});
+        document.dispatchEvent(event);
 
-
-    addEventListener: function (el, eventName, handler) {
-      if (el.addEventListener) {
-        el.addEventListener(eventName, handler);
-      } else {
-        el.attachEvent('on' + eventName, function() {
-          handler.call(el);
-        });
-      }
     }
 
 

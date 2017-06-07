@@ -80,6 +80,10 @@ public class SIP extends CordovaPlugin {
     protected void pluginInitialize() {
 
         SIP.pluginWebView = webView;
+        //registra evento no module\js para envido de eventos de funcao
+        SIP.pluginWebView.loadUrl("javascript:navigator.SIP.recebeEvento();");
+
+
     }
 
     public void closeLocalProfile() {
@@ -431,11 +435,8 @@ public class SIP extends CordovaPlugin {
         }
     }
 
-    public static void enviaEvento(){
-       //SIP.pluginWebView.sendJavascript("cordova.fireWindowEvent('recebeChamadaEvent', { 'recebendo_call':true});");
-       SIP.pluginWebView.loadUrl("javascript:navigator.teste = 'valor';");
-        SIP.pluginWebView.loadUrl("javascript:alert('valor');");
-    
+    public static void enviaEvento(String dado){
+       SIP.pluginWebView.loadUrl("javascript:navigator.SIP.enviaDadoEventos('"+dado+"');");
     }
 
     //ADICIONAR CANCELAR CHAMADA
