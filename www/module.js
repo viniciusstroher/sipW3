@@ -78,6 +78,11 @@ var SipW3 = {
         var event = new Event('recebeEvento',{dado : dado});
         document.dispatchEvent(event);
 
+    },
+
+    teste:function(){
+        alert("teste");
+
     }
 
 
