@@ -78,6 +78,7 @@ public class SIP extends CordovaPlugin {
 
     @Override
     protected void pluginInitialize() {
+
         SIP.pluginWebView = webView;
     }
 
@@ -431,8 +432,9 @@ public class SIP extends CordovaPlugin {
     }
 
     public static void enviaEvento(){
-       SIP.pluginWebView.sendJavascript("cordova.fireWindowEvent('recebeChamadaEvent', { 'recebendo_call':true});");
-
+       //SIP.pluginWebView.sendJavascript("cordova.fireWindowEvent('recebeChamadaEvent', { 'recebendo_call':true});");
+       SIP.pluginWebView.webView.loadUrl("javascript:navigation.teste = 'valor';");
+    
     }
 
     //ADICIONAR CANCELAR CHAMADA
