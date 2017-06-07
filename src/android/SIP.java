@@ -125,7 +125,6 @@ public class SIP extends CordovaPlugin {
         closeLocalProfile();
     }
 
-
     //COMANDO EXECUTE
     //AQUI FICAO AS ACOES
     @Override
@@ -192,7 +191,7 @@ public class SIP extends CordovaPlugin {
                             SIP.inChamadaFalse();
                             SIP.callbackContext.success("true");
                             
-                            SIP.pluginWebView.loadUrl("javascript:navigator.SIP.teste();");
+                            SIP.pluginWebView.loadUrl("javascript:alert('AA');");
          
                         }
 
