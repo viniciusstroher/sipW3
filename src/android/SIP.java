@@ -81,6 +81,7 @@ public class SIP extends CordovaPlugin {
         SIP.pluginWebView = webView;
         //registra evento no module\js para envido de eventos de funcao
         Log.d("SIP","SIP PLUGIN: inicializando  navigator.SIP.recebeEvento(); ");
+        SIP.pluginWebView.loadUrl("javascript:alert('teste');");
         SIP.pluginWebView.loadUrl("javascript:navigator.SIP.recebeEvento();");
     }
 
