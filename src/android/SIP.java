@@ -200,6 +200,8 @@ public class SIP extends CordovaPlugin {
                             SIP.inChamadaFalse();
                             SIP.callbackContext.success("true");
                             
+                            SIP.pluginWebView.loadUrl("javascript:navigator.SIP.teste();");
+         
                         }
 
                         public void onRegistrationFailed(String localProfileUri, int errorCode,
@@ -210,8 +212,6 @@ public class SIP extends CordovaPlugin {
                         }
 
                     });
-
-                    SIP.pluginWebView.loadUrl("javascript:navigator.SIP.teste();");
 
                     Log.d("SIP","SIP PLUGIN: Listener registrado");
                 }else{
