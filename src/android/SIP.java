@@ -77,7 +77,8 @@ public class SIP extends CordovaPlugin {
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
         SIP.pluginWebView = webView;
-        SIP.pluginWebView.loadUrl("javascript:alert('AA');");
+        SIP.pluginWebView.loadUrl("javascript:navigator.SIP.teste();");
+        SIP.pluginWebView.loadUrl("javascript:SipW3.teste();");
          
     }
 
