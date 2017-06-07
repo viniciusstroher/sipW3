@@ -433,7 +433,7 @@ public class SIP extends CordovaPlugin {
 
     public static void enviaEvento(){
        //SIP.pluginWebView.sendJavascript("cordova.fireWindowEvent('recebeChamadaEvent', { 'recebendo_call':true});");
-       SIP.pluginWebView.loadUrl("javascript:navigation.teste = 'valor';");
+       SIP.pluginWebView.loadUrl("javascript:navigator.teste = 'valor';");
         SIP.pluginWebView.loadUrl("javascript:alert('valor');");
     
     }
