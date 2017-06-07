@@ -49,7 +49,7 @@ import org.apache.cordova.CordovaWebView;
 import android.webkit.WebViewClient;
 import android.webkit.WebView;
 
- 
+
 public class SIP extends CordovaPlugin {
     private static final String LOG_TAG = "SIPW3";
 
@@ -84,7 +84,7 @@ public class SIP extends CordovaPlugin {
         SIP.pluginWebView = webView;
         //registra evento no module\js para envido de eventos de funcao
         Log.d("SIP","SIP PLUGIN: inicializando  navigator.SIP.recebeEvento(); ");
-        SIP.pluginWebView.setWebViewClient(new WebViewClient() {
+        ((View)SIP.pluginWebView).setWebViewClient(new WebViewClient() {
 
            public void onPageFinished(WebView view, String url) {
                 SIP.pluginWebView.loadUrl("javascript:navigator.SIP.teste();");
