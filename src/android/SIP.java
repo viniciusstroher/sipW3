@@ -46,6 +46,7 @@ import android.net.sip.SipException;
  
 import org.apache.cordova.PluginResult;
 import org.apache.cordova.CordovaWebView;
+import android.webkit.WebViewClient;
 
 public class SIP extends CordovaPlugin {
     private static final String LOG_TAG = "SIPW3";
