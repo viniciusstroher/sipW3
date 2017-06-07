@@ -431,12 +431,8 @@ public class SIP extends CordovaPlugin {
     }
 
     public static void enviaEvento(){
-        cordova.getThreadPool().execute(new Runnable() {
-                public void run() {
-                    SIP.pluginWebView.sendJavascript("cordova.fireWindowEvent('recebeChamadaEvent', { 'recebendo_call':true});");
+       SIP.pluginWebView.sendJavascript("cordova.fireWindowEvent('recebeChamadaEvent', { 'recebendo_call':true});");
 
-                }
-        });
     }
 
     //ADICIONAR CANCELAR CHAMADA
