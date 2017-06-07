@@ -78,8 +78,7 @@ public class SIP extends CordovaPlugin {
 
     @Override
     protected void pluginInitialize() {
-        
-        
+        SIP.pluginWebView = webView;
     }
 
     public void closeLocalProfile() {
@@ -312,7 +311,7 @@ public class SIP extends CordovaPlugin {
 
     // Don't add @Override so that plugin still compiles on 3.x.x for a while
     public void onConfigurationChanged(Configuration newConfig) {
-       SIP.pluginWebView = webView;
+       
     }
     
     public static void encerraChamada(){
@@ -434,7 +433,7 @@ public class SIP extends CordovaPlugin {
     public static void enviaEvento(){
         cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
-                    cordova.sendJavascript("cordova.fireWindowEvent('recebeChamadaEvent', { 'recebendo_call':true});");
+                    SIP.pluginWebView.sendJavascript("cordova.fireWindowEvent('recebeChamadaEvent', { 'recebendo_call':true});");
 
                 }
         });
