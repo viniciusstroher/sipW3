@@ -12,15 +12,9 @@ var SipW3 = {
         };
 
         exec(function(suc){
-            console.log(suc);
             sucesso(suc);
 
-            SipW3.addEventListener(document, 'recebeChamadaEvent', function(e) {
-              console.log('recebendo evento: ',e);
-            });
-
         },function(err){
-            console.log(err);
             falha(err);
 
         }, "SIP", "conectarSip", [params]);
@@ -63,7 +57,7 @@ var SipW3 = {
         }, "SIP", opt == 1 ? "toogleSpeakerRecebeLigacao" : "toogleSpeakerEnviaLigacao", []);
     },
 
-    encerraChamada:function(sucesso,falha){
+    encerraChamada : function(sucesso,falha){
 
         exec(function(suc){
             sucesso(suc);
