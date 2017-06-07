@@ -67,8 +67,9 @@ var SipW3 = {
     },
 
     recebeEvento:function(){
+        console.log("Iniciando recebeEvento")
         document.addEventListener('recebeEvento', function (e) { 
-            console.log(e);
+            console.log('recebeEvento',e);
         }, false);
     },
 
