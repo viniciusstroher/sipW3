@@ -208,7 +208,6 @@ public class SIP extends CordovaPlugin {
                             SIP.inChamadaFalse();
                             SIP.callbackContext.success("true");
                             
-                            
                         }
 
                         public void onRegistrationFailed(String localProfileUri, int errorCode,
