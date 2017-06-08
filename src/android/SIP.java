@@ -90,7 +90,7 @@ public class SIP extends CordovaPlugin {
     @Override
     protected void pluginInitialize() {
         SIP.pluginWebView = webView; 
-        SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = false;");     
+        SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:false};");     
     }
 
     public void closeLocalProfile() {
@@ -109,7 +109,8 @@ public class SIP extends CordovaPlugin {
                 mSipManager.unregister(mSipProfile, null);
               }
 
-              SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = false;");
+              SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:false};");     
+   
            }
         } catch (Exception e) {
            Log.d("SIP", "SIP PLUGIN: Failed to close local profile: "+ e.getMessage());
@@ -354,6 +355,8 @@ public class SIP extends CordovaPlugin {
                           SIP.inChamadaFalse();
                           SIP.callbackContext.success("chamada_terminada");
                           Log.d("SIP","SIP PLUGIN: aceitaChamada Chamada encerrada." +SIP.isInChamada());
+                          SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:false};");     
+   
                        }
                      
                       @Override
@@ -361,7 +364,7 @@ public class SIP extends CordovaPlugin {
                           SIP.inChamadaFalse();
                           SIP.callbackContext.success("chamada_terminada");
                           Log.d("SIP","SIP PLUGIN: onError Chamada encerrada. "+SIP.isInChamada()+"  "+errorCode+" - "+errorMessage);
-                       }
+                          SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:false};"); 
 
                     };
 

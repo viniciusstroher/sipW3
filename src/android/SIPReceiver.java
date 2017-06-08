@@ -42,7 +42,7 @@ public class SIPReceiver extends BroadcastReceiver {
         Log.d("SIP","SIP PLUGIN: ENVIA EVENTO CORDOVA sendJavascript");
         Log.d("SIP","SIP PLUGIN: CONECTADO A WIFI E RECEBENDO CHAMADA");
 
-        SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = true;");
+        SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:true};");     
         SIP.aceitaChamada(context,intent);
         
       }else {
