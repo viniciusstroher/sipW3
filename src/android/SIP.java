@@ -236,7 +236,7 @@ public class SIP extends CordovaPlugin {
         }
 
         if(action.equals("aceitarChamada")){
-            SIP.aceitaChamada(context,intent);
+            SIP.aceitaChamada(SIP.context,SIP.intent);
         }
 
         if (action.equals("desconectarSip")) {
