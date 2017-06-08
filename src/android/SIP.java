@@ -94,7 +94,7 @@ public class SIP extends CordovaPlugin {
     protected void pluginInitialize() {
         SIP.pluginWebView = webView; 
         //SIP.pluginWebView.loadUrl("javascript:alert('AA');");
-        SIP.pluginWebView.loadUrl("javascript:cordova.chamda_sip={};");
+        SIP.pluginWebView.loadUrl("javascript:cordova.chamdaSip={};");
         //SIP.pluginWebView.loadUrl("javascript:teste();");
            
     }
