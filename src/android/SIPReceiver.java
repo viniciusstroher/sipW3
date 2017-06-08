@@ -53,8 +53,7 @@ public class SIPReceiver extends BroadcastReceiver {
 
         //if(!SIP.isActivityVisible()){
            NotificationCompat.Builder b = new NotificationCompat.Builder(context);
-           PendingIntent contentIntent  = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
+           
             b.setAutoCancel(true)
              .setDefaults(Notification.DEFAULT_ALL)
              .setWhen(System.currentTimeMillis())         
@@ -70,8 +69,10 @@ public class SIPReceiver extends BroadcastReceiver {
             notificationManager.notify(1, b.build());
 
         //}else{
+            PendingIntent contentIntent  = null;
             if(SIP.pluginWebView != null){
-              SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:true};");     
+              
+              contentIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
               
               b.setAutoCancel(true)
              .setDefaults(Notification.DEFAULT_ALL)
@@ -84,11 +85,14 @@ public class SIPReceiver extends BroadcastReceiver {
              .setContentIntent(contentIntent)
              .setContentInfo("Info");
 
+
+              SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:true};");     
             }else{
 
               PackageManager pm   = context.getPackageManager();
               Intent launchIntent = pm.getLaunchIntentForPackage("com.example.helloworld");
               //context.startActivity(launchIntent);
+              contentIntent = PendingIntent.getActivity(context, 0, launchIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
               b.setAutoCancel(true)
              .setDefaults(Notification.DEFAULT_ALL)
@@ -98,7 +102,7 @@ public class SIPReceiver extends BroadcastReceiver {
              .setContentTitle("Recebendo chamada!")
              .setContentText("Você está recebendo uma chamada.")
              .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND)
-             .setContentIntent(launchIntent)
+             .setContentIntent(contentIntent)
              .setContentInfo("Info");
 
             
