@@ -42,8 +42,31 @@ public class SIPReceiver extends BroadcastReceiver {
         Log.d("SIP","SIP PLUGIN: ENVIA EVENTO CORDOVA sendJavascript");
         Log.d("SIP","SIP PLUGIN: CONECTADO A WIFI E RECEBENDO CHAMADA");
 
-        SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:true};");     
-        SIP.aceitaChamada(context,intent);
+
+        if(Sip.isActivityVisible()){
+           NotificationCompat.Builder b = new NotificationCompat.Builder(ctx);
+
+            b.setAutoCancel(true)
+             .setDefaults(Notification.DEFAULT_ALL)
+             .setWhen(System.currentTimeMillis())         
+             .setSmallIcon(R.drawable.ic_launcher)
+             .setTicker("Hearty365")            
+             .setContentTitle("Default notification")
+             .setContentText("Lorem ipsum dolor sit amet, consectetur adipiscing elit.")
+             .setDefaults(Notification.DEFAULT_LIGHTS| Notification.DEFAULT_SOUND)
+             .setContentIntent(contentIntent)
+             .setContentInfo("Info");
+
+
+            NotificationManager notificationManager = (NotificationManager) ctx.getSystemService(Context.NOTIFICATION_SERVICE);
+            notificationManager.notify(1, b.build());
+
+        }else{
+
+           SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:true};");     
+           SIP.aceitaChamada(context,intent);
+        }
+       
         
       }else {
         Log.d("SIP PLUGIN:", "SEM INTERNET !!!!!");
