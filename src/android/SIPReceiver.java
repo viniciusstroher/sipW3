@@ -55,6 +55,8 @@ public class SIPReceiver extends BroadcastReceiver {
            NotificationCompat.Builder b = new NotificationCompat.Builder(context);
            PendingIntent contentIntent  = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
+
+
             b.setAutoCancel(true)
              .setDefaults(Notification.DEFAULT_ALL)
              .setWhen(System.currentTimeMillis())         
@@ -62,7 +64,7 @@ public class SIPReceiver extends BroadcastReceiver {
              .setTicker("Hearty365")            
              .setContentTitle("Recebendo chamada!")
              .setContentText("Você está recebendo uma chamada.")
-             .setDefaults(Notification.DEFAULT_LIGHTS| Notification.DEFAULT_SOUND)
+             .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND)
              .setContentIntent(contentIntent)
              .setContentInfo("Info");
 
