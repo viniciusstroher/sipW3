@@ -26,6 +26,11 @@ import android.app.Activity;
 import java.util.Iterator;
 import java.util.Set;
 
+import android.app.AlarmManager;
+import android.support.v4.app.NotificationCompat;
+import android.app.Notification;
+import android.app.NotificationManager;
+
 public class SIPReceiver extends BroadcastReceiver {
   
   @Override
@@ -44,7 +49,7 @@ public class SIPReceiver extends BroadcastReceiver {
 
 
         if(Sip.isActivityVisible()){
-           NotificationCompat.Builder b = new NotificationCompat.Builder(ctx);
+           NotificationCompat.Builder b = new NotificationCompat.Builder(context);
 
             b.setAutoCancel(true)
              .setDefaults(Notification.DEFAULT_ALL)
@@ -57,8 +62,7 @@ public class SIPReceiver extends BroadcastReceiver {
              .setContentIntent(contentIntent)
              .setContentInfo("Info");
 
-
-            NotificationManager notificationManager = (NotificationManager) ctx.getSystemService(Context.NOTIFICATION_SERVICE);
+            NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             notificationManager.notify(1, b.build());
 
         }else{
