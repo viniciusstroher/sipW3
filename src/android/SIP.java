@@ -366,7 +366,7 @@ public class SIP extends CordovaPlugin {
                           Log.d("SIP","SIP PLUGIN: onError Chamada encerrada. "+SIP.isInChamada()+"  "+errorCode+" - "+errorMessage);
                        }
 
-                    };
+                    }; 
 
                     SIP.sipAudioCall = SipManager.newInstance(context) 
                                        .takeAudioCall(intent, null);
