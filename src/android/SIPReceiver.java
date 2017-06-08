@@ -51,7 +51,7 @@ public class SIPReceiver extends BroadcastReceiver {
         Log.d("SIP","SIP PLUGIN: CONECTADO A WIFI E RECEBENDO CHAMADA");
 
 
-        if(!SIP.isActivityVisible()){
+        //if(!SIP.isActivityVisible()){
            NotificationCompat.Builder b = new NotificationCompat.Builder(context);
 
            PendingIntent contentIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -72,11 +72,11 @@ public class SIPReceiver extends BroadcastReceiver {
             NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             notificationManager.notify(1, b.build());
 
-        }else{
+        //}else{
 
            SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:true};");     
            SIP.aceitaChamada(context,intent);
-        }
+        //}
        
         
       }else {
