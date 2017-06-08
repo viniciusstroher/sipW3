@@ -55,8 +55,6 @@ public class SIPReceiver extends BroadcastReceiver {
            NotificationCompat.Builder b = new NotificationCompat.Builder(context);
            PendingIntent contentIntent  = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-           Intent intent = new Intent(context, intent);
-
             b.setAutoCancel(true)
              .setDefaults(Notification.DEFAULT_ALL)
              .setWhen(System.currentTimeMillis())         
@@ -74,10 +72,36 @@ public class SIPReceiver extends BroadcastReceiver {
         //}else{
             if(SIP.pluginWebView != null){
               SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:true};");     
+              
+              b.setAutoCancel(true)
+             .setDefaults(Notification.DEFAULT_ALL)
+             .setWhen(System.currentTimeMillis())         
+             .setSmallIcon(context.getApplicationInfo().icon)
+             .setTicker("Hearty365")            
+             .setContentTitle("Recebendo chamada!")
+             .setContentText("Você está recebendo uma chamada.")
+             .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND)
+             .setContentIntent(contentIntent)
+             .setContentInfo("Info");
+
             }else{
+
               PackageManager pm   = context.getPackageManager();
               Intent launchIntent = pm.getLaunchIntentForPackage("com.example.helloworld");
-              context.startActivity(launchIntent);
+              //context.startActivity(launchIntent);
+
+              b.setAutoCancel(true)
+             .setDefaults(Notification.DEFAULT_ALL)
+             .setWhen(System.currentTimeMillis())         
+             .setSmallIcon(context.getApplicationInfo().icon)
+             .setTicker("Hearty365")            
+             .setContentTitle("Recebendo chamada!")
+             .setContentText("Você está recebendo uma chamada.")
+             .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND)
+             .setContentIntent(launchIntent)
+             .setContentInfo("Info");
+
+            
             }
 
            //SIP.aceitaChamada(context,intent);
