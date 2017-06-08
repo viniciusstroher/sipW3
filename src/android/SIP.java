@@ -94,8 +94,8 @@ public class SIP extends CordovaPlugin {
     protected void pluginInitialize() {
         SIP.pluginWebView = webView; 
         //SIP.pluginWebView.loadUrl("javascript:alert('AA');");
-        SIP.pluginWebView.loadUrl("javascript:window.chamdaSip = {objeto:true};");
-        
+        SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = false;");
+
         //SIP.pluginWebView.loadUrl("javascript:teste();");
            
     }
@@ -115,6 +115,8 @@ public class SIP extends CordovaPlugin {
               if (mSipManager.isRegistered(mSipProfile.getProfileName())){
                 mSipManager.unregister(mSipProfile, null);
               }
+
+              SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = false;");
            }
         } catch (Exception e) {
            Log.d("SIP", "SIP PLUGIN: Failed to close local profile: "+ e.getMessage());
