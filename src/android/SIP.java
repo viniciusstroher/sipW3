@@ -93,10 +93,7 @@ public class SIP extends CordovaPlugin {
     @Override
     protected void pluginInitialize() {
         SIP.pluginWebView = webView; 
-        SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = false;");
-
-        //SIP.pluginWebView.loadUrl("javascript:teste();");
-           
+        SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = false;");     
     }
 
     public void closeLocalProfile() {
@@ -309,20 +306,6 @@ public class SIP extends CordovaPlugin {
         return true;
     }
 
-    /*public static void sendUpdate(String type) {
-        if (SIP.callbackContext != null) {
-            PluginResult result = new PluginResult(PluginResult.Status.OK, type);
-            result.setKeepCallback(true);
-            SIP.callbackContext.sendPluginResult(result);
-        }
-        
-        cordova.fireWindowEvent('recebeChamadaEvent', 
-                {"level":"20","isPlugged":true});
-
-        //SIP.pluginWebView.postMessage("recebeChamadaEvent", type);
-    }*/
-
-
     //ENVIO DE MENSAGEMS A CLASSE
     @Override
     public Object onMessage(String id, Object data) {
@@ -335,8 +318,7 @@ public class SIP extends CordovaPlugin {
     }
     
     public static void encerraChamada(){
-        try{
-                
+        try{    
             SIP.makeAudioCall.endCall();
             SIP.makeAudioCall.close();
             Log.d("SIP","SIP PLUGIN: ligacao encerrada.");
@@ -366,7 +348,6 @@ public class SIP extends CordovaPlugin {
                        @Override
                        public void onCallEstablished(SipAudioCall call) {
                           call.startAudio();
-                          //call.setSpeakerMode(true);
                           call.toggleMute();
                           
                           SIP.inChamadaTrue();
@@ -391,13 +372,12 @@ public class SIP extends CordovaPlugin {
                     };
 
                     SIP.sipAudioCall = SipManager.newInstance(context) 
-                                  .takeAudioCall(intent, null);
+                                       .takeAudioCall(intent, null);
+                    
                     SIP.sipAudioCall.setListener(listener);
-
                     SIP.sipAudioCall.answerCall(30);
                     SIP.sipAudioCall.startAudio();
-                    //SIP.sipAudioCall.setSpeakerMode(true);
-
+                    
                     SIP.callbackContext.success("chamada_em_andamento");
                 }else{
                     Log.d("SIP","SIP PLUGIN: else aceitaChamada ja_tem_alguma_chamada_em_andamento."+SIP.isInChamada());
@@ -419,7 +399,6 @@ public class SIP extends CordovaPlugin {
                @Override
                public void onCallEstablished(SipAudioCall call) {
                   call.startAudio();
-                  //call.setSpeakerMode(true);
                   call.toggleMute();
                   
                   SIP.inChamadaTrue();
@@ -433,7 +412,6 @@ public class SIP extends CordovaPlugin {
                   SIP.callbackContext.success("chamada_terminada");
                   Log.d("SIP","SIP PLUGIN:  fazChamada chamada_terminada.");
                }
-
 
             };
 
@@ -456,7 +434,7 @@ public class SIP extends CordovaPlugin {
 
     //ADICIONAR CANCELAR CHAMADA
     //ATTIBUTO PARA VER SE ESTA EM LIGACAO
-     public static boolean isInChamada() {
+    public static boolean isInChamada() {
         return inChamada;
     }  
 
@@ -469,8 +447,7 @@ public class SIP extends CordovaPlugin {
     }
 
     private static boolean inChamada;
-
-
+    
     public static boolean isActivityVisible() {
         return activityVisible;
     }  
