@@ -368,8 +368,7 @@ public class SIP extends CordovaPlugin {
 
                     };
 
-                    SIP.sipAudioCall = SipManager.newInstance(context) 
-                                       .takeAudioCall(intent, null);
+                    SIP.sipAudioCall = SipManager.newInstance(context).takeAudioCall(intent, null);
                     
                     SIP.sipAudioCall.setListener(listener);
                     SIP.sipAudioCall.answerCall(30);
