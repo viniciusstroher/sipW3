@@ -30,6 +30,9 @@ import android.app.AlarmManager;
 import android.support.v4.app.NotificationCompat;
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.app.PendingIntent;
 
 public class SIPReceiver extends BroadcastReceiver {
   
@@ -48,8 +51,12 @@ public class SIPReceiver extends BroadcastReceiver {
         Log.d("SIP","SIP PLUGIN: CONECTADO A WIFI E RECEBENDO CHAMADA");
 
 
-        if(Sip.isActivityVisible()){
+        if(SIP.isActivityVisible()){
            NotificationCompat.Builder b = new NotificationCompat.Builder(context);
+
+           PendingIntent contentIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+
 
             b.setAutoCancel(true)
              .setDefaults(Notification.DEFAULT_ALL)
