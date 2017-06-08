@@ -384,6 +384,7 @@ public class SIP extends CordovaPlugin {
                 Log.d("SIP","SIP PLUGIN: App em background."+SIP.isInChamada());
             }
         }catch(Exception e){
+          SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:false};");                     
           Log.d("SIP","SIP PLUGIN ERR: "+e.getMessage());
         }
     }
