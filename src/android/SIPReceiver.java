@@ -47,28 +47,13 @@ public class SIPReceiver extends BroadcastReceiver {
       State wifi = conMan.getNetworkInfo(1).getState();
 
       if (wifi == State.CONNECTED || wifi == State.CONNECTING) {
-        Log.d("SIP","SIP PLUGIN: ENVIA EVENTO CORDOVA sendJavascript");
-        Log.d("SIP","SIP PLUGIN: CONECTADO A WIFI E RECEBENDO CHAMADA");
+            Log.d("SIP","SIP PLUGIN: ENVIA EVENTO CORDOVA sendJavascript");
+            Log.d("SIP","SIP PLUGIN: CONECTADO A WIFI E RECEBENDO CHAMADA");
 
 
-        //if(!SIP.isActivityVisible()){
-           NotificationCompat.Builder b = new NotificationCompat.Builder(context);
+            NotificationCompat.Builder b = new NotificationCompat.Builder(context);
            
-            b.setAutoCancel(true)
-             .setDefaults(Notification.DEFAULT_ALL)
-             .setWhen(System.currentTimeMillis())         
-             .setSmallIcon(context.getApplicationInfo().icon)
-             .setTicker("Hearty365")            
-             .setContentTitle("Recebendo chamada!")
-             .setContentText("Você está recebendo uma chamada.")
-             .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND)
-             .setContentIntent(contentIntent)
-             .setContentInfo("Info");
-
-            NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-            notificationManager.notify(1, b.build());
-
-        //}else{
+           
             PendingIntent contentIntent  = null;
             if(SIP.pluginWebView != null){
               
@@ -91,6 +76,7 @@ public class SIPReceiver extends BroadcastReceiver {
 
               PackageManager pm   = context.getPackageManager();
               Intent launchIntent = pm.getLaunchIntentForPackage("com.racionaltec");
+              
               contentIntent = PendingIntent.getActivity(context, 0, launchIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
               b.setAutoCancel(true)
@@ -106,6 +92,10 @@ public class SIPReceiver extends BroadcastReceiver {
 
             
             }
+
+            NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+            notificationManager.notify(1, b.build());
+
 
            //SIP.aceitaChamada(context,intent);
         //}
