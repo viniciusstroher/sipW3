@@ -53,9 +53,10 @@ public class SIPReceiver extends BroadcastReceiver {
 
         //if(!SIP.isActivityVisible()){
            NotificationCompat.Builder b = new NotificationCompat.Builder(context);
-           PendingIntent contentIntent  = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+           //PendingIntent contentIntent  = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-
+           Intent intent2 = new Intent().setClassName("com.ionicframework.rtec826466", "MainActivity");
+           final PendingIntent contentIntent = PendingIntent.getActivity(context, 0, intent2, 0);
 
             b.setAutoCancel(true)
              .setDefaults(Notification.DEFAULT_ALL)
