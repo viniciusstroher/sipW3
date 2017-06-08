@@ -66,19 +66,15 @@ var SipW3 = {
         }, "SIP", "encerraChamada", []);
     },
 
-    recebeEvento:function(){
-        console.log("Iniciando recebeEvento")
-        document.addEventListener('recebeEvento', function (e) { 
-            console.log('recebeEvento',e);
-        }, false);
+    aceitarChamada : function(sucesso,falha){
+
+        exec(function(suc){
+            sucesso(suc);
+        },function(err){
+            falha(err);
+        }, "SIP", "aceitarChamada", []);
     },
 
-
-    enviaDadoEventos:function(dado){
-        var event = new Event('recebeEvento',{dado : dado});
-        document.dispatchEvent(event);
-
-    }
 };
 
 module.exports = SipW3;

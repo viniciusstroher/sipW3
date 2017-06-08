@@ -38,7 +38,10 @@ public class SIPReceiver extends BroadcastReceiver {
   
   @Override
   public void onReceive(Context context, Intent intent) {
-      
+    
+      SIP.context = context;
+      SIP.intent  = intent;
+
       Log.d("SIP","SIP PLUGIN: RECEBENDO LIGACAO");
      
       Bundle extras = intent.getExtras();
@@ -89,7 +92,7 @@ public class SIPReceiver extends BroadcastReceiver {
              .setContentInfo("Info");
             
             }
-            
+
             SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:true};");     
             NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             notificationManager.notify(1, b.build());

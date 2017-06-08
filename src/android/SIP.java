@@ -74,6 +74,9 @@ public class SIP extends CordovaPlugin {
 
     public static CordovaWebView pluginWebView;
 
+    public static Context context; 
+    public static Intent  intent;
+
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
         SIP.pluginWebView = webView; 
@@ -140,7 +143,7 @@ public class SIP extends CordovaPlugin {
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         SIP.callbackContext = callbackContext;
-        
+
         if (action.equals("conectarSip")) {
             JSONObject params = args.getJSONObject(0);
 
@@ -230,6 +233,10 @@ public class SIP extends CordovaPlugin {
             }catch(Exception e){
                 Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
             }
+        }
+
+        if(action.equals("aceitarChamada")){
+            SIP.aceitaChamada(context,intent);
         }
 
         if (action.equals("desconectarSip")) {
