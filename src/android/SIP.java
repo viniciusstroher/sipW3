@@ -355,8 +355,6 @@ public class SIP extends CordovaPlugin {
                           SIP.inChamadaFalse();
                           SIP.callbackContext.success("chamada_terminada");
                           Log.d("SIP","SIP PLUGIN: aceitaChamada Chamada encerrada." +SIP.isInChamada());
-                          SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:false};");     
-   
                        }
                      
                       @Override
@@ -364,11 +362,12 @@ public class SIP extends CordovaPlugin {
                           SIP.inChamadaFalse();
                           SIP.callbackContext.success("chamada_terminada");
                           Log.d("SIP","SIP PLUGIN: onError Chamada encerrada. "+SIP.isInChamada()+"  "+errorCode+" - "+errorMessage);
-                          SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:false};"); 
+                       }
 
                     };
 
-                    SIP.sipAudioCall = SipManager.newInstance(context).takeAudioCall(intent, null);
+                    SIP.sipAudioCall = SipManager.newInstance(context) 
+                                       .takeAudioCall(intent, null);
                     
                     SIP.sipAudioCall.setListener(listener);
                     SIP.sipAudioCall.answerCall(30);
