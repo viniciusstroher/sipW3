@@ -70,7 +70,6 @@ public class SIPReceiver extends BroadcastReceiver {
              .setContentIntent(contentIntent)
              .setContentInfo("Info");
 
-              SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:true};");     
             }else{
 
               PackageManager pm   = context.getPackageManager();
@@ -88,10 +87,10 @@ public class SIPReceiver extends BroadcastReceiver {
              .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND)
              .setContentIntent(contentIntent)
              .setContentInfo("Info");
-
             
             }
-
+            
+            SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:true};");     
             NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             notificationManager.notify(1, b.build());
 

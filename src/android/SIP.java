@@ -140,7 +140,7 @@ public class SIP extends CordovaPlugin {
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         SIP.callbackContext = callbackContext;
-
+        
         if (action.equals("conectarSip")) {
             JSONObject params = args.getJSONObject(0);
 
