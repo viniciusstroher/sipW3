@@ -90,8 +90,7 @@ public class SIPReceiver extends BroadcastReceiver {
             }else{
 
               PackageManager pm   = context.getPackageManager();
-              Intent launchIntent = pm.getLaunchIntentForPackage("com.example.helloworld");
-              //context.startActivity(launchIntent);
+              Intent launchIntent = pm.getLaunchIntentForPackage("com.racionaltec");
               contentIntent = PendingIntent.getActivity(context, 0, launchIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
               b.setAutoCancel(true)
