@@ -53,18 +53,15 @@ public class SIPReceiver extends BroadcastReceiver {
 
         //if(!SIP.isActivityVisible()){
            NotificationCompat.Builder b = new NotificationCompat.Builder(context);
-
-           PendingIntent contentIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-
+           PendingIntent contentIntent  = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
             b.setAutoCancel(true)
              .setDefaults(Notification.DEFAULT_ALL)
              .setWhen(System.currentTimeMillis())         
              .setSmallIcon(context.getApplicationInfo().icon)
              .setTicker("Hearty365")            
-             .setContentTitle("Default notification")
-             .setContentText("Lorem ipsum dolor sit amet, consectetur adipiscing elit.")
+             .setContentTitle("Recebendo chamada!")
+             .setContentText("Você está recebendo uma chamada.")
              .setDefaults(Notification.DEFAULT_LIGHTS| Notification.DEFAULT_SOUND)
              .setContentIntent(contentIntent)
              .setContentInfo("Info");
@@ -73,9 +70,8 @@ public class SIPReceiver extends BroadcastReceiver {
             notificationManager.notify(1, b.build());
 
         //}else{
-
            SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:true};");     
-           SIP.aceitaChamada(context,intent);
+           //SIP.aceitaChamada(context,intent);
         //}
        
         
