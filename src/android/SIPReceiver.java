@@ -73,7 +73,10 @@ public class SIPReceiver extends BroadcastReceiver {
             notificationManager.notify(1, b.build());
 
         //}else{
-           SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:true};");     
+            if(SIP.pluginWebView != null){
+              SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:true};");     
+            }
+            
            //SIP.aceitaChamada(context,intent);
         //}
        
