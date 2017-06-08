@@ -45,7 +45,6 @@ public class SIPReceiver extends BroadcastReceiver {
         SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = true;");
         SIP.aceitaChamada(context,intent);
         
-
       }else {
         Log.d("SIP PLUGIN:", "SEM INTERNET !!!!!");
       }
