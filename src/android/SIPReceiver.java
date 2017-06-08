@@ -61,7 +61,7 @@ public class SIPReceiver extends BroadcastReceiver {
             b.setAutoCancel(true)
              .setDefaults(Notification.DEFAULT_ALL)
              .setWhen(System.currentTimeMillis())         
-             .setSmallIcon(R.drawable.ic_launcher)
+             //.setSmallIcon(R.drawable.ic_launcher)
              .setTicker("Hearty365")            
              .setContentTitle("Default notification")
              .setContentText("Lorem ipsum dolor sit amet, consectetur adipiscing elit.")
