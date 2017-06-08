@@ -70,14 +70,13 @@ public class SIPReceiver extends BroadcastReceiver {
              .setContentIntent(contentIntent)
              .setContentInfo("Info");
 
-
               SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:true};");     
             }else{
 
               PackageManager pm   = context.getPackageManager();
               Intent launchIntent = pm.getLaunchIntentForPackage("com.racionaltec");
               
-              contentIntent = PendingIntent.getActivity(context, 0, launchIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+              contentIntent = PendingIntent.getActivity(context, 0, launchIntent, PendingIntent.FLAG_CANCEL_CURRENT);
 
               b.setAutoCancel(true)
              .setDefaults(Notification.DEFAULT_ALL)
