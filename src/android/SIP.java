@@ -91,7 +91,7 @@ public class SIP extends CordovaPlugin {
     }
 
     @Override
-    protected void pluginInitialize() {
+    protected void pluginInitialize() throws Exception{
         SIP.pluginWebView = webView; 
         SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:false};");     
         cordova.getThreadPool().execute(new Runnable() {
