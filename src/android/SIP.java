@@ -390,7 +390,7 @@ public class SIP extends CordovaPlugin {
                        }
 
                        @Override
-                       onRinging(SipAudioCall call, SipProfile caller){
+                       public void onRinging(SipAudioCall call, SipProfile caller){
 
                          SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:true};"); 
                          Log.d("SIP","SIP PLUGIN: onRinging . " +SIP.isInChamada()); 
