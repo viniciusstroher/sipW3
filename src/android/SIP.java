@@ -388,7 +388,14 @@ public class SIP extends CordovaPlugin {
                           
                           Log.d("SIP","SIP PLUGIN: aceitaChamada Chamada encerrada." +SIP.isInChamada());
                        }
-                        
+
+                       @Override
+                       onRinging(SipAudioCall call, SipProfile caller){
+
+                         SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:true};"); 
+                         Log.d("SIP","SIP PLUGIN: onRinging . " +SIP.isInChamada()); 
+                       }
+
                        @Override
                        public void onError(SipAudioCall call, int errorCode, String errorMessage){
                           SIP.inChamadaFalse();
