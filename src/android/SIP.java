@@ -50,7 +50,7 @@ import org.apache.cordova.PluginResult;
 import org.apache.cordova.CordovaWebView;
 import android.webkit.WebViewClient;
 import android.webkit.WebView;
-
+import android.media.AudioManager;
 
 public class SIP extends CordovaPlugin {
     private static final String LOG_TAG = "SIPW3";
@@ -253,7 +253,13 @@ public class SIP extends CordovaPlugin {
 
         if(action.equals("emChamada")){
             JSONObject obj = new JSONObject();
-            obj.put("emChamada", SIP.isInChamada());
+            AudioManager manager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
+            if(manager.getMode() == AudioManager.MODE_IN_CALL){
+                obj.put("emChamada", true);
+            }else{
+                obj.put("emChamada", false);
+            }
+            
 
             SIP.callbackContext.success(obj);
         }
