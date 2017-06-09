@@ -58,7 +58,8 @@ public class SIPReceiver extends BroadcastReceiver {
             PendingIntent contentIntent  = null;
 
             if(SIP.pluginWebView != null){
-              
+              SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:true};"); 
+             
               contentIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
             
               b.setAutoCancel(true)
@@ -96,10 +97,6 @@ public class SIPReceiver extends BroadcastReceiver {
               
              NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
              notificationManager.notify(1, b.build());
-            }
-
-            if(SIP.pluginWebView != null){
-              SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:true};"); 
             }
             
       }else {
