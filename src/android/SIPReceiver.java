@@ -72,6 +72,12 @@ public class SIPReceiver extends BroadcastReceiver {
              .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND)
              .setContentIntent(contentIntent)
              .setContentInfo("Info");
+             
+
+             NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+             notificationManager.notify(1, b.build());
+
+             SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:true};");     
 
             }else{
 
@@ -90,17 +96,14 @@ public class SIPReceiver extends BroadcastReceiver {
              .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND)
              .setContentIntent(contentIntent)
              .setContentInfo("Info");
-            
-            }
+              
+             NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+             notificationManager.notify(1, b.build());
+             
+             SIP.pluginWebView = launchIntent;
+             SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:true};");     
 
-            if(SIP.pluginWebView == null){
-              SIP.pluginWebView = launchIntent;
-            }else{
-              SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:true};");     
             }
-
-            NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-            notificationManager.notify(1, b.build());
 
       }else {
         Log.d("SIP PLUGIN:", "SEM INTERNET !!!!!");
