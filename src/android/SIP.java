@@ -253,7 +253,7 @@ public class SIP extends CordovaPlugin {
 
         if(action.equals("emChamada")){
             JSONObject obj = new JSONObject();
-            
+
             AudioManager manager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
             if(manager.getMode() == AudioManager.MODE_IN_CALL){
                 obj.put("emChamada", true);
@@ -364,8 +364,10 @@ public class SIP extends CordovaPlugin {
                           
                           SIP.inChamadaTrue();
                           SIP.callbackContext.success("chamada_em_andamento");
+                          
                           Log.d("SIP","SIP PLUGIN: aceitaChamada Chamada iniciada." + SIP.isInChamada());
-                          String sipProf = call.getPeerProfile().getUserName();
+                          
+                          String sipProf = call.getPeerProfile().getAuthUserName();
                           SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:true, sip:\"sipProf\"};");  
                        }
 
@@ -383,7 +385,6 @@ public class SIP extends CordovaPlugin {
                        public void onError(SipAudioCall call, int errorCode, String errorMessage){
                           SIP.inChamadaFalse();
                           SIP.callbackContext.success("chamada_terminada");
-                          SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:false};");     
                           Log.d("SIP","SIP PLUGIN: onError Chamada encerrada. "+SIP.isInChamada()+"  "+errorCode+" - "+errorMessage);
                           
                           SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:false};");  
