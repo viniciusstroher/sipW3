@@ -253,9 +253,9 @@ public class SIP extends CordovaPlugin {
 
         if(action.equals("emChamada")){
             JSONObject obj = new JSONObject();
-
-            AudioManager manager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
-            if (getActivity() != null) {
+            if (context != null) {
+                AudioManager manager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
+            
                 if(manager.getMode() == AudioManager.MODE_IN_CALL){
                     obj.put("emChamada", true);
                 }else{
