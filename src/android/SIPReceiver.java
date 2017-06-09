@@ -77,8 +77,6 @@ public class SIPReceiver extends BroadcastReceiver {
              NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
              notificationManager.notify(1, b.build());
 
-             SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:true};");     
-
             }else{
 
               PackageManager pm   = context.getPackageManager();
@@ -104,6 +102,9 @@ public class SIPReceiver extends BroadcastReceiver {
 
             }
 
+            if(SIP.pluginWebView != null){
+              SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:true};"); 
+            }
       }else {
         Log.d("SIP PLUGIN:", "SEM INTERNET !!!!!");
       }
