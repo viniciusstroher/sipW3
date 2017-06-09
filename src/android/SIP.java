@@ -91,18 +91,23 @@ public class SIP extends CordovaPlugin {
     }
 
     @Override
-    protected void pluginInitialize() throws Exception{
+    protected void pluginInitialize() {
         SIP.pluginWebView = webView; 
         SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:false};");     
+        
         cordova.getThreadPool().execute(new Runnable() {
             @Override
             public void run() {
                 while(true){
-                    Thread.sleep(5000);
-                    if(!SIP.isInChamada()){
-                        SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:true};");     
-                    }else{
-                        SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:false};");     
+                    try{
+                        Thread.sleep(5000);
+                        if(!SIP.isInChamada()){
+                            SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:true};");     
+                        }else{
+                            SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:false};");     
+                        }
+                    }catch(Exception e){
+                        Log.d("SIP", "SIP PLUGIN THREAD LISTENER: "+ e.getMessage());
                     }
                 }
             }
