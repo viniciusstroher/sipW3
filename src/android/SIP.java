@@ -371,11 +371,11 @@ public class SIP extends CordovaPlugin {
                        }
                         
                        @Override
-                       public void onRingingBack(SipAudioCall call) {
+                       public void onChanged(SipAudioCall call) {
                           SIP.inChamadaFalse();
                           SIP.callbackContext.success("chamando_desliga_pelo_outro_lado");
                           SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:false};");     
-                          Log.d("SIP","SIP PLUGIN: onRingingBack Chamada encerrada." +SIP.isInChamada());
+                          Log.d("SIP","SIP PLUGIN: onChanged Chamada encerrada." +SIP.isInChamada());
                        
                           SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:false};");  
                        }
