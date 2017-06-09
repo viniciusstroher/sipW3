@@ -344,7 +344,6 @@ public class SIP extends CordovaPlugin {
         try {
             if(SIP.isActivityVisible()){
                 if(!SIP.isInChamada()){
-                    SIP.inChamadaTrue();
                     Log.d("SIP","SIP PLUGIN: Chamada recebida e ativa.");
 
                     SipAudioCall.Listener listener = new SipAudioCall.Listener() {
@@ -372,16 +371,6 @@ public class SIP extends CordovaPlugin {
                        }
                         
                        @Override
-                       public void onReadyToCall(SipAudioCall call) {
-                          SIP.inChamadaFalse();
-                          SIP.callbackContext.success("chamando_desliga_pelo_outro_lado");
-                          SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:false};");     
-                          Log.d("SIP","SIP PLUGIN: onReadyToCall Chamada encerrada." +SIP.isInChamada());
-                       
-                          SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:false};");  
-                       }
-
-                      @Override
                        public void onError(SipAudioCall call, int errorCode, String errorMessage){
                           SIP.inChamadaFalse();
                           SIP.callbackContext.success("chamada_terminada");
@@ -411,6 +400,7 @@ public class SIP extends CordovaPlugin {
         }catch(Exception e){
           SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:false};");                     
           Log.d("SIP","SIP PLUGIN ERR: "+e.getMessage());
+          SIP.inChamadaFalse();
         }
     }
 
