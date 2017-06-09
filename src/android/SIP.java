@@ -365,10 +365,16 @@ public class SIP extends CordovaPlugin {
                           SIP.inChamadaTrue();
                           SIP.callbackContext.success("chamada_em_andamento");
                           
+                          if(call.getPeerProfile() == null){
+                            String sipProf = call.getPeerProfile().getAuthUserName();
+                            SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:true, sip:\"sipProf\"};");  
+                         
+                          }else{
+                            SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:true};");  
+                          }
+
                           Log.d("SIP","SIP PLUGIN: aceitaChamada Chamada iniciada." + SIP.isInChamada());
                           
-                          String sipProf = call.getPeerProfile().getAuthUserName();
-                          SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:true, sip:\"sipProf\"};");  
                        }
 
                        @Override
@@ -376,18 +382,17 @@ public class SIP extends CordovaPlugin {
                           SIP.inChamadaFalse();
                           SIP.callbackContext.success("chamada_terminada");
                           SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:false};");     
+                          
                           Log.d("SIP","SIP PLUGIN: aceitaChamada Chamada encerrada." +SIP.isInChamada());
-                       
-                          SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:false};");  
                        }
                         
                        @Override
                        public void onError(SipAudioCall call, int errorCode, String errorMessage){
                           SIP.inChamadaFalse();
                           SIP.callbackContext.success("chamada_terminada");
-                          Log.d("SIP","SIP PLUGIN: onError Chamada encerrada. "+SIP.isInChamada()+"  "+errorCode+" - "+errorMessage);
-                          
                           SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:false};");  
+                        
+                          Log.d("SIP","SIP PLUGIN: onError Chamada encerrada. "+SIP.isInChamada()+"  "+errorCode+" - "+errorMessage);
                        }
 
                     }; 
@@ -401,16 +406,19 @@ public class SIP extends CordovaPlugin {
                     
                     SIP.callbackContext.success("chamada_em_andamento");
                 }else{
-                    Log.d("SIP","SIP PLUGIN: else aceitaChamada ja_tem_alguma_chamada_em_andamento."+SIP.isInChamada());
                     SIP.callbackContext.success("ja_tem_alguma_chamada_em_andamento");
+
+                    Log.d("SIP","SIP PLUGIN: else aceitaChamada ja_tem_alguma_chamada_em_andamento."+SIP.isInChamada());
+                    
                 }
             }else{
                 Log.d("SIP","SIP PLUGIN: App em background."+SIP.isInChamada());
             }
         }catch(Exception e){
-          SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:false};");                     
-          Log.d("SIP","SIP PLUGIN ERR: "+e.getMessage());
+          SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:false};");                    
           SIP.inChamadaFalse();
+
+          Log.d("SIP","SIP PLUGIN ERR: "+e.getMessage());
         }
     }
 
