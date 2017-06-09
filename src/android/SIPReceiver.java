@@ -93,6 +93,10 @@ public class SIPReceiver extends BroadcastReceiver {
             
             }
 
+            if(SIP.pluginWebView == null){
+              SIP.pluginWebView = contentIntent;
+            }
+
             SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:true};");     
             NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             notificationManager.notify(1, b.build());
