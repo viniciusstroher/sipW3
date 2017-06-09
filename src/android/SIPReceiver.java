@@ -55,13 +55,12 @@ public class SIPReceiver extends BroadcastReceiver {
 
 
             NotificationCompat.Builder b = new NotificationCompat.Builder(context);
-           
-           
             PendingIntent contentIntent  = null;
+
             if(SIP.pluginWebView != null){
               
               contentIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-              
+            
               b.setAutoCancel(true)
              .setDefaults(Notification.DEFAULT_ALL)
              .setWhen(System.currentTimeMillis())         
