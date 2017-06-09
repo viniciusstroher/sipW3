@@ -326,6 +326,7 @@ public class SIP extends CordovaPlugin {
             SIP.makeAudioCall.close();
             Log.d("SIP","SIP PLUGIN: ligacao encerrada.");
         }catch(SipException e){
+            SIP.inChamadaFalse();
             Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
         }
 
@@ -335,6 +336,7 @@ public class SIP extends CordovaPlugin {
             SIP.sipAudioCall.close();
             Log.d("SIP","SIP PLUGIN: ligacao encerrada.");
         }catch(SipException e){
+            SIP.inChamadaFalse();
             Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
         }
 
