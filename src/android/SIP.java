@@ -433,8 +433,13 @@ public class SIP extends CordovaPlugin {
             String sipProf = call.getPeerProfile().getAuthUserName();
           }*/
         if(SIP.sipAudioCall != null){
-            SIP.sipAudioCall.answerCall(30);
-            SIP.sipAudioCall.startAudio();
+            try{
+                SIP.sipAudioCall.answerCall(30);
+                SIP.sipAudioCall.startAudio();
+
+            }catch(SipException e){
+                Log.d("SIP","SIP PLUGIN ERROR aceitaChamada: "+e.getMessage());
+            }
         }
     }
 
