@@ -420,6 +420,22 @@ public class SIP extends CordovaPlugin {
     }
 
     public static void encerraChamada(){
+        
+        try{
+            if(SIP.sipAudioCall != null){
+                if(SIP.sipAudioCall.getPeerProfile() != null){
+                    SIP.sipAudioCall.answerCall(0);
+                }
+                SIP.sipAudioCall.endCall();
+                SIP.sipAudioCall.close();
+                SIP.sipAudioCall = null;
+            }
+           
+        }catch(SipException e){
+            SIP.sipAudioCall = null;
+            Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
+        }
+
         try{    
             SIP.makeAudioCall.endCall();
             SIP.makeAudioCall.close();
@@ -429,25 +445,11 @@ public class SIP extends CordovaPlugin {
             SIP.makeAudioCall = null;
             Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
         }
-
-        try{
-            SIP.sipAudioCall.endCall();
-            SIP.sipAudioCall.close();
-            SIP.sipAudioCall = null;
-
-        }catch(SipException e){
-            SIP.sipAudioCall = null;
-            Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
-        }
         Log.d("SIP","SIP PLUGIN: ligacao encerrada.");
     }
 
     public static void aceitaChamada(){
 
-        /*String sipProf = "";
-        if(call.getPeerProfile() == null){
-            String sipProf = call.getPeerProfile().getAuthUserName();
-        }*/
         if(SIP.sipAudioCall != null){
             try{
                 SIP.sipAudioCall.answerCall(30);
@@ -463,7 +465,7 @@ public class SIP extends CordovaPlugin {
         if(SIP.pluginWebView != null){
             String sipComming = "";
             if(SIP.sipAudioCall != null){
-                if(call.getPeerProfile() == null){
+                if(SIP.sipAudioCall.getPeerProfile() != null){
                     sipComming = call.getPeerProfile().getAuthUserName();
                 }
             }
