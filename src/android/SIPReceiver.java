@@ -64,25 +64,19 @@ public class SIPReceiver extends BroadcastReceiver {
                 SIP.recebeChamada(context,intent);
               }else{
                 
-                
-                contentIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_ACTIVITY_NEW_TASK);
+               PackageManager pm   = context.getPackageManager();
+               Intent notificationIntent = pm.getLaunchIntentForPackage("com.racionaltec");
+               
+               notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+               PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
+               
+               try{
+                    pendingIntent.send();
+               }catch(Exception e){
 
-                b.setAutoCancel(true)
-               .setDefaults(Notification.DEFAULT_ALL)
-               .setWhen(System.currentTimeMillis())          
-               .setSmallIcon(context.getApplicationInfo().icon)
-               .setTicker("Hearty365")            
-               .setContentTitle("Recebendo chamada!")
-               .setContentText("Você está recebendo uma chamada.")
-               .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND)
-               .setContentIntent(contentIntent)
-               .setContentInfo("Info");
-                
-               NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-               notificationManager.notify(1, b.build());
+               }
 
                SIP.recebeChamada(context,intent);
-
               }
               
             }else{
