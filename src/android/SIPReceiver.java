@@ -81,24 +81,7 @@ public class SIPReceiver extends BroadcastReceiver {
               
             }else{
 
-              PackageManager pm   = context.getPackageManager();
-              Intent launchIntent = pm.getLaunchIntentForPackage("com.racionaltec");
-              
-              contentIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_ACTIVITY_NEW_TASK);
-
-              b.setAutoCancel(true)
-             .setDefaults(Notification.DEFAULT_ALL)
-             .setWhen(System.currentTimeMillis())          
-             .setSmallIcon(context.getApplicationInfo().icon)
-             .setTicker("Hearty365")            
-             .setContentTitle("Recebendo chamada!")
-             .setContentText("Você está recebendo uma chamada.")
-             .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND)
-             .setContentIntent(contentIntent)
-             .setContentInfo("Info");
-              
-             NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-             notificationManager.notify(1, b.build());
+             
             }
             
       }else {
