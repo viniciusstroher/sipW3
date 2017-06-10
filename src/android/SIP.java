@@ -51,7 +51,7 @@ import org.apache.cordova.CordovaWebView;
 import android.webkit.WebViewClient;
 import android.webkit.WebView;
 import android.media.AudioManager;
-
+import android.net.sip.SipSession;
 public class SIP extends CordovaPlugin {
     private static final String LOG_TAG = "SIPW3";
 
@@ -476,13 +476,15 @@ public class SIP extends CordovaPlugin {
         }
     }
 
-
     public void resolveStatusChamdaSIP(){
         if(SIP.sipAudioCall != null){
             if(SIP.sipAudioCall.isInCall()){
                 SIP.eventoChamadaEmAndamentoSIP();
             }else{
-                SIP.eventoRecebencoChamadaSIP();
+                if(SIP.sipAudioCall.getState() == SipSession.State.OUTGOING_CALL_RING_BACK){
+                    SIP.eventoRecebencoChamadaSIP();
+                }
+                
             }
 
         }else{
