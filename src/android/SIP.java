@@ -482,6 +482,7 @@ public class SIP extends CordovaPlugin {
                     }else{
                         SIP.eventoSemChamadaSIP();
                     }
+                    Thread.sleep(10000);
                 }
             }
         });
