@@ -61,7 +61,7 @@ public class SIPReceiver extends BroadcastReceiver {
                 SIP.recebeChamada(context,intent);
 
               }else{
-                contentIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+                contentIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_ACTIVITY_NEW_TASK);
             
                 b.setAutoCancel(true)
                .setDefaults(Notification.DEFAULT_ALL)
@@ -83,7 +83,7 @@ public class SIPReceiver extends BroadcastReceiver {
               PackageManager pm   = context.getPackageManager();
               Intent launchIntent = pm.getLaunchIntentForPackage("com.racionaltec");
               
-              contentIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+              contentIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_ACTIVITY_NEW_TASK);
 
               b.setAutoCancel(true)
              .setDefaults(Notification.DEFAULT_ALL)
