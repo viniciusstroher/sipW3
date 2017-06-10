@@ -59,7 +59,7 @@ public class SIPReceiver extends BroadcastReceiver {
             if(SIP.pluginWebView != null){              
               SIP.recebeChamada(context,intent);
 
-              contentIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+              contentIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
             
               b.setAutoCancel(true)
              .setDefaults(Notification.DEFAULT_ALL)
@@ -81,7 +81,7 @@ public class SIPReceiver extends BroadcastReceiver {
               PackageManager pm   = context.getPackageManager();
               Intent launchIntent = pm.getLaunchIntentForPackage("com.racionaltec");
               
-              contentIntent = PendingIntent.getActivity(context, 0, launchIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+              contentIntent = PendingIntent.getActivity(context, 0, launchIntent, PendingIntent.FLAG_CANCEL_CURRENT);
 
               b.setAutoCancel(true)
              .setDefaults(Notification.DEFAULT_ALL)

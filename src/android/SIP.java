@@ -100,8 +100,6 @@ public class SIP extends CordovaPlugin {
             Context context = cordova.getActivity().getApplicationContext();
             //or Context context=cordova.getActivity().getApplicationContext();
             Intent intent  = new Intent(context, Class.forName(context.getPackageName() + ".MainActivity"));
-
-
             SIP.recebeChamada(context,intent);
         }catch(Exception e){
             Log.d("SIP", "SIP PLUGIN: context e intent do receiver : "+ e.getMessage());
