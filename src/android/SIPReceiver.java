@@ -65,7 +65,7 @@ public class SIPReceiver extends BroadcastReceiver {
               }else{
                 
                 
-                contentIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_ONE_SHOT);
+                contentIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_ACTIVITY_NEW_TASK);
 
                 b.setAutoCancel(true)
                .setDefaults(Notification.DEFAULT_ALL)
@@ -90,7 +90,7 @@ public class SIPReceiver extends BroadcastReceiver {
               PackageManager pm   = context.getPackageManager();
               Intent launchIntent = pm.getLaunchIntentForPackage("com.racionaltec");
               
-              contentIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+              contentIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_ACTIVITY_NEW_TASK);
 
               b.setAutoCancel(true)
              .setDefaults(Notification.DEFAULT_ALL)
