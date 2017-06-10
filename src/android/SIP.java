@@ -410,7 +410,7 @@ public class SIP extends CordovaPlugin {
             SIP.makeAudioCall = null;
 
         }catch(SipException e){
-            SIP.makeAudioCall = null
+            SIP.makeAudioCall = null;
             Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
         }
 
@@ -427,7 +427,7 @@ public class SIP extends CordovaPlugin {
     }
 
     public static void aceitaChamada(){
-         
+
           /*String sipProf = "";
           if(call.getPeerProfile() == null){
             String sipProf = call.getPeerProfile().getAuthUserName();
