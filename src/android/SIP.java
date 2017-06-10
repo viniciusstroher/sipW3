@@ -336,48 +336,45 @@ public class SIP extends CordovaPlugin {
 
     public static void recebeChamada(Context context, Intent intent){
         try {
-            if(SIP.isActivityVisible()){
-                if(!SIP.isInChamada()){
-                    Log.d("SIP","SIP PLUGIN: Chamada recebida e ativa.");
+            if(!SIP.isInChamada()){
+                Log.d("SIP","SIP PLUGIN: Chamada recebida e ativa.");
 
-                    SipAudioCall.Listener listener = new SipAudioCall.Listener() {
+                SipAudioCall.Listener listener = new SipAudioCall.Listener() {
 
-                       @Override
-                       public void onCallEstablished(SipAudioCall call) {
-                          Log.d("SIP","SIP PLUGIN: recebeChamada Chamada iniciada.");
-                       }
+                   @Override
+                   public void onCallEstablished(SipAudioCall call) {
+                      Log.d("SIP","SIP PLUGIN: recebeChamada Chamada iniciada.");
+                   }
 
-                       @Override
-                       public void onCallEnded(SipAudioCall call) {
-                          Log.d("SIP","SIP PLUGIN: recebeChamada Chamada encerrada.");
-                          SIP.encerraChamada();
-                       }
+                   @Override
+                   public void onCallEnded(SipAudioCall call) {
+                      Log.d("SIP","SIP PLUGIN: recebeChamada Chamada encerrada.");
+                      SIP.encerraChamada();
+                   }
 
-                       @Override
-                       public void onRinging(SipAudioCall call, SipProfile caller){
-                          Log.d("SIP","SIP PLUGIN: recebeChamada onRinging . "); 
-                       }
+                   @Override
+                   public void onRinging(SipAudioCall call, SipProfile caller){
+                      Log.d("SIP","SIP PLUGIN: recebeChamada onRinging . "); 
+                   }
 
-                       @Override
-                       public void onError(SipAudioCall call, int errorCode, String errorMessage){
-                          Log.d("SIP","SIP PLUGIN: recebeChamada onError Chamada encerrada. ("+errorCode+") - "+errorMessage);
-                          SIP.encerraChamada();
-                       }
+                   @Override
+                   public void onError(SipAudioCall call, int errorCode, String errorMessage){
+                      Log.d("SIP","SIP PLUGIN: recebeChamada onError Chamada encerrada. ("+errorCode+") - "+errorMessage);
+                      SIP.encerraChamada();
+                   }
 
-                    }; 
+                }; 
 
-                    SIP.sipAudioCall = SipManager.newInstance(context) 
-                                       .takeAudioCall(intent, null);
-                    
-                    SIP.sipAudioCall.setListener(listener);
-                    Log.d("SIP","SIP PLUGIN: Ligação recebido pelo broadcard receiver");
+                SIP.sipAudioCall = SipManager.newInstance(context) 
+                                   .takeAudioCall(intent, null);
                 
-                }else{
-                    Log.d("SIP","SIP PLUGIN: else aceitaChamada ja_tem_alguma_chamada_em_andamento."+SIP.isInChamada());
-                }
+                SIP.sipAudioCall.setListener(listener);
+                Log.d("SIP","SIP PLUGIN: Ligação recebido pelo broadcard receiver");
+            
             }else{
-                Log.d("SIP","SIP PLUGIN: App em background.");
+                Log.d("SIP","SIP PLUGIN: else aceitaChamada ja_tem_alguma_chamada_em_andamento."+SIP.isInChamada());
             }
+            
         }catch(Exception e){
           SIP.sipAudioCall = null;
           Log.d("SIP","SIP PLUGIN ERR: "+e.getMessage());
