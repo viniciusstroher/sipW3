@@ -490,7 +490,7 @@ public class SIP extends CordovaPlugin {
                     try{
                         resolveStatusChamdaSIP();
                         Thread.sleep(10000);
-                    }(Exception e){
+                    }catch(Exception e){
                         Log.d("SIP","SIP PLUGIN ERROR watchChamdasSIP: "+e.getMessage());
                     }
                 }
