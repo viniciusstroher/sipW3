@@ -467,6 +467,19 @@ public class SIP extends CordovaPlugin {
     }
 
 
+    public void resolveStatusChamdaSIP(){
+        if(SIP.sipAudioCall != null){
+            if(SIP.sipAudioCall.isInCall()){
+                SIP.eventoChamadaEmAndamentoSIP();
+            }else{
+                SIP.eventoRecebencoChamadaSIP();
+            }
+
+        }else{
+            SIP.eventoSemChamadaSIP();
+        }
+    }
+
     public void watchChamdasSIP(){
         
         cordova.getThreadPool().execute(new Runnable() {
@@ -474,17 +487,12 @@ public class SIP extends CordovaPlugin {
             public void run() {
                 boolean looping = true;
                 while(looping){
-                    if(SIP.sipAudioCall != null){
-                        if(SIP.sipAudioCall.isInCall()){
-                            SIP.eventoChamadaEmAndamentoSIP();
-                        }else{
-                            SIP.eventoRecebencoChamadaSIP();
-                        }
-
-                    }else{
-                        SIP.eventoSemChamadaSIP();
+                    try{
+                        resolveStatusChamdaSIP();
+                        Thread.sleep(10000);
+                    }(Exception e){
+                        Log.d("SIP","SIP PLUGIN ERROR watchChamdasSIP: "+e.getMessage());
                     }
-                    Thread.sleep(10000);
                 }
             }
         });
