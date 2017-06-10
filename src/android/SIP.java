@@ -218,16 +218,21 @@ public class SIP extends CordovaPlugin {
             
             try{
                 SIP.fazChamada(mSipManager ,mSipProfile , address);
+                SIP.callbackContext.success(true);
             }catch(Exception e){
                 Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
+                SIP.callbackContext.success(false);
             }
         }
 
         if(action.equals("aceitarChamada")){
             try{
                 SIP.aceitaChamada();
+                SIP.callbackContext.success(true);
             }catch(Exception e){
+                SIP.callbackContext.success(false);
                 Log.d("SIP","SIP PLUGIN ERROR: aceitaChamada "+e.getMessage());
+
             }
         }
 
@@ -236,6 +241,7 @@ public class SIP extends CordovaPlugin {
                 @Override
                 public void run() {
                     fechaProfileSIP();
+                    SIP.callbackContext.success(true);
                 }
             });
         }

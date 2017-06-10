@@ -53,13 +53,12 @@ public class SIPReceiver extends BroadcastReceiver {
             Log.d("SIP","SIP PLUGIN: ENVIA EVENTO CORDOVA sendJavascript");
             Log.d("SIP","SIP PLUGIN: CONECTADO A WIFI E RECEBENDO CHAMADA");
 
-
             NotificationCompat.Builder b = new NotificationCompat.Builder(context);
             PendingIntent contentIntent  = null;
 
             if(SIP.pluginWebView != null){              
               SIP.recebeChamada(context,intent);
-            
+
               contentIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
             
               b.setAutoCancel(true)
