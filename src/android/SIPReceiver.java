@@ -58,8 +58,9 @@ public class SIPReceiver extends BroadcastReceiver {
             PendingIntent contentIntent  = null;
 
             if(SIP.pluginWebView != null){
-              SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:true};"); 
-             
+              
+              SIP.recebeChamada();
+
               contentIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
             
               b.setAutoCancel(true)

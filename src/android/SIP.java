@@ -93,11 +93,10 @@ public class SIP extends CordovaPlugin {
     @Override
     protected void pluginInitialize() {
         SIP.pluginWebView = webView; 
-        SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:false};");     
-        
+        SIP.watchChamdasSIP();
     }
 
-    public void closeLocalProfile() {
+    public void fechaProfileSIP() {
 
         if (mSipManager == null) {
            return;
@@ -112,9 +111,6 @@ public class SIP extends CordovaPlugin {
               if (mSipManager.isRegistered(mSipProfile.getProfileName())){
                 mSipManager.unregister(mSipProfile, null);
               }
-
-              SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:false};");     
-   
            }
         } catch (Exception e) {
            Log.d("SIP", "SIP PLUGIN: Failed to close local profile: "+ e.getMessage());
@@ -136,7 +132,7 @@ public class SIP extends CordovaPlugin {
     public void onDestroy() {
         Log.d("SIP", "SIP PLUGIN: Destruindo Sip profile ");
         encerraChamada();
-        closeLocalProfile();
+        fechaProfileSIP();
     }
 
     //COMANDO EXECUTE
@@ -188,46 +184,37 @@ public class SIP extends CordovaPlugin {
                 if(isVoipSupported && isApiSupported){
                     
                     mSipManager.open(mSipProfile, pendingIntent, null);
-
+                    
                     Log.d("SIP","SIP PLUGIN: PROFILE SIP - "+mSipProfile.getUriString());
 
                     mSipManager.setRegistrationListener(mSipProfile.getUriString(), new SipRegistrationListener() {
 
                         public void onRegistering(String localProfileUri) {
                             Log.d("SIP","SIP PLUGIN: Registering with SIP Server... "+localProfileUri);
-                            
                         }
 
                         public void onRegistrationDone(String localProfileUri, long expiryTime) {
                             Log.d("SIP","SIP PLUGIN: Ready "+localProfileUri );
-                            SIP.inChamadaFalse();
-                            SIP.callbackContext.success("true");
-                            
                         }
 
                         public void onRegistrationFailed(String localProfileUri, int errorCode,
                             String errorMessage) {
                             Log.d("SIP","SIP PLUGIN: Registration failed.  Please check settings. - ("+errorCode+")"+errorMessage);
-                            SIP.callbackContext.success("false");
-
                         }
 
                     });
-
                     Log.d("SIP","SIP PLUGIN: Listener registrado");
                 }else{
-                    
                     Log.d("SIP","SIP PLUGIN: NÃO SUPORTADO.");
                 }
             }catch(Exception e){
                 Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
             }  
-
         }
 
         if(action.equals("chamar")){
             JSONObject params = args.getJSONObject(0);
-            String address  = params.getString("address");
+            String address    = params.getString("address");
             
             try{
                 fazChamada(mSipManager ,mSipProfile , address);
@@ -237,7 +224,11 @@ public class SIP extends CordovaPlugin {
         }
 
         if(action.equals("aceitarChamada")){
-            SIP.aceitaChamada(SIP.context,SIP.intent);
+            try{
+                SIP.aceitaChamada(SIP.context,SIP.intent);
+            }catch(Exception e){
+                Log.d("SIP","SIP PLUGIN ERROR: aceitaChamada "+e.getMessage());
+            }
         }
 
         if (action.equals("desconectarSip")) {
@@ -245,10 +236,9 @@ public class SIP extends CordovaPlugin {
                 @Override
                 public void run() {
                     SIP.inChamadaFalse();
-                    closeLocalProfile();
+                    fechaProfileSIP();
                 }
             });
-
         }
 
         if(action.equals("emChamada")){
@@ -307,53 +297,18 @@ public class SIP extends CordovaPlugin {
         return true;
     }
 
-    //ENVIO DE MENSAGEMS A CLASSE
     @Override
-    public Object onMessage(String id, Object data) {
-        return null;
-    }
-
-    // Don't add @Override so that plugin still compiles on 3.x.x for a while
-    public void onConfigurationChanged(Configuration newConfig) {
-       
-    }
+    public Object onMessage(String id, Object data) {return null;}
+    public void onConfigurationChanged(Configuration newConfig) {}
     
-    public static void encerraChamada(){
-        try{    
-            SIP.makeAudioCall.endCall();
-            SIP.makeAudioCall.close();
-            Log.d("SIP","SIP PLUGIN: ligacao encerrada.");
-        }catch(SipException e){
-            SIP.inChamadaFalse();
-            Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
-        }
-
-        try{
-            SIP.sipAudioCall.endCall();
-            SIP.sipAudioCall.close();
-            Log.d("SIP","SIP PLUGIN: ligacao encerrada.");
-        }catch(SipException e){
-            SIP.inChamadaFalse();
-            Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
-        }
-
-    }
-
     //ADICIONAR CANCELAR CHAMADA
     //ATTIBUTO PARA VER SE ESTA EM LIGACAO
     public static boolean isInChamada() {
-        return inChamada;
+        if(SIP.sipAudioCall != null){
+            return SIP.sipAudioCall.isInCall();
+        }
+        return false;
     }  
-
-    public static void inChamadaTrue() {
-        inChamada = true;
-    }
-
-    public static void inChamadaFalse() {
-        inChamada = false;
-    }
-
-    private static boolean inChamada;
 
     public static boolean isActivityVisible() {
         return activityVisible;
@@ -370,7 +325,7 @@ public class SIP extends CordovaPlugin {
     private static boolean activityVisible;
     private static boolean speaker = false;
 
-    public static void aceitaChamada(Context context, Intent intent){
+    public static void recebeChamada(Context context, Intent intent){
         try {
             if(SIP.isActivityVisible()){
                 if(!SIP.isInChamada()){
@@ -380,44 +335,28 @@ public class SIP extends CordovaPlugin {
 
                        @Override
                        public void onCallEstablished(SipAudioCall call) {
-                          call.startAudio();
-                          call.toggleMute();
                           
-                          SIP.inChamadaTrue();
-                          SIP.callbackContext.success("chamada_em_andamento");
-                          
+                          String sipProf = "";
                           if(call.getPeerProfile() == null){
                             String sipProf = call.getPeerProfile().getAuthUserName();
-                            SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:true, sip:\"sipProf\"};");  
-                         
-                          }else{
-                            SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:true};");  
                           }
 
-                          Log.d("SIP","SIP PLUGIN: aceitaChamada Chamada iniciada." + SIP.isInChamada());
-                          
+                          Log.d("SIP","SIP PLUGIN: recebeChamada Chamada iniciada.");
                        }
 
                        @Override
                        public void onCallEnded(SipAudioCall call) {
-                          SIP.inChamadaFalse();
-                          SIP.callbackContext.success("chamada_terminada");
-                          SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:false};");     
-                          Log.d("SIP","SIP PLUGIN: aceitaChamada Chamada encerrada." +SIP.isInChamada());
+                          Log.d("SIP","SIP PLUGIN: recebeChamada Chamada encerrada.");
                        }
 
                        @Override
                        public void onRinging(SipAudioCall call, SipProfile caller){
-                         SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:true};"); 
-                         Log.d("SIP","SIP PLUGIN: onRinging . " +SIP.isInChamada()); 
+                         Log.d("SIP","SIP PLUGIN: recebeChamada onRinging . "); 
                        }
 
                        @Override
                        public void onError(SipAudioCall call, int errorCode, String errorMessage){
-                          SIP.inChamadaFalse();
-                          SIP.callbackContext.success("chamada_terminada");
-                          SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:false};");  
-                          Log.d("SIP","SIP PLUGIN: onError Chamada encerrada. "+SIP.isInChamada()+"  "+errorCode+" - "+errorMessage);
+                          Log.d("SIP","SIP PLUGIN: recebeChamada onError Chamada encerrada. ("+errorCode+") - "+errorMessage);
                        }
 
                     }; 
@@ -438,7 +377,7 @@ public class SIP extends CordovaPlugin {
                 SIP.inChamadaFalse();
             }
         }catch(Exception e){
-          SIP.pluginWebView.loadUrl("javascript:window.recebendoChamadaSip = {status:false};");                    
+          
           SIP.inChamadaFalse();
           Log.d("SIP","SIP PLUGIN ERR: "+e.getMessage());
         }
@@ -480,4 +419,81 @@ public class SIP extends CordovaPlugin {
             Log.d("SIP","SIP PLUGIN:  fazChamada else ja_tem_alguma_chamada_em_andamento.");
         }
     }
+
+    public static void encerraChamada(){
+        try{    
+            SIP.makeAudioCall.endCall();
+            SIP.makeAudioCall.close();
+            SIP.makeAudioCall = null;
+
+        }catch(SipException e){
+
+            SIP.inChamadaFalse();
+            Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
+        }
+
+        try{
+            SIP.sipAudioCall.endCall();
+            SIP.sipAudioCall.close();
+            SIP.sipAudioCall = null;
+
+        }catch(SipException e){
+
+            SIP.inChamadaFalse();
+            Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
+        }
+        Log.d("SIP","SIP PLUGIN: ligacao encerrada.");
+    }
+
+    public static void aceitaChamada(){
+        call.startAudio();
+                          call.toggleMute();
+
+    }
+
+    public static void eventoRecebencoChamadaSIP(){
+        if(SIP.pluginWebView != null){
+            SIP.pluginWebView.loadUrl("javascript:window.statusSIP = {status:'recebendoChamada'};");                    
+          
+        }
+    }
+
+    public static void eventoChamadaEmAndamentoSIP(){
+        if(SIP.pluginWebView != null){
+            SIP.pluginWebView.loadUrl("javascript:window.statusSIP = {status:'chamadaEmAndamento'};");                    
+            
+        }
+    }
+
+    public static void eventoSemChamadaSIP(){
+        if(SIP.pluginWebView != null){
+            SIP.pluginWebView.loadUrl("javascript:window.statusSIP = {status:'semChamdas'};");                    
+          
+        }
+    }
+
+
+    public static void watchChamdasSIP(){
+        
+        cordova.getThreadPool().execute(new Runnable() {
+            @Override
+            public void run() {
+                boolean looping = true;
+                while(looping){
+                    if(SIP.sipAudioCall != null){
+                        if(SIP.sipAudioCall.isInCall()){
+                            eventoChamadaEmAndamentoSIP();
+                        }else{
+                            eventoRecebencoChamadaSIP();
+                        }
+
+                    }else{
+                        eventoSemChamadaSIP();
+                    }
+                }
+            }
+        });
+
+    }
+
 }
