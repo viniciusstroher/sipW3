@@ -424,10 +424,10 @@ public class SIP extends CordovaPlugin {
         try{
             if(SIP.sipAudioCall != null){
                 if(SIP.sipAudioCall.getPeerProfile() != null){
-                    SIP.sipAudioCall.answerCall(0);
+                    SIP.sipAudioCall.endCall();
+                    SIP.sipAudioCall.close();
                 }
-                SIP.sipAudioCall.endCall();
-                SIP.sipAudioCall.close();
+                
                 SIP.sipAudioCall = null;
             }
            
@@ -437,10 +437,15 @@ public class SIP extends CordovaPlugin {
         }
 
         try{    
-            SIP.makeAudioCall.endCall();
-            SIP.makeAudioCall.close();
-            SIP.makeAudioCall = null;
-
+            
+            
+            if(SIP.makeAudioCall != null){
+                if(SIP.makeAudioCall.getPeerProfile() != null){
+                    SIP.makeAudioCall.endCall();
+                    SIP.makeAudioCall.close();
+                }
+                SIP.makeAudioCall = null;
+            }
         }catch(SipException e){
             SIP.makeAudioCall = null;
             Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
