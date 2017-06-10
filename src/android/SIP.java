@@ -428,10 +428,10 @@ public class SIP extends CordovaPlugin {
 
     public static void aceitaChamada(){
 
-          /*String sipProf = "";
-          if(call.getPeerProfile() == null){
+        /*String sipProf = "";
+        if(call.getPeerProfile() == null){
             String sipProf = call.getPeerProfile().getAuthUserName();
-          }*/
+        }*/
         if(SIP.sipAudioCall != null){
             try{
                 SIP.sipAudioCall.answerCall(30);
@@ -459,7 +459,7 @@ public class SIP extends CordovaPlugin {
 
     public static void eventoSemChamadaSIP(){
         if(SIP.pluginWebView != null){
-            SIP.pluginWebView.loadUrl("javascript:window.statusSIP = {status:'semChamdas'};");                    
+            SIP.pluginWebView.loadUrl("javascript:window.statusSIP = {status:'semChamada'};");                    
           
         }
     }
