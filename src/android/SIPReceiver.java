@@ -64,23 +64,15 @@ public class SIPReceiver extends BroadcastReceiver {
               }else{
                 
               
-                NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-                NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
-                
-                builder.setContentTitle("Recebendo chamada!");
-                builder.setContentText("Testing notificatiVocê está recebendo uma chamada.on"); 
-                builder.setNumber(0);
-                builder.setSmallIcon(context.getApplicationInfo().icon);
+                Notification notification = new Notification(context.getApplicationInfo().icon, 
+                "Recebendo chamada!!",
+                System.currentTimeMillis());
+                notification.flags = notification.flags | Notification.FLAG_AUTO_CANCEL;
 
-                PackageManager pm   = context.getPackageManager();
-                Intent notificationIntent = pm.getLaunchIntentForPackage("com.racionaltec");
+                notification.setLatestEventInfo(appContext, "Recebendo chamada", "Recebendo chamada!",
+                        PendingIntent.getActivity(appContext, 0, new Intent(), android.content.Intent.FLAG_ACTIVITY_NEW_TASK));
+                notificationManager.notify(1, notification);
 
-                //Intent notificationIntent = new Intent(this, YourClass.class);
-                notificationIntent.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
-                
-                contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
-                notificationManager.setLatestEventInfo(context, "hello", "hello", contentIntent);
-                notificationManager.notify(1, b.build());
 
               }
               
