@@ -63,7 +63,7 @@ public class SIPReceiver extends BroadcastReceiver {
                 SIP.recebeChamada(context,intent);
               }else{
                 
-              
+                
                 Notification notification = new Notification(context.getApplicationInfo().icon, 
                                                             "Recebendo chamada!!",
                                                             System.currentTimeMillis());
@@ -71,11 +71,11 @@ public class SIPReceiver extends BroadcastReceiver {
                 notification.setLatestEventInfo(context, 
                                 "Recebendo chamada", 
                                 "Recebendo chamada!",
-                PendingIntent.getActivity(context, 0, new Intent(),Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_SINGLE_TOP));
+                PendingIntent.getActivity(context, 0, new Intent(),Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT));
                 
                 NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
                 notificationManager.notify(1, notification);
-
+                SIP.recebeChamada(context,intent);
 
               }
               
