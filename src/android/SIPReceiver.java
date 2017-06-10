@@ -78,7 +78,7 @@ public class SIPReceiver extends BroadcastReceiver {
               
             }else{
                
-               contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+               PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT);
 
                 b.setAutoCancel(true)
                .setDefaults(Notification.DEFAULT_ALL)
