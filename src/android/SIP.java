@@ -198,7 +198,7 @@ public class SIP extends CordovaPlugin {
 
                         public void onRegistrationDone(String localProfileUri, long expiryTime) {
                             Log.d("SIP","SIP PLUGIN: Ready "+localProfileUri );
-                            SIP.verificaContextoSIP();
+                            verificaContextoSIP();
                         }
 
                         public void onRegistrationFailed(String localProfileUri, int errorCode,
@@ -496,21 +496,6 @@ public class SIP extends CordovaPlugin {
         }
     }
 
-    public void verificaContextoSIP(){
-        try{
-            /*Intent intent = new Intent();
-            intent.setAction("org.apache.cordova.SIP.INCOMING_CALL");
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(cordova.getActivity(), 0, intent, Intent.FILL_IN_DATA);
-            */
-
-            Context context = cordova.getActivity().getApplicationContext();
-            Intent intent   = new Intent(context, Class.forName(context.getPackageName() + ".MainActivity"));
-            
-            SIP.recebeChamada(context,intent);
-        }catch(Exception e){
-            Log.d("SIP", "SIP PLUGIN: context e intent do receiver : "+ e.getMessage());
-        }
-    }
 
     public void watchChamdasSIP(){
         
