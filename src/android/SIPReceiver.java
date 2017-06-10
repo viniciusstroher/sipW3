@@ -79,7 +79,7 @@ public class SIPReceiver extends BroadcastReceiver {
                 //Intent notificationIntent = new Intent(this, YourClass.class);
                 notificationIntent.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
                 
-                PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
+                contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
                 notification.setLatestEventInfo(getApplicationContext(), "hello", "hello", contentIntent);
 
               }
