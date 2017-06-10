@@ -235,7 +235,6 @@ public class SIP extends CordovaPlugin {
             cordova.getThreadPool().execute(new Runnable() {
                 @Override
                 public void run() {
-                    SIP.inChamadaFalse();
                     fechaProfileSIP();
                 }
             });
@@ -417,8 +416,7 @@ public class SIP extends CordovaPlugin {
             SIP.makeAudioCall = null;
 
         }catch(SipException e){
-
-            SIP.inChamadaFalse();
+            SIP.makeAudioCall = null
             Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
         }
 
@@ -428,8 +426,7 @@ public class SIP extends CordovaPlugin {
             SIP.sipAudioCall = null;
 
         }catch(SipException e){
-
-            SIP.inChamadaFalse();
+            SIP.sipAudioCall = null;
             Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
         }
         Log.d("SIP","SIP PLUGIN: ligacao encerrada.");
