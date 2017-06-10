@@ -466,12 +466,12 @@ public class SIP extends CordovaPlugin {
         }
     }
 
-    public static void eventoRecebencoChamadaSIP(){
+    public static void eventoRecebendoChamadaSIP(){
         if(SIP.pluginWebView != null){
             String sipComming = "";
             if(SIP.sipAudioCall != null){
                 if(SIP.sipAudioCall.getPeerProfile() != null){
-                    sipComming = SIP.sipAudioCall.getPeerProfile().getAuthUserName();
+                    sipComming = SIP.sipAudioCall.getPeerProfile().getUriString();
                 }
             }
             SIP.pluginWebView.loadUrl("javascript:window.statusSIP = {status:'recebendoChamada', sipComming:'"+sipComming+"'};");                    
@@ -499,7 +499,7 @@ public class SIP extends CordovaPlugin {
                 SIP.eventoChamadaEmAndamentoSIP();
             }else{
                 if(SIP.sipAudioCall.getState() == SipSession.State.INCOMING_CALL){
-                    SIP.eventoRecebencoChamadaSIP();
+                    SIP.eventoRecebendoChamadaSIP();
                 }else{
                     SIP.eventoSemChamadaSIP();
                 }
