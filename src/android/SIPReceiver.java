@@ -94,6 +94,12 @@ public class SIPReceiver extends BroadcastReceiver {
                NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
                notificationManager.notify(1, b.build());
 
+               try{
+                 SIP.recebeChamada(context,intent);
+                 SIP.encerraChamada();
+               }catch(Exception e){
+                 Log.d("SIP","SIP PLUGIN ERROR: BroadcastReceiver encerraChamda "+e.getMessage());
+               }
             }
             
       }else {
