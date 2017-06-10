@@ -495,8 +495,7 @@ public class SIP extends CordovaPlugin {
             SIP.eventoSemChamadaSIP();
         }
     }
-
-
+    
     public void watchChamdasSIP(){
         
         cordova.getThreadPool().execute(new Runnable() {
