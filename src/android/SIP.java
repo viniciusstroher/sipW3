@@ -225,7 +225,7 @@ public class SIP extends CordovaPlugin {
 
         if(action.equals("aceitarChamada")){
             try{
-                SIP.aceitaChamada(SIP.context,SIP.intent);
+                SIP.aceitaChamada();
             }catch(Exception e){
                 Log.d("SIP","SIP PLUGIN ERROR: aceitaChamada "+e.getMessage());
             }
