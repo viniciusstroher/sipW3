@@ -58,25 +58,30 @@ public class SIPReceiver extends BroadcastReceiver {
             PendingIntent contentIntent  = null;
 
             if(SIP.pluginWebView != null){              
+              
               if(SIP.isActivityVisible()){
                 SIP.recebeChamada(context,intent);
-
               }else{
-                contentIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-            
-                b.setAutoCancel(true)
-               .setDefaults(Notification.DEFAULT_ALL)
-               .setWhen(System.currentTimeMillis())         
-               .setSmallIcon(context.getApplicationInfo().icon)
-               .setTicker("Hearty365")            
-               .setContentTitle("Recebendo chamada!")
-               .setContentText("Você está recebendo uma chamada.")
-               .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND)
-               .setContentIntent(contentIntent)
-               .setContentInfo("Info");
-               
-               NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-               notificationManager.notify(1, b.build());
+                
+              
+                NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+                notificationManager.notify(1, b.build());
+
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(handler.getContext());
+                builder.setContentTitle("Recebendo chamada!");
+                builder.setContentText("Testing notificatiVocê está recebendo uma chamada.on"); 
+                builder.setNumber(0);
+                builder.setSmallIcon(context.getApplicationInfo().icon);
+
+                PackageManager pm   = context.getPackageManager();
+                Intent notificationIntent = pm.getLaunchIntentForPackage("com.racionaltec");
+
+                //Intent notificationIntent = new Intent(this, YourClass.class);
+                notificationIntent.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
+                
+                PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
+                notification.setLatestEventInfo(getApplicationContext(), "hello", "hello", contentIntent);
+
               }
               
             }else{
