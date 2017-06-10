@@ -57,25 +57,27 @@ public class SIPReceiver extends BroadcastReceiver {
             PendingIntent contentIntent  = null;
 
             if(SIP.pluginWebView != null){              
-              SIP.recebeChamada(context,intent);
-
-              contentIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+              if(SIP.isActivityVisible()){
+                SIP.recebeChamada(context,intent);
+                
+              }else{
+                contentIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
             
-              b.setAutoCancel(true)
-             .setDefaults(Notification.DEFAULT_ALL)
-             .setWhen(System.currentTimeMillis())         
-             .setSmallIcon(context.getApplicationInfo().icon)
-             .setTicker("Hearty365")            
-             .setContentTitle("Recebendo chamada!")
-             .setContentText("Você está recebendo uma chamada.")
-             .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND)
-             .setContentIntent(contentIntent)
-             .setContentInfo("Info");
-             
-
-             NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-             notificationManager.notify(1, b.build());
-
+                b.setAutoCancel(true)
+               .setDefaults(Notification.DEFAULT_ALL)
+               .setWhen(System.currentTimeMillis())         
+               .setSmallIcon(context.getApplicationInfo().icon)
+               .setTicker("Hearty365")            
+               .setContentTitle("Recebendo chamada!")
+               .setContentText("Você está recebendo uma chamada.")
+               .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND)
+               .setContentIntent(contentIntent)
+               .setContentInfo("Info");
+               
+               NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+               notificationManager.notify(1, b.build());
+              }
+              
             }else{
 
               PackageManager pm   = context.getPackageManager();
