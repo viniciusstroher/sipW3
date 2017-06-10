@@ -53,6 +53,7 @@ public class SIPReceiver extends BroadcastReceiver {
             Log.d("SIP","SIP PLUGIN: ENVIA EVENTO CORDOVA sendJavascript");
             Log.d("SIP","SIP PLUGIN: CONECTADO A WIFI E RECEBENDO CHAMADA");
             Log.d("SIP","SIP PLUGIN: SIP.pluginWebView "+SIP.pluginWebView);
+            Log.d("SIP","SIP PLUGIN: SIP.isActivityVisible "+SIP.isActivityVisible());
 
             NotificationCompat.Builder b = new NotificationCompat.Builder(context);
             PendingIntent contentIntent  = null;
