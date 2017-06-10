@@ -57,10 +57,9 @@ public class SIPReceiver extends BroadcastReceiver {
             NotificationCompat.Builder b = new NotificationCompat.Builder(context);
             PendingIntent contentIntent  = null;
 
-            if(SIP.pluginWebView != null){
-              
-              SIP.recebeChamada();
-
+            if(SIP.pluginWebView != null){              
+              SIP.recebeChamada(context,intent);
+            
               contentIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
             
               b.setAutoCancel(true)
