@@ -67,7 +67,7 @@ public class SIPReceiver extends BroadcastReceiver {
                 NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
                 notificationManager.notify(1, b.build());
 
-                NotificationCompat.Builder builder = new NotificationCompat.Builder(handler.getContext());
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
                 builder.setContentTitle("Recebendo chamada!");
                 builder.setContentText("Testing notificatiVocê está recebendo uma chamada.on"); 
                 builder.setNumber(0);
@@ -79,7 +79,7 @@ public class SIPReceiver extends BroadcastReceiver {
                 //Intent notificationIntent = new Intent(this, YourClass.class);
                 notificationIntent.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
                 
-                PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
+                PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
                 notification.setLatestEventInfo(getApplicationContext(), "hello", "hello", contentIntent);
 
               }
