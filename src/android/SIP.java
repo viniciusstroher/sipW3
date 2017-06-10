@@ -479,7 +479,7 @@ public class SIP extends CordovaPlugin {
             if(SIP.sipAudioCall.isInCall()){
                 SIP.eventoChamadaEmAndamentoSIP();
             }else{
-                if(SIP.sipAudioCall.getState() == SipSession.State.OUTGOING_CALL_RING_BACK){
+                if(SIP.sipAudioCall.getState() == SipSession.State.INCOMING_CALL){
                     SIP.eventoRecebencoChamadaSIP();
                 }
                 
