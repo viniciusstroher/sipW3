@@ -339,6 +339,8 @@ public class SIP extends CordovaPlugin {
     private static boolean speaker = false;
 
     public static void recebeChamada(Context context, Intent intent){
+        SIP.context = context;
+        SIP.intent  = intent;
         try {
             if(!SIP.isInChamada()){
                 Log.d("SIP","SIP PLUGIN: Chamada recebida e ativa.");
