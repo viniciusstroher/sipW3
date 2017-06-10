@@ -460,22 +460,22 @@ public class SIP extends CordovaPlugin {
     }
 
 
-    public static void watchChamdasSIP(){
+    public void watchChamdasSIP(){
         
-        SIP.pluginWebView.getThreadPool().execute(new Runnable() {
+        cordova.getThreadPool().execute(new Runnable() {
             @Override
             public void run() {
                 boolean looping = true;
                 while(looping){
                     if(SIP.sipAudioCall != null){
                         if(SIP.sipAudioCall.isInCall()){
-                            eventoChamadaEmAndamentoSIP();
+                            SIP.eventoChamadaEmAndamentoSIP();
                         }else{
-                            eventoRecebencoChamadaSIP();
+                            SIP.eventoRecebencoChamadaSIP();
                         }
 
                     }else{
-                        eventoSemChamadaSIP();
+                        SIP.eventoSemChamadaSIP();
                     }
                 }
             }
