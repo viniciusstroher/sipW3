@@ -78,15 +78,22 @@ public class SIPReceiver extends BroadcastReceiver {
               
             }else{
                
-               notificationIntent.setFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED | Intent.FLAG_ACTIVITY_NEW_TASK);
-               PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
-               
-               try{
-                    pendingIntent.send();
-               }catch(Exception e){
+               contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT);
 
-               }
-             
+                b.setAutoCancel(true)
+               .setDefaults(Notification.DEFAULT_ALL)
+               .setWhen(System.currentTimeMillis())         
+               .setSmallIcon(context.getApplicationInfo().icon)
+               .setTicker("Hearty365")            
+               .setContentTitle("Chamada Perdida!")
+               .setContentText("Voce recebeu uma chamada mas seu aplicativo não estava aberto.")
+               .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND)
+               .setContentIntent(contentIntent)
+               .setContentInfo("Info");
+                
+               NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+               notificationManager.notify(1, b.build());
+
             }
             
       }else {
