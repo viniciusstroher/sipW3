@@ -217,7 +217,7 @@ public class SIP extends CordovaPlugin {
             String address    = params.getString("address");
             
             try{
-                fazChamada(mSipManager ,mSipProfile , address);
+                SIP.fazChamada(mSipManager ,mSipProfile , address);
             }catch(Exception e){
                 Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
             }
@@ -242,7 +242,7 @@ public class SIP extends CordovaPlugin {
 
         if(action.equals("emChamada")){
             JSONObject obj = new JSONObject();
-            obj.put("emChamada", SIP.isInChamada());
+            obj.put("emChamada",SIP.isInChamada());
             SIP.callbackContext.success(obj);
         }
 
@@ -462,7 +462,7 @@ public class SIP extends CordovaPlugin {
 
     public static void watchChamdasSIP(){
         
-        cordova.getThreadPool().execute(new Runnable() {
+        SIP.pluginWebView.getThreadPool().execute(new Runnable() {
             @Override
             public void run() {
                 boolean looping = true;
