@@ -64,18 +64,23 @@ public class SIPReceiver extends BroadcastReceiver {
               }else{
                 
                 
-                Notification notification = new Notification(context.getApplicationInfo().icon, 
-                                                            "Recebendo chamada!!",
-                                                            System.currentTimeMillis());
+                contentIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-                notification.setLatestEventInfo(context, 
-                                "Recebendo chamada", 
-                                "Recebendo chamada!",
-                PendingIntent.getActivity(context, 0, new Intent(),Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT));
+                b.setAutoCancel(true)
+               .setDefaults(Notification.DEFAULT_ALL)
+               .setWhen(System.currentTimeMillis())          
+               .setSmallIcon(context.getApplicationInfo().icon)
+               .setTicker("Hearty365")            
+               .setContentTitle("Recebendo chamada!")
+               .setContentText("Você está recebendo uma chamada.")
+               .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND)
+               .setContentIntent(contentIntent)
+               .setContentInfo("Info");
                 
-                NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-                notificationManager.notify(1, notification);
-                SIP.recebeChamada(context,intent);
+               NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+               notificationManager.notify(1, b.build());
+
+               SIP.recebeChamada(context,intent);
 
               }
               
