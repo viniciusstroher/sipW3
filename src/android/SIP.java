@@ -334,12 +334,6 @@ public class SIP extends CordovaPlugin {
 
                        @Override
                        public void onCallEstablished(SipAudioCall call) {
-                          
-                          String sipProf = "";
-                          if(call.getPeerProfile() == null){
-                            String sipProf = call.getPeerProfile().getAuthUserName();
-                          }
-
                           Log.d("SIP","SIP PLUGIN: recebeChamada Chamada iniciada.");
                        }
 
@@ -350,7 +344,7 @@ public class SIP extends CordovaPlugin {
 
                        @Override
                        public void onRinging(SipAudioCall call, SipProfile caller){
-                         Log.d("SIP","SIP PLUGIN: recebeChamada onRinging . "); 
+                          Log.d("SIP","SIP PLUGIN: recebeChamada onRinging . "); 
                        }
 
                        @Override
@@ -433,6 +427,11 @@ public class SIP extends CordovaPlugin {
     }
 
     public static void aceitaChamada(){
+         
+          /*String sipProf = "";
+          if(call.getPeerProfile() == null){
+            String sipProf = call.getPeerProfile().getAuthUserName();
+          }*/
         if(SIP.sipAudioCall != null){
             SIP.sipAudioCall.answerCall(30);
             SIP.sipAudioCall.startAudio();
