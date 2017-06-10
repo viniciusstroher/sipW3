@@ -52,6 +52,7 @@ public class SIPReceiver extends BroadcastReceiver {
       if (wifi == State.CONNECTED || wifi == State.CONNECTING) {
             Log.d("SIP","SIP PLUGIN: ENVIA EVENTO CORDOVA sendJavascript");
             Log.d("SIP","SIP PLUGIN: CONECTADO A WIFI E RECEBENDO CHAMADA");
+            Log.d("SIP","SIP PLUGIN: SIP.pluginWebView "+SIP.pluginWebView);
 
             NotificationCompat.Builder b = new NotificationCompat.Builder(context);
             PendingIntent contentIntent  = null;
