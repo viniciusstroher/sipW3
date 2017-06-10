@@ -72,6 +72,8 @@ public class SIPReceiver extends BroadcastReceiver {
 
                 notification.setLatestEventInfo(context, "Recebendo chamada", "Recebendo chamada!",
                         PendingIntent.getActivity(context, 0, new Intent(), android.content.Intent.FLAG_ACTIVITY_NEW_TASK));
+                
+                NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
                 notificationManager.notify(1, notification);
 
 
