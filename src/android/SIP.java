@@ -469,12 +469,17 @@ public class SIP extends CordovaPlugin {
     public static void eventoRecebendoChamadaSIP(){
         if(SIP.pluginWebView != null){
             String sipComming = "";
+            String sipMe      = "";
             if(SIP.sipAudioCall != null){
                 if(SIP.sipAudioCall.getPeerProfile() != null){
                     sipComming = SIP.sipAudioCall.getPeerProfile().getUriString();
                 }
+
+                if(SIP.sipAudioCall.getLocalProfile() != null){
+                    sipMe = SIP.sipAudioCall.getLocalProfile().getUriString();
+                }
             }
-            SIP.pluginWebView.loadUrl("javascript:window.statusSIP = {status:'recebendoChamada', sipComming:'"+sipComming+"'};");                    
+            SIP.pluginWebView.loadUrl("javascript:window.statusSIP = {status:'recebendoChamada', sipComming:'"+sipComming+"' , sipMe:'"+sipMe+"'};");                    
           
         }
     }
