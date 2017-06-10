@@ -203,11 +203,15 @@ public class SIP extends CordovaPlugin {
                         }
 
                     });
+                    SIP.callbackContext.success("true");
                     Log.d("SIP","SIP PLUGIN: Listener registrado");
+
                 }else{
+                    SIP.callbackContext.success("false");
                     Log.d("SIP","SIP PLUGIN: NÃO SUPORTADO.");
                 }
             }catch(Exception e){
+                SIP.callbackContext.success("false");
                 Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
             }  
         }
@@ -218,19 +222,19 @@ public class SIP extends CordovaPlugin {
             
             try{
                 SIP.fazChamada(mSipManager ,mSipProfile , address);
-                SIP.callbackContext.success(true);
+                SIP.callbackContext.success("true");
             }catch(Exception e){
                 Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
-                SIP.callbackContext.success(false);
+                SIP.callbackContext.success("false");
             }
         }
 
         if(action.equals("aceitarChamada")){
             try{
                 SIP.aceitaChamada();
-                SIP.callbackContext.success(true);
+                SIP.callbackContext.success("true");
             }catch(Exception e){
-                SIP.callbackContext.success(false);
+                SIP.callbackContext.success("false");
                 Log.d("SIP","SIP PLUGIN ERROR: aceitaChamada "+e.getMessage());
 
             }
@@ -241,7 +245,7 @@ public class SIP extends CordovaPlugin {
                 @Override
                 public void run() {
                     fechaProfileSIP();
-                    SIP.callbackContext.success(true);
+                    SIP.callbackContext.success("true");
                 }
             });
         }
@@ -263,9 +267,9 @@ public class SIP extends CordovaPlugin {
             
             try{
                 if(!SIP.speaker){
-                    SIP.makeAudioCall.setSpeakerMode(true);
+                    SIP.makeAudioCall.setSpeakerMode("true");
                 }else{
-                    SIP.makeAudioCall.setSpeakerMode(false);
+                    SIP.makeAudioCall.setSpeakerMode("false");
                 }
 
                 obj.put("speaker", SIP.speaker);
@@ -284,9 +288,9 @@ public class SIP extends CordovaPlugin {
             
             try{
                 if(!SIP.speaker){
-                    SIP.sipAudioCall.setSpeakerMode(true);
+                    SIP.sipAudioCall.setSpeakerMode("true");
                 }else{
-                    SIP.sipAudioCall.setSpeakerMode(false);
+                    SIP.sipAudioCall.setSpeakerMode("false");
                 }
 
                 obj.put("speaker", SIP.speaker);
