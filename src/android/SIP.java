@@ -365,20 +365,15 @@ public class SIP extends CordovaPlugin {
                                        .takeAudioCall(intent, null);
                     
                     SIP.sipAudioCall.setListener(listener);
-                    SIP.sipAudioCall.answerCall(30);
-                    SIP.sipAudioCall.startAudio();
-                    SIP.callbackContext.success("chamada_em_andamento");
+                    
                 }else{
-                    SIP.callbackContext.success("ja_tem_alguma_chamada_em_andamento");
                     Log.d("SIP","SIP PLUGIN: else aceitaChamada ja_tem_alguma_chamada_em_andamento."+SIP.isInChamada());
                 }
             }else{
-                Log.d("SIP","SIP PLUGIN: App em background."+SIP.isInChamada());
-                SIP.inChamadaFalse();
+                Log.d("SIP","SIP PLUGIN: App em background.");
             }
         }catch(Exception e){
-          
-          SIP.inChamadaFalse();
+          SIP.sipAudioCall = null;
           Log.d("SIP","SIP PLUGIN ERR: "+e.getMessage());
         }
     }
@@ -392,16 +387,11 @@ public class SIP extends CordovaPlugin {
                public void onCallEstablished(SipAudioCall call) {
                   call.startAudio();
                   call.toggleMute();
-                  
-                  SIP.inChamadaTrue();
-                  SIP.callbackContext.success("chamada_em_andamento");
                   Log.d("SIP","SIP PLUGIN:  fazChamada chamada_em_andamento.");
                }
 
                @Override
                public void onCallEnded(SipAudioCall call) {
-                  SIP.inChamadaFalse();
-                  SIP.callbackContext.success("chamada_terminada");
                   Log.d("SIP","SIP PLUGIN:  fazChamada chamada_terminada.");
                }
 
@@ -410,7 +400,7 @@ public class SIP extends CordovaPlugin {
             try{
                 SIP.makeAudioCall = m.makeAudioCall(sp.getUriString(), address, listener, 30);  
             }catch(SipException e){
-                SIP.inChamadaFalse();
+                SIP.makeAudioCall =  null;
                 Log.d("SIP","SIP PLUGIN ERR: "+e.getMessage());
             }
 
@@ -446,9 +436,10 @@ public class SIP extends CordovaPlugin {
     }
 
     public static void aceitaChamada(){
-        call.startAudio();
-                          call.toggleMute();
-
+        if(SIP.sipAudioCall != null){
+            SIP.sipAudioCall.answerCall(30);
+            SIP.sipAudioCall.startAudio();
+        }
     }
 
     public static void eventoRecebencoChamadaSIP(){
