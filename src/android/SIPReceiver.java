@@ -67,10 +67,11 @@ public class SIPReceiver extends BroadcastReceiver {
                 Notification notification = new Notification(context.getApplicationInfo().icon, 
                 "Recebendo chamada!!",
                 System.currentTimeMillis());
+
                 notification.flags = notification.flags | Notification.FLAG_AUTO_CANCEL;
 
-                notification.setLatestEventInfo(appContext, "Recebendo chamada", "Recebendo chamada!",
-                        PendingIntent.getActivity(appContext, 0, new Intent(), android.content.Intent.FLAG_ACTIVITY_NEW_TASK));
+                notification.setLatestEventInfo(context, "Recebendo chamada", "Recebendo chamada!",
+                        PendingIntent.getActivity(context, 0, new Intent(), android.content.Intent.FLAG_ACTIVITY_NEW_TASK));
                 notificationManager.notify(1, notification);
 
 
