@@ -340,6 +340,7 @@ public class SIP extends CordovaPlugin {
                        @Override
                        public void onCallEnded(SipAudioCall call) {
                           Log.d("SIP","SIP PLUGIN: recebeChamada Chamada encerrada.");
+                          SIP.encerraChamada();
                        }
 
                        @Override
@@ -350,6 +351,7 @@ public class SIP extends CordovaPlugin {
                        @Override
                        public void onError(SipAudioCall call, int errorCode, String errorMessage){
                           Log.d("SIP","SIP PLUGIN: recebeChamada onError Chamada encerrada. ("+errorCode+") - "+errorMessage);
+                          SIP.encerraChamada();
                        }
 
                     }; 
