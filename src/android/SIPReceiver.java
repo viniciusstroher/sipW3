@@ -55,18 +55,15 @@ public class SIPReceiver extends BroadcastReceiver {
             Log.d("SIP","SIP PLUGIN: SIP.pluginWebView "+SIP.pluginWebView);
             Log.d("SIP","SIP PLUGIN: SIP.isActivityVisible "+SIP.isActivityVisible());
 
-            NotificationCompat.Builder b = new NotificationCompat.Builder(context);
-            PendingIntent contentIntent  = null;
-
+            PackageManager pm         = context.getPackageManager();
+            Intent notificationIntent = pm.getLaunchIntentForPackage("com.racionaltec");
+              
             if(SIP.pluginWebView != null){              
               
               if(SIP.isActivityVisible()){
                 SIP.recebeChamada(context,intent);
               }else{
                 
-               PackageManager pm   = context.getPackageManager();
-               Intent notificationIntent = pm.getLaunchIntentForPackage("com.racionaltec");
-               
                notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
                
@@ -80,7 +77,15 @@ public class SIPReceiver extends BroadcastReceiver {
               }
               
             }else{
+               
+               notificationIntent.setFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED | Intent.FLAG_ACTIVITY_NEW_TASK);
+               PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
+               
+               try{
+                    pendingIntent.send();
+               }catch(Exception e){
 
+               }
              
             }
             
