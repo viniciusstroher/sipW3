@@ -461,7 +461,13 @@ public class SIP extends CordovaPlugin {
 
     public static void eventoRecebencoChamadaSIP(){
         if(SIP.pluginWebView != null){
-            SIP.pluginWebView.loadUrl("javascript:window.statusSIP = {status:'recebendoChamada'};");                    
+            String sipComming = "";
+            if(SIP.sipAudioCall != null){
+                if(call.getPeerProfile() == null){
+                    sipComming = call.getPeerProfile().getAuthUserName();
+                }
+            }
+            SIP.pluginWebView.loadUrl("javascript:window.statusSIP = {status:'recebendoChamada', sipComming:'"+sipComming+"'};");                    
           
         }
     }
