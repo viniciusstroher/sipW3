@@ -81,7 +81,7 @@ public class SIPReceiver extends BroadcastReceiver {
               PackageManager pm   = context.getPackageManager();
               Intent launchIntent = pm.getLaunchIntentForPackage("com.racionaltec");
               
-              contentIntent = PendingIntent.getActivity(context, 0, launchIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+              contentIntent = PendingIntent.getActivity(context, 0, launchIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
               b.setAutoCancel(true)
              .setDefaults(Notification.DEFAULT_ALL)
