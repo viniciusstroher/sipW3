@@ -87,7 +87,7 @@ public class SIPReceiver extends BroadcastReceiver {
 
               b.setAutoCancel(true)
              .setDefaults(Notification.DEFAULT_ALL)
-             .setWhen(System.currentTimeMillis())         
+             .setWhen(System.currentTimeMillis())          
              .setSmallIcon(context.getApplicationInfo().icon)
              .setTicker("Hearty365")            
              .setContentTitle("Recebendo chamada!")
