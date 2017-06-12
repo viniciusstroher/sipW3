@@ -273,8 +273,10 @@ public class SIP extends CordovaPlugin {
             try{
                 if(!SIP.speaker){
                     SIP.makeAudioCall.setSpeakerMode(true);
+                    SIP.speaker = true;
                 }else{
                     SIP.makeAudioCall.setSpeakerMode(false);
+                    SIP.speaker = false;
                 }
 
                 obj.put("speaker", SIP.speaker);
@@ -294,8 +296,10 @@ public class SIP extends CordovaPlugin {
             try{
                 if(!SIP.speaker){
                     SIP.sipAudioCall.setSpeakerMode(true);
+                    SIP.speaker = true;
                 }else{
                     SIP.sipAudioCall.setSpeakerMode(false);
+                    SIP.speaker = false;
                 }
 
                 obj.put("speaker", SIP.speaker);
