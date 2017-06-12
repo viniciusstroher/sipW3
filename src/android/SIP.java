@@ -152,7 +152,73 @@ public class SIP extends CordovaPlugin {
             this.password   = params.getString("password");
             this.user       = params.getString("user");
 
-            iniciaSIP();
+            try{
+                if (mSipManager == null) {
+                    mSipManager = SipManager.newInstance(cordova.getActivity());
+                }
+
+                SipProfile.Builder builder = new SipProfile.Builder(this.user, this.sip);
+                builder.setPassword(this.password);
+                mSipProfile = builder.build();
+
+                Log.d("SIP","SIP PLUGIN: SIP PROFILE BUILDED");
+
+            }catch(Exception e){
+                Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
+            }
+
+            try{
+                
+                Intent intent = new Intent();
+                intent.setAction("org.apache.cordova.SIP.INCOMING_CALL");
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(cordova.getActivity(), 0, intent, Intent.FILL_IN_DATA);
+                
+                Boolean isRegistered    = mSipManager.isRegistered(mSipProfile.getUriString());
+                Boolean isOpened        = mSipManager.isOpened(mSipProfile.getUriString());
+                Boolean isVoipSupported = mSipManager.isVoipSupported(cordova.getActivity());
+                Boolean isApiSupported  = mSipManager.isApiSupported(cordova.getActivity());
+                
+                Log.d("SIP","SIP PLUGIN: isRegistered "    + isRegistered);
+                Log.d("SIP","SIP PLUGIN: isOpened "        + isOpened);
+                Log.d("SIP","SIP PLUGIN: isVoipSupported " + isVoipSupported);
+                Log.d("SIP","SIP PLUGIN: isApiSupported "  + isApiSupported);
+               
+                mSipProfile.getAutoRegistration();
+                
+                if(isVoipSupported && isApiSupported){
+                    
+                    mSipManager.open(mSipProfile, pendingIntent, null);
+                    
+                    Log.d("SIP","SIP PLUGIN: PROFILE SIP - "+mSipProfile.getUriString());
+
+                    mSipManager.setRegistrationListener(mSipProfile.getUriString(), new SipRegistrationListener() {
+
+                        public void onRegistering(String localProfileUri) {
+                            Log.d("SIP","SIP PLUGIN: Registering with SIP Server... "+localProfileUri);
+                        }
+
+                        public void onRegistrationDone(String localProfileUri, long expiryTime) {
+                            Log.d("SIP","SIP PLUGIN: Ready "+localProfileUri );
+                            
+                        }
+
+                        public void onRegistrationFailed(String localProfileUri, int errorCode,
+                            String errorMessage) {
+                            Log.d("SIP","SIP PLUGIN: Registration failed.  Please check settings. - ("+errorCode+")"+errorMessage);
+                        }
+
+                    });
+                    SIP.callbackContext.success("true");
+                    Log.d("SIP","SIP PLUGIN: Listener registrado");
+
+                }else{
+                    SIP.callbackContext.success("false");
+                    Log.d("SIP","SIP PLUGIN: NÃO SUPORTADO.");
+                }
+            }catch(Exception e){
+                SIP.callbackContext.success("false");
+                Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
+            }  
         }
 
         if(action.equals("chamar")){
@@ -273,75 +339,7 @@ public class SIP extends CordovaPlugin {
     private static boolean activityVisible;
     private static boolean speaker = false;
 
-    public static void iniciaSIP(){
-            try{
-                if (mSipManager == null) {
-                    mSipManager = SipManager.newInstance(cordova.getActivity());
-                }
-
-                SipProfile.Builder builder = new SipProfile.Builder(this.user, this.sip);
-                builder.setPassword(this.password);
-                mSipProfile = builder.build();
-
-                Log.d("SIP","SIP PLUGIN: SIP PROFILE BUILDED");
-
-            }catch(Exception e){
-                Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
-            }
-
-            try{
-                
-                Intent intent = new Intent();
-                intent.setAction("org.apache.cordova.SIP.INCOMING_CALL");
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(cordova.getActivity(), 0, intent, Intent.FILL_IN_DATA);
-                
-                Boolean isRegistered    = mSipManager.isRegistered(mSipProfile.getUriString());
-                Boolean isOpened        = mSipManager.isOpened(mSipProfile.getUriString());
-                Boolean isVoipSupported = mSipManager.isVoipSupported(cordova.getActivity());
-                Boolean isApiSupported  = mSipManager.isApiSupported(cordova.getActivity());
-                
-                Log.d("SIP","SIP PLUGIN: isRegistered "    + isRegistered);
-                Log.d("SIP","SIP PLUGIN: isOpened "        + isOpened);
-                Log.d("SIP","SIP PLUGIN: isVoipSupported " + isVoipSupported);
-                Log.d("SIP","SIP PLUGIN: isApiSupported "  + isApiSupported);
-               
-                mSipProfile.getAutoRegistration();
-                
-                if(isVoipSupported && isApiSupported){
-                    
-                    mSipManager.open(mSipProfile, pendingIntent, null);
-                    
-                    Log.d("SIP","SIP PLUGIN: PROFILE SIP - "+mSipProfile.getUriString());
-
-                    mSipManager.setRegistrationListener(mSipProfile.getUriString(), new SipRegistrationListener() {
-
-                        public void onRegistering(String localProfileUri) {
-                            Log.d("SIP","SIP PLUGIN: Registering with SIP Server... "+localProfileUri);
-                        }
-
-                        public void onRegistrationDone(String localProfileUri, long expiryTime) {
-                            Log.d("SIP","SIP PLUGIN: Ready "+localProfileUri );
-                            
-                        }
-
-                        public void onRegistrationFailed(String localProfileUri, int errorCode,
-                            String errorMessage) {
-                            Log.d("SIP","SIP PLUGIN: Registration failed.  Please check settings. - ("+errorCode+")"+errorMessage);
-                        }
-
-                    });
-                    SIP.callbackContext.success("true");
-                    Log.d("SIP","SIP PLUGIN: Listener registrado");
-
-                }else{
-                    SIP.callbackContext.success("false");
-                    Log.d("SIP","SIP PLUGIN: NÃO SUPORTADO.");
-                }
-            }catch(Exception e){
-                SIP.callbackContext.success("false");
-                Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
-            }  
-    }
+  
 
     public static void recebeChamada(Context context, Intent intent){
         SIP.context = context;
