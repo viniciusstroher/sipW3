@@ -271,18 +271,20 @@ public class SIP extends CordovaPlugin {
             obj.put("speaker", false);
             
             try{
-                if(!SIP.speaker){
-                    SIP.makeAudioCall.setSpeakerMode(true);
-                    SIP.speaker = true;
-                }else{
-                    SIP.makeAudioCall.setSpeakerMode(false);
-                    SIP.speaker = false;
+                if(SIP.makeAudioCall != null){
+                    if(!SIP.speaker){
+                        SIP.makeAudioCall.setSpeakerMode(true);
+                        SIP.speaker = true;
+                    }else{
+                        SIP.makeAudioCall.setSpeakerMode(false);
+                        SIP.speaker = false;
+                    }
                 }
-
                 obj.put("speaker", SIP.speaker);
                 SIP.callbackContext.success(obj);
 
             }catch(Exception e){
+                 SIP.speaker = false;
                  obj.put("exception", e.getMessage());
                  obj.put("speaker", false);
                  SIP.callbackContext.success(obj);
@@ -294,18 +296,20 @@ public class SIP extends CordovaPlugin {
             obj.put("speaker", false);
             
             try{
-                if(!SIP.speaker){
-                    SIP.sipAudioCall.setSpeakerMode(true);
-                    SIP.speaker = true;
-                }else{
-                    SIP.sipAudioCall.setSpeakerMode(false);
-                    SIP.speaker = false;
+                if(SIP.sipAudioCall != null){
+                    if(!SIP.speaker){
+                        SIP.sipAudioCall.setSpeakerMode(true);
+                        SIP.speaker = true;
+                    }else{
+                        SIP.sipAudioCall.setSpeakerMode(false);
+                        SIP.speaker = false;
+                    }
                 }
-
                 obj.put("speaker", SIP.speaker);
                 SIP.callbackContext.success(obj);
 
             }catch(Exception e){
+                 SIP.speaker = false;
                  obj.put("exception", e.getMessage());
                  obj.put("speaker", false);
                  SIP.callbackContext.success(obj);
