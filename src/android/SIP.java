@@ -274,7 +274,7 @@ public class SIP extends CordovaPlugin {
     private static boolean speaker = false;
 
     public static void iniciaSIP(){
-        try{
+            try{
                 if (mSipManager == null) {
                     mSipManager = SipManager.newInstance(cordova.getActivity());
                 }
