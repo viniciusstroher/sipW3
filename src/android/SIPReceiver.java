@@ -84,7 +84,7 @@ public class SIPReceiver extends BroadcastReceiver {
                .setDefaults(Notification.DEFAULT_ALL)
                .setWhen(System.currentTimeMillis())         
                .setSmallIcon(context.getApplicationInfo().icon)
-               .setTicker("Hearty365")            
+               .setTicker("Chamada Perdida!")            
                .setContentTitle("Chamada Perdida!")
                .setContentText("Voce recebeu uma chamada mas seu aplicativo não estava aberto.")
                .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND)
