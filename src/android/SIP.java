@@ -386,6 +386,7 @@ public class SIP extends CordovaPlugin {
                                    .takeAudioCall(intent, null);
                 SIP.sipAudioCall.setSpeakerMode(false);
                 SIP.sipAudioCall.setListener(listener);
+
                 Log.d("SIP","SIP PLUGIN: Ligação recebido pelo broadcard receiver");
             
             }else{
@@ -449,8 +450,7 @@ public class SIP extends CordovaPlugin {
         }
 
         try{    
-            
-            
+           
             if(SIP.makeAudioCall != null){
                 if(SIP.makeAudioCall.getPeerProfile() != null){
                     SIP.makeAudioCall.endCall();
@@ -471,7 +471,6 @@ public class SIP extends CordovaPlugin {
             try{
                 SIP.sipAudioCall.answerCall(30);
                 SIP.sipAudioCall.startAudio();
-
             }catch(SipException e){
                 Log.d("SIP","SIP PLUGIN ERROR aceitaChamada: "+e.getMessage());
             }
