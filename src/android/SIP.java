@@ -332,6 +332,11 @@ public class SIP extends CordovaPlugin {
         if(SIP.sipAudioCall != null){
             return SIP.sipAudioCall.isInCall();
         }
+
+        if(SIP.makeAudioCall != null){
+            return SIP.makeAudioCall.isInCall();
+        }
+        
         return false;
     }  
 
