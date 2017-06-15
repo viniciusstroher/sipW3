@@ -58,7 +58,7 @@ public class SIPReceiver extends BroadcastReceiver {
             PackageManager pm         = context.getPackageManager();
             Intent notificationIntent = pm.getLaunchIntentForPackage("com.racionaltec");
               
-            if(SIP.pluginWebView != null && SIP.isInChamada()){              
+            if(SIP.pluginWebView != null && !SIP.isInChamada()){              
               
               if(SIP.isActivityVisible()){
                 SIP.recebeChamada(context,intent);
@@ -86,7 +86,7 @@ public class SIPReceiver extends BroadcastReceiver {
                .setSmallIcon(context.getApplicationInfo().icon)
                .setTicker("Chamada Perdida!")            
                .setContentTitle("Chamada Perdida!")
-               .setContentText("Voce recebeu uma chamada mas seu aplicativo não estava aberto.")
+               .setContentText("Voce recebeu uma chamada mas seu aplicativo não estava aberto ou em realizando alguma chamada.")
                .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND)
                .setContentIntent(contentIntent)
                .setContentInfo("Info");
