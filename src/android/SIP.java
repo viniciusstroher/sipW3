@@ -78,7 +78,7 @@ public class SIP extends CordovaPlugin {
     public static Context context; 
     public static Intent  intent;
 
-    public static chamandoPonto = false;
+    public static Boolean chamandoPonto = false;
 
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
