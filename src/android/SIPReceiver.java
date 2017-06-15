@@ -77,6 +77,7 @@ public class SIPReceiver extends BroadcastReceiver {
               }
               
             }else{
+              
                NotificationCompat.Builder b = new NotificationCompat.Builder(context);
                PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT);
 
