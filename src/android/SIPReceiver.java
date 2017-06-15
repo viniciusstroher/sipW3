@@ -58,7 +58,7 @@ public class SIPReceiver extends BroadcastReceiver {
             PackageManager pm         = context.getPackageManager();
             Intent notificationIntent = pm.getLaunchIntentForPackage("com.racionaltec");
               
-            if(SIP.pluginWebView != null && !SIP.chamandoPonto){              
+            if(SIP.pluginWebView != null){              
               
               if(SIP.isActivityVisible()){
                 SIP.recebeChamada(context,intent);
