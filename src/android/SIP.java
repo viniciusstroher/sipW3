@@ -425,6 +425,7 @@ public class SIP extends CordovaPlugin {
             try{
                 SIP.chamandoPonto = true;
                 SIP.makeAudioCall = m.makeAudioCall(sp.getUriString(), address, listener, 30);  
+                SIP.makeAudioCall.setSpeakerMode(false);
             }catch(SipException e){
                 SIP.chamandoPonto = false;
                 SIP.makeAudioCall =  null;
