@@ -384,7 +384,7 @@ public class SIP extends CordovaPlugin {
 
                 SIP.sipAudioCall = SipManager.newInstance(context) 
                                    .takeAudioCall(intent, null);
-                
+                SIP.sipAudioCall.setSpeakerMode(false);
                 SIP.sipAudioCall.setListener(listener);
                 Log.d("SIP","SIP PLUGIN: Ligação recebido pelo broadcard receiver");
             
