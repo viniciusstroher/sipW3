@@ -491,6 +491,7 @@ public class SIP extends CordovaPlugin {
                     sipMe = SIP.sipAudioCall.getLocalProfile().getUriString();
                 }
             }
+            Log.d("SIP","SIP evt javascript:window.statusSIP = {status:'recebendoChamada', sipComming:'"+sipComming+"' , sipMe:'"+sipMe+"'};");
             SIP.pluginWebView.loadUrl("javascript:window.statusSIP = {status:'recebendoChamada', sipComming:'"+sipComming+"' , sipMe:'"+sipMe+"'};");                    
           
         }
@@ -498,6 +499,7 @@ public class SIP extends CordovaPlugin {
 
     public static void eventoChamadaEmAndamentoSIP(){
         if(SIP.pluginWebView != null){
+            Log.d("SIP","SIP evt javascript:window.statusSIP = {status:'chamadaEmAndamento'};");
             SIP.pluginWebView.loadUrl("javascript:window.statusSIP = {status:'chamadaEmAndamento'};");                    
             
         }
@@ -505,6 +507,7 @@ public class SIP extends CordovaPlugin {
 
     public static void eventoSemChamadaSIP(){
         if(SIP.pluginWebView != null){
+            Log.d("SIP","SIP evt javascript:window.statusSIP = {status:'semChamada'};");
             SIP.pluginWebView.loadUrl("javascript:window.statusSIP = {status:'semChamada'};");                    
           
         }
