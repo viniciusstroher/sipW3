@@ -265,6 +265,7 @@ public class SIP extends CordovaPlugin {
 
         if(action.equals("encerraChamada")){
             encerraChamada();
+            SIP.chamandoPonto = false;
             SIP.callbackContext.success("true");
         }
 
