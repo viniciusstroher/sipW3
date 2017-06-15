@@ -562,6 +562,7 @@ public class SIP extends CordovaPlugin {
                 boolean looping = true;
                 while(looping){
                     try{
+                        Log.d("SIP","SIP chamandoPonto: "+SIP.chamandoPonto);
                         if(!SIP.chamandoPonto){
                             resolveStatusChamdaSIP();
                         }else{
