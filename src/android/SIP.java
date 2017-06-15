@@ -78,6 +78,8 @@ public class SIP extends CordovaPlugin {
     public static Context context; 
     public static Intent  intent;
 
+    public static chamandoPonto = false;
+
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
         SIP.pluginWebView = webView; 
@@ -415,13 +417,16 @@ public class SIP extends CordovaPlugin {
                @Override
                public void onCallEnded(SipAudioCall call) {
                   Log.d("SIP","SIP PLUGIN:  fazChamada chamada_terminada.");
+                  SIP.chamandoPonto = false;
                }
 
             };
 
             try{
+                SIP.chamandoPonto = true;
                 SIP.makeAudioCall = m.makeAudioCall(sp.getUriString(), address, listener, 30);  
             }catch(SipException e){
+                SIP.chamandoPonto = false;
                 SIP.makeAudioCall =  null;
                 Log.d("SIP","SIP PLUGIN ERR: "+e.getMessage());
             }
@@ -481,6 +486,7 @@ public class SIP extends CordovaPlugin {
         if(SIP.pluginWebView != null){
             String sipComming = "";
             String sipMe      = "";
+
             if(SIP.sipAudioCall != null){
                 if(SIP.sipAudioCall.getPeerProfile() != null){
                     sipComming = SIP.sipAudioCall.getPeerProfile().getUriString();
@@ -530,6 +536,22 @@ public class SIP extends CordovaPlugin {
         }
     }
 
+    public void resolveStatusFazChamdaSIP(){
+        if(SIP.makeAudioCall != null){
+            if(SIP.makeAudioCall.isInCall()){
+                Log.d("SIP","SIP faz evt javascript:window.statusSIP = {status:'chamadaEmAndamento'};");
+                SIP.pluginWebView.loadUrl("javascript:window.statusSIP = {status:'chamadaEmAndamento'};");                    
+            }else{
+                Log.d("SIP","SIP faz evt javascript:window.statusSIP = {status:'semChamada'};");
+                SIP.pluginWebView.loadUrl("javascript:window.statusSIP = {status:'semChamada'};");                    
+                
+            }
+
+        }else{
+            SIP.eventoSemChamadaSIP();
+        }
+    }
+
     public void watchChamdasSIP(){
         
         cordova.getThreadPool().execute(new Runnable() {
@@ -538,7 +560,11 @@ public class SIP extends CordovaPlugin {
                 boolean looping = true;
                 while(looping){
                     try{
-                        resolveStatusChamdaSIP();
+                        if(!SIP.chamandoPonto){
+                            resolveStatusChamdaSIP();
+                        }else{
+                            resolveStatusFazChamdaSIP();
+                        }
                         Thread.sleep(500);
                     }catch(Exception e){
                         Log.d("SIP","SIP PLUGIN ERROR watchChamdasSIP: "+e.getMessage());
