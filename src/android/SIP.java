@@ -450,12 +450,9 @@ public class SIP extends CordovaPlugin {
         try{
             if(SIP.sipAudioCall != null){
                 SIP.sipAudioCall.endCall();
-                SIP.sipAudioCall.close();
                 if(SIP.sipAudioCall.getPeerProfile() != null){
-                    SIP.sipAudioCall.getPeerProfile().endCall();
-                    SIP.sipAudioCall.getPeerProfile().close();
+                    SIP.sipAudioCall.endCall();  
                 }
-                
                 SIP.sipAudioCall = null;
             }
            
@@ -468,10 +465,9 @@ public class SIP extends CordovaPlugin {
            
             if(SIP.makeAudioCall != null){
                 SIP.makeAudioCall.endCall();
-                SIP.makeAudioCall.close();
+            
                 if(SIP.makeAudioCall.getPeerProfile() != null){
-                    SIP.makeAudioCall.getPeerProfile().endCall();
-                    SIP.makeAudioCall.getPeerProfile().close();
+                    SIP.makeAudioCall.endCall();
                 }
                 SIP.makeAudioCall = null;
             }
