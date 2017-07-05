@@ -270,6 +270,20 @@ public class SIP extends CordovaPlugin {
             SIP.callbackContext.success("true");
         }
 
+        if(action.equals("toogleWatcher")){
+            if(SIP.watcherProntoParaChamadas){
+                encerraChamada();
+                SIP.watcherProntoParaChamadas = false;
+                SIP.callbackContext.success("false");
+            }
+
+            if(!SIP.watcherProntoParaChamadas){
+                SIP.watcherProntoParaChamadas = true;
+                SIP.callbackContext.success("true");
+            }
+            
+        }
+
         if(action.equals("toogleSpeakerEnviaLigacao")){
             JSONObject obj = new JSONObject();
             obj.put("speaker", false);
