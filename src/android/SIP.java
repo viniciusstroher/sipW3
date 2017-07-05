@@ -79,7 +79,7 @@ public class SIP extends CordovaPlugin {
     public static Intent  intent;
 
     public static Boolean chamandoPonto = false;
-
+    public static Boolean watcherProntoParaChamadas = false;
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
         SIP.pluginWebView = webView; 
@@ -201,6 +201,7 @@ public class SIP extends CordovaPlugin {
 
                         public void onRegistrationDone(String localProfileUri, long expiryTime) {
                             Log.d("SIP","SIP PLUGIN: Ready "+localProfileUri );
+                            SIP.watcherProntoParaChamadas = true;
                             
                         }
 
@@ -567,16 +568,18 @@ public class SIP extends CordovaPlugin {
             public void run() {
                 boolean looping = true;
                 while(looping){
-                    try{
-                        Log.d("SIP","SIP chamandoPonto: "+SIP.chamandoPonto);
-                        if(!SIP.chamandoPonto){
-                            resolveStatusChamdaSIP();
-                        }else{
-                            resolveStatusFazChamdaSIP();
+                    if(SIP.watcherProntoParaChamadas){
+                        try{
+                            Log.d("SIP","SIP chamandoPonto: "+SIP.chamandoPonto);
+                            if(!SIP.chamandoPonto){
+                                resolveStatusChamdaSIP();
+                            }else{
+                                resolveStatusFazChamdaSIP();
+                            }
+                            Thread.sleep(500);
+                        }catch(Exception e){
+                            Log.d("SIP","SIP PLUGIN ERROR watchChamdasSIP: "+e.getMessage());
                         }
-                        Thread.sleep(500);
-                    }catch(Exception e){
-                        Log.d("SIP","SIP PLUGIN ERROR watchChamdasSIP: "+e.getMessage());
                     }
                 }
             }
