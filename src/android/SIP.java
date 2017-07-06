@@ -161,8 +161,8 @@ public class SIP extends CordovaPlugin {
 
                 SipProfile.Builder builder = new SipProfile.Builder(this.user, this.sip);
                 builder.setPassword(this.password);
-                builder.setAuthUserName(this.user);
-                builder.setOutboundProxy(this.sip);
+                //builder.setAuthUserName(this.user);
+                //builder.setOutboundProxy(this.sip);
                 
                 mSipProfile = builder.build();
 
