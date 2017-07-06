@@ -445,12 +445,17 @@ public class SIP extends CordovaPlugin {
                   SIP.chamandoPonto = false;
                }
 
+               @Override
+               void onRinging (SipAudioCall call,  SipProfile caller){
+                    SIP.makeAudioCall.answerCall(20);
+               }
+               
             };
 
             try{
                 SIP.chamandoPonto = true;
                 SIP.makeAudioCall = m.makeAudioCall(sp.getUriString(), address, listener, 30);  
-                SIP.makeAudioCall.answerCall(10);
+                
                 SIP.makeAudioCall.setSpeakerMode(false);
             }catch(SipException e){
                 SIP.chamandoPonto = false;
