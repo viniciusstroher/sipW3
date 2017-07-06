@@ -62,6 +62,7 @@ public class SIP extends CordovaPlugin {
 
     public static SipManager mSipManager = null;
     public        SipProfile mSipProfile = null;
+    public static      SipProfile mSipProfile2 = null;
     public        SIPReceiver callReceiver;
 
     public static SipAudioCall sipAudioCall;
@@ -165,7 +166,7 @@ public class SIP extends CordovaPlugin {
                 //builder.setOutboundProxy(this.sip);
                 
                 mSipProfile = builder.build();
-
+                SIP.mSipProfile2 = mSipProfile;
                 Log.d("SIP","SIP PLUGIN: SIP PROFILE BUILDED");
 
             }catch(Exception e){
@@ -485,8 +486,8 @@ public class SIP extends CordovaPlugin {
            
             if(SIP.makeAudioCall != null){
                 try{
-                    SIP.mSipManager.close(mSipProfile.getUriString());
-                    SIP.mSipManager.open(mSipProfile.getUriString());
+                    SIP.mSipManager.close( SIP.mSipProfile2.getUriString());
+                    SIP.mSipManager.open( SIP.mSipProfile2.getUriString());
                 }catch(SipException e){
                     Log.d("SIP","SIP PLUGIN ERROR mSipManager.close: "+e.getMessage());
                 }
