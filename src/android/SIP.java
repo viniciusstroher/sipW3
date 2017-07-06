@@ -161,6 +161,9 @@ public class SIP extends CordovaPlugin {
 
                 SipProfile.Builder builder = new SipProfile.Builder(this.user, this.sip);
                 builder.setPassword(this.password);
+                builder.setAuthUserName(this.user);
+                builder.setOutboundProxy(this.sip);
+                
                 mSipProfile = builder.build();
 
                 Log.d("SIP","SIP PLUGIN: SIP PROFILE BUILDED");
@@ -431,7 +434,7 @@ public class SIP extends CordovaPlugin {
                public void onCallEstablished(SipAudioCall call) {
                   call.setSpeakerMode(false);
                   call.startAudio();
-                  call.toggleMute();
+                  //call.toggleMute();
                   Log.d("SIP","SIP PLUGIN:  fazChamada chamada_em_andamento.");
                }
 
@@ -459,6 +462,8 @@ public class SIP extends CordovaPlugin {
         }
     }
 
+
+
     public static void encerraChamada(){
 
 
@@ -473,7 +478,7 @@ public class SIP extends CordovaPlugin {
            
         }catch(SipException e){
             SIP.sipAudioCall = null;
-            Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
+            Log.d("SIP","SIP PLUGIN ERROR sipAudioCall: "+e.getMessage());
         }
 
         try{    
@@ -488,7 +493,7 @@ public class SIP extends CordovaPlugin {
             }
         }catch(SipException e){
             SIP.makeAudioCall = null;
-            Log.d("SIP","SIP PLUGIN ERROR: "+e.getMessage());
+            Log.d("SIP","SIP PLUGIN ERROR makeAudioCall: "+e.getMessage());
         }
         Log.d("SIP","SIP PLUGIN: ligacao encerrada.");
     }
