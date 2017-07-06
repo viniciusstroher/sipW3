@@ -450,6 +450,7 @@ public class SIP extends CordovaPlugin {
             try{
                 SIP.chamandoPonto = true;
                 SIP.makeAudioCall = m.makeAudioCall(sp.getUriString(), address, listener, 30);  
+                SIP.makeAudioCall.answerCall(10);
                 SIP.makeAudioCall.setSpeakerMode(false);
             }catch(SipException e){
                 SIP.chamandoPonto = false;
@@ -486,11 +487,8 @@ public class SIP extends CordovaPlugin {
             Log.d("SIP","SIP PLUGIN makeAudioCall");
             if(SIP.makeAudioCall != null){
                 Log.d("SIP","SIP PLUGIN makeAudioCall end call");
-                fechaProfileSIP();
-                SIP.makeAudioCall.close();
-                
+                SIP.makeAudioCall.endCall();
                 Log.d("SIP","SIP PLUGIN makeAudioCall ended call");
-                
                 if(SIP.makeAudioCall.getPeerProfile() != null){
                     SIP.makeAudioCall.endCall();
                 }
