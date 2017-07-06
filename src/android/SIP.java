@@ -486,7 +486,7 @@ public class SIP extends CordovaPlugin {
             Log.d("SIP","SIP PLUGIN makeAudioCall");
             if(SIP.makeAudioCall != null){
                 Log.d("SIP","SIP PLUGIN makeAudioCall end call");
-                
+                fechaProfileSIP();
                 SIP.makeAudioCall.close();
                 
                 Log.d("SIP","SIP PLUGIN makeAudioCall ended call");
