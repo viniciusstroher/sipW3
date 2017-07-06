@@ -485,6 +485,7 @@ public class SIP extends CordovaPlugin {
         try{    
            
             if(SIP.makeAudioCall != null){
+                SIP.makeAudioCall.stopCall();
                 SIP.makeAudioCall.endCall();
 
                 if(SIP.makeAudioCall.getPeerProfile() != null){
