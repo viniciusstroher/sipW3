@@ -573,8 +573,16 @@ public class SIP extends CordovaPlugin {
                 SIP.pluginWebView.loadUrl("javascript:window.statusSIP = {status:'chamadaEmAndamento'};");                    
             }else{
                 Log.d("SIP","SIP makeAudioCall getState:  "+SIP.makeAudioCall.getState());
-                Log.d("SIP","SIP faz evt javascript:window.statusSIP = {status:'semChamada'};");
-                SIP.pluginWebView.loadUrl("javascript:window.statusSIP = {status:'semChamada'};");                    
+                
+                if(SIP.makeAudioCall.getState() == SipSession.State.OUTGOING_CALL_RING_BACK){
+                    Log.d("SIP","SIP faz evt javascript:window.statusSIP = {status:'envinadoChamado'};");
+                    SIP.pluginWebView.loadUrl("javascript:window.statusSIP = {status:'envinadoChamado'};"); 
+                }else{
+                    Log.d("SIP","SIP faz evt javascript:window.statusSIP = {status:'semChamada'};");
+                    SIP.pluginWebView.loadUrl("javascript:window.statusSIP = {status:'semChamada'};");                    
+                }
+                
+                
                 
             }
 
