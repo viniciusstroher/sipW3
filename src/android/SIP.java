@@ -447,7 +447,11 @@ public class SIP extends CordovaPlugin {
 
                @Override
                public void onRinging (SipAudioCall call,  SipProfile caller){
-                    SIP.makeAudioCall.answerCall(20);
+                    try{
+                        SIP.makeAudioCall.answerCall(20);
+                    }catch(Exception e){
+                        Log.d("SIP","SIP PLUGIN:  onRinging: "+e.getMessage());
+                    }
                }
                
             };
