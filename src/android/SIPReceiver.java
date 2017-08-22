@@ -56,6 +56,7 @@ public class SIPReceiver extends BroadcastReceiver {
             Log.d("SIP","SIP PLUGIN: SIP.isActivityVisible "+SIP.isActivityVisible());
 
             PackageManager pm         = context.getPackageManager();
+        //ALTERAR PACOTE SE FOR OUTRO APP, DESCOBRIR O APP Q ESTA PARA PEGA O LAUNC HINTENT
             Intent notificationIntent = pm.getLaunchIntentForPackage("com.racionaltec");
               
             if(SIP.pluginWebView != null){              
